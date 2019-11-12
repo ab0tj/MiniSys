@@ -1,0 +1,205 @@
+{COMPONENT Z:\PROJECTS\WINCUPL\MINISYS-186EB\186EB-GAL1.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Sun Nov 10 15:15:23 2019 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P WP' {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P BKPRT' {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P RD' {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P WR' {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P S0 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P S1 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P S2 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P DEN' {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P DTR {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P HLDA {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P IO {Pt "I/O"}{Lq 0}{Ploc 300 20}}
+   {P OHLDA' {Pt "I/O"}{Lq 0}{Ploc 300 40}}
+   {P M1' {Pt "I/O"}{Lq 0}{Ploc 300 60}}
+   {P BKWR' {Pt "I/O"}{Lq 0}{Ploc 300 80}}
+   {P MEMW' {Pt "I/O"}{Lq 0}{Ploc 300 100}}
+   {P MEMR' {Pt "I/O"}{Lq 0}{Ploc 300 120}}
+   {P IOW' {Pt "I/O"}{Lq 0}{Ploc 300 140}}
+   {P IOR' {Pt "I/O"}{Lq 0}{Ploc 300 160}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 200 230}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 210}
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 280 30}
+   {Pnl 280 50}
+   {Pnl 280 70}
+   {Pnl 280 90}
+   {Pnl 280 110}
+   {Pnl 280 130}
+   {Pnl 280 150}
+   {Pnl 280 170}
+
+   {Sd A 1 2 3 4 5 6 7 8 9 11 12 13 14 15 16 17 18 19}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 220 270 0}
+   {L 120 200 100 200}
+   {C 125 200 5}
+   {L 120 180 100 180}
+   {C 125 180 5}
+   {L 120 160 100 160}
+   {C 125 160 5}
+   {L 120 140 100 140}
+   {C 125 140 5}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 120 60 100 60}
+   {C 125 60 5}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
+   {L 270 20 300 20}
+   {C 275 40 5}
+   {L 280 40 300 40}
+   {C 275 60 5}
+   {L 280 60 300 60}
+   {C 275 80 5}
+   {L 280 80 300 80}
+   {C 275 100 5}
+   {L 280 100 300 100}
+   {C 275 120 5}
+   {L 280 120 300 120}
+   {C 275 140 5}
+   {L 280 140 300 140}
+   {C 275 160 5}
+   {L 280 160 300 160}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "WP'" 140 200}
+   {T "BKPRT'" 140 180}
+   {T "RD'" 140 160}
+   {T "WR'" 140 140}
+   {T "S0" 140 120}
+   {T "S1" 140 100}
+   {T "S2" 140 80}
+   {T "DEN'" 140 60}
+   {T "DTR" 140 40}
+   {T "HLDA" 140 20}
+   [Tj "RC"]
+   {T "IO" 260 20}
+   {T "OHLDA'" 260 40}
+   {T "M1'" 260 60}
+   {T "BKWR'" 260 80}
+   {T "MEMW'" 260 100}
+   {T "MEMR'" 260 120}
+   {T "IOW'" 260 140}
+   {T "IOR'" 260 160}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "G16V8MA" 200 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD Z:\PROJECTS\WINCUPL\MINISYS-186EB\186EB-GAL1 200 220}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N WP'
+   }
+   {N BKPRT'
+   }
+   {N RD'
+   }
+   {N WR'
+   }
+   {N S0
+   }
+   {N S1
+   }
+   {N S2
+   }
+   {N DEN'
+   }
+   {N DTR
+   }
+   {N HLDA
+   }
+   {N IO
+   }
+   {N OHLDA'
+   }
+   {N M1'
+   }
+   {N BKWR'
+   }
+   {N MEMW'
+   }
+   {N MEMR'
+   }
+   {N IOW'
+   }
+   {N IOR'
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

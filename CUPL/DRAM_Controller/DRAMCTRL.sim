@@ -1,0 +1,375 @@
+%SIGNAL
+PIN  41 =  A0 
+PIN  35 =  A1 
+PIN  49 =  A2 
+PIN  51 =  A3 
+PIN  54 =  A4 
+PIN  56 =  A5 
+PIN  61 =  A6 
+PIN  58 =  A7 
+PIN  64 =  A8 
+PIN  67 =  A9 
+PIN  69 =  A10 
+PIN  73 =  A11 
+PIN  34 =  A12 
+PIN  50 =  A13 
+PIN  52 =  A14 
+PIN  55 =  A15 
+PIN  57 =  A16 
+PIN  63 =  A17 
+PIN  60 =  A18 
+PIN  65 =  A19 
+PIN  68 =  A20 
+PIN  70 =  A21 
+PIN  74 =  A22 
+PIN  36 =  A23 
+PIN  84 = !AEN 
+PIN  28 =  BA0 
+PIN  37 = !BHE 
+PIN   4 = !CAS0 
+PIN   5 = !CAS1 
+PIN  30 = !CAS2 
+PIN  29 = !CAS3 
+PIN  83 =  CLK 
+PIN   2 =  CLK1 
+PIN  81 =  CLK2 
+PIN  76 =  D0 
+PIN  75 =  D1 
+PIN  45 = !INTA 
+PIN   1 = !IOW 
+PIN  80 = !M16 
+PIN   9 =  MA0 
+PIN  15 =  MA1 
+PIN  16 =  MA2 
+PIN  17 =  MA3 
+PIN  18 =  MA4 
+PIN  21 =  MA5 
+PIN  20 =  MA6 
+PIN  22 =  MA7 
+PIN  24 =  MA8 
+PIN  25 =  MA9 
+PIN  27 =  MA10 
+PIN  77 =  MA11 
+PIN  79 =  MA12 
+PIN  39 = !MEMR 
+PIN  40 = !MEMW 
+PIN  44 = !MOVL 
+PIN   0 =  MUX 
+PIN  11 = !OE 
+PIN   0 =  R0 
+PIN   0 =  R1 
+PIN   0 =  R2 
+PIN   0 =  R3 
+PIN   0 =  R4 
+PIN   0 =  R5 
+PIN   0 =  R6 
+PIN   0 =  R7 
+PIN   0 =  R8 
+PIN   0 =  R9 
+PIN   6 = !RAS0 
+PIN  31 = !RAS1 
+PIN   8 = !RAS2 
+PIN  33 = !RAS3 
+PIN  46 = !RESET 
+PIN  48 = !RFSH 
+PIN   0 =  T0 
+PIN   0 =  T1 
+PIN   0 =  T2 
+PIN   0 =  T3 
+PIN   0 =  T4 
+PIN   0 =  T5 
+PIN   0 =  T6 
+PIN   0 =  T7 
+PIN   0 =  T8 
+PIN  10 = !WAIT 
+PIN  12 = !WE 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+BA0 =>
+    A0
+
+CAS =>
+    MEMR & T1
+  # MEMW & T1
+
+CAS0 =>
+    !A0 & MEMW & T1
+  # !A0 & MEMR & T1
+  # T4
+  # T5
+  # T6
+
+CAS1 =>
+    A0 & MEMW & T1
+  # A0 & MEMR & T1
+  # BHE & MEMW & T1
+  # BHE & MEMR & T1
+  # T4
+  # T5
+  # T6
+
+CAS2 =>
+    CAS0
+
+CAS3 =>
+    CAS1
+
+M16 =>
+    !MOVL
+
+MA0 =>
+    A12 & !MUX
+  # A1 & MUX
+
+MA1 =>
+    A13 & !MUX
+  # A2 & MUX
+
+MA2 =>
+    A14 & !MUX
+  # A3 & MUX
+
+MA3 =>
+    A15 & !MUX
+  # A4 & MUX
+
+MA4 =>
+    A16 & !MUX
+  # A5 & MUX
+
+MA5 =>
+    A17 & !MUX
+  # A6 & MUX
+
+MA6 =>
+    A18 & !MUX
+  # A7 & MUX
+
+MA7 =>
+    A19 & !MUX
+  # A8 & MUX
+
+MA8 =>
+    A20 & !MUX
+  # A9 & MUX
+
+MA9 =>
+    A21 & !MUX
+  # A10 & MUX
+
+MA10 =>
+    A22 & !MUX
+  # A11 & MUX
+
+MA11 =>
+    MOVL
+
+MUX =>
+    !CLK & T0
+  # T1
+
+OE =>
+    MEMR & !MOVL & !T4 & !T5 & !T6 & !T7
+
+R0.d  =>
+    !R0 & !R1
+
+R0.ar  =>
+    !RFSH
+
+R0.ck  =>
+    CLK
+
+R1.d  =>
+    R0
+
+R1.ar  =>
+    !RFSH
+
+R1.ck  =>
+    CLK
+
+R2.t  =>
+    R1
+
+R2.ar  =>
+    !RFSH
+
+R2.ck  =>
+    CLK
+
+R3.t  =>
+    R1 & R2
+
+R3.ar  =>
+    !RFSH
+
+R3.ck  =>
+    CLK
+
+R4.t  =>
+    R1 & R2 & R3
+
+R4.ar  =>
+    !RFSH
+
+R4.ck  =>
+    CLK
+
+R5.t  =>
+    R1 & R2 & R3 & R4
+
+R5.ar  =>
+    !RFSH
+
+R5.ck  =>
+    CLK
+
+R6.t  =>
+    R1 & R2 & R3 & R4 & R5
+
+R6.ar  =>
+    !RFSH
+
+R6.ck  =>
+    CLK
+
+R7.t  =>
+    R1 & R2 & R3 & R4 & R5 & R6
+
+R7.ar  =>
+    !RFSH
+
+R7.ck  =>
+    CLK
+
+R8.t  =>
+    R1 & R2 & R3 & R4 & R5 & R6 & R7
+
+R8.ar  =>
+    !RFSH
+
+R8.ck  =>
+    CLK
+
+R9.t  =>
+    R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8
+
+R9.ar  =>
+    !RFSH
+
+R9.ck  =>
+    CLK
+
+RAS =>
+    T0 & !T3
+
+RAS0 =>
+    !A23 & T0 & !T3
+  # T5
+  # T6
+
+RAS1 =>
+    RAS0
+
+RAS2 =>
+    A23 & T0 & !T3
+  # T5
+  # T6
+
+RAS3 =>
+    RAS2
+
+RCYC =>
+    T4
+  # T5
+  # T6
+  # T7
+
+T0.d  =>
+    MEMW & !MOVL & !T4 & !T5 & !T6 & !T7
+  # MEMR & !MOVL & !T4 & !T5 & !T6 & !T7
+
+T0.ck  =>
+    CLK
+
+T1.d  =>
+    T0
+
+T1.ck  =>
+    CLK
+
+T2.d  =>
+    T1
+
+T2.ck  =>
+    CLK
+
+T3.d  =>
+    T2
+
+T3.ck  =>
+    CLK
+
+T4.d  =>
+    !T0 & T3 & !T5
+  # !R2 & !R3 & !R4 & !R5 & !R6 & !R7 & !R8 & !R9 & RFSH & !T5
+  # INTA & !T5
+  # RESET & !T5
+  # MEMW & MOVL & !T5
+  # MEMR & MOVL & !T5
+
+T4.ar  =>
+    !T7 & T8
+
+T4.ck  =>
+    CLK
+
+T5.d  =>
+    T4
+
+T5.ar  =>
+    !T7 & T8
+
+T5.ck  =>
+    CLK
+
+T6.d  =>
+    T5
+
+T6.ar  =>
+    !T7 & T8
+
+T6.ck  =>
+    CLK
+
+T7.d  =>
+    T6
+
+T7.ar  =>
+    !T7 & T8
+
+T7.ck  =>
+    CLK
+
+T8.d  =>
+    T7
+
+T8.ar  =>
+    !T7 & T8
+
+T8.ck  =>
+    CLK
+
+WAIT =>
+    MEMR & !MOVL & !T2
+  # MEMW & !MOVL & !T2
+
+WE =>
+    MEMW & !MOVL & !T4 & !T5 & !T6 & !T7
+
+%END

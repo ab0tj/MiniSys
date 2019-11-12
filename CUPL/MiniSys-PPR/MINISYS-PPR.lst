@@ -1,0 +1,56 @@
+LISTING FOR LOGIC DESCRIPTION FILE: MINISYS-PPR.pld                  Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Apr 25 19:40:05 2019
+
+  1:Name     MiniSys-PPR ;
+  2:PartNo   05 ;
+  3:Date     2/23/2019 ;
+  4:Revision 01 ;
+  5:Designer Engineer ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   p22v10lcc ;
+ 10:
+ 11:PIN 2  = !HI;
+ 12:PIN 3  = LO;
+ 13:PIN 4  = A3;
+ 14:PIN 5  = A2;
+ 15:PIN 6  = A1;
+ 16:PIN 7  = A0;
+ 17:PIN 9  = AEN;
+ 18:PIN 10 = !IOR;
+ 19:PIN 11 = !IOW;
+ 20:PIN 12 = INT;
+ 21:PIN 13 = !INTA;
+ 22:
+ 23:PIN 17 = !PIT_CS;
+ 24:PIN 18 = RTC_AS;
+ 25:PIN 19 = !RTC_CS;
+ 26:PIN 20 = !PIC_CS;
+ 27:PIN 21 = !STS;
+ 28:PIN 23 = !WR;
+ 29:PIN 24 = !RD;
+ 30:PIN 25 = DIR;
+ 31:PIN 26 = !bINT;
+ 32:
+ 33:
+ 34:PIT_CS  = AEN & HI & LO & A3 & !A2;                             /* BASE + 8 THRU 11 */
+ 35:RTC_AS  = AEN & HI & LO & A3 & A2 & !A1 & A0 & IOW;     /* BASE + 13 WRITE */
+ 36:RTC_CS  = AEN & HI & LO & A3 & A2 & !A1 & !A0;          /* BASE + 12 */
+ 37:PIC_CS  = AEN & HI & LO & A3 & A2 & A1;                 /* BASE + 14 AND 15 */
+ 38:STS     = AEN & HI & LO & !A3 & A2 & A1 & A0 & IOR;     /* BASE + 7 READ */
+ 39:WR      = IOW & !(A3 & A2 & !A1 & A0);                  /* DON'T STROBE WR DURING RTC_AS */
+ 40:RD      = IOR;
+ 41:DIR     = (AEN & HI & LO & A3 & IOR) # INTA;
+ 42:bINT    = INT;
+ 43:bINT.OE = INT;
+ 44:
+
+
+
+Jedec Fuse Checksum       (78ba)
+Jedec Transmit Checksum   (9307)

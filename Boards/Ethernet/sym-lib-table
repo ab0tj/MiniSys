@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name Ethernet-rescue)(type Legacy)(uri ${KIPRJMOD}/Ethernet-rescue.lib)(options "")(descr ""))
+)

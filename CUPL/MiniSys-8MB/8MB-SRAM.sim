@@ -1,0 +1,81 @@
+%SIGNAL
+PIN   2 =  A0 
+PIN   1 =  A23 
+PIN   3 = !BHE 
+PIN  13 = !BRDSEL 
+PIN   5 = !MEMR 
+PIN   6 = !MEMW 
+PIN   4 = !MOVL 
+PIN  18 = !OEH 
+PIN  19 = !OEL 
+PIN  15 = !RD 
+PIN  12 =  SEL 
+PIN  11 =  SI 
+PIN   7 =  UPPER 
+PIN  16 = !WEH 
+PIN  17 = !WEL 
+PIN  14 = !WR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+BRDSEL =>
+    A23 & MOVL & !UPPER
+  # !A23 & MOVL & UPPER
+
+OEH =>
+    !BRDSEL & !MEMR
+
+OEL =>
+    !BRDSEL & !MEMR
+
+RD =>
+    !BRDSEL & !MEMR
+
+SEL =>
+    A0 & MEMW & SI
+  # A0 & !MEMR & MEMW
+  # MEMR & MEMW & SI
+  # !BHE & MEMR & SI
+  # !A0 & !BHE & MEMR & !MEMW
+  # A0 & !BHE & SI
+  # A0 & !BHE & !MEMR
+
+WEH =>
+    !BHE & !BRDSEL & !MEMW
+  # A0 & !BRDSEL & !MEMW
+
+WEL =>
+    !A0 & !BRDSEL & !MEMW
+
+WR =>
+    !WEH
+  # !WEL
+
+BRDSEL.oe  =>
+    1 
+
+OEH.oe  =>
+    1 
+
+OEL.oe  =>
+    1 
+
+RD.oe  =>
+    1 
+
+SEL.oe  =>
+    1 
+
+WEH.oe  =>
+    1 
+
+WEL.oe  =>
+    1 
+
+WR.oe  =>
+    1 
+
+%END

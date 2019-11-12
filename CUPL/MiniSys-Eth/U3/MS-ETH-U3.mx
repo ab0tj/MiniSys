@@ -1,0 +1,36 @@
+Name     MS-Eth-U3 ;
+PartNo   03 ;
+Date     2/23/2019 ;
+Revision 01 ;
+Designer Engineer ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g16v8as ;
+
+
+
+PIN 1 = !LOW;
+PIN 2 = !HI;
+PIN 3 = !IND;
+PIN 4 = !EGHT;
+PIN 5 = BA2;
+PIN 6 = BA1;
+PIN 7 = BA0;
+PIN 8 = !IOR;
+PIN 9 = AEN;
+PIN 12 = A2;
+PIN 13 = A1;
+PIN 14 = A0;
+PIN 15 = ASEL;
+PIN 16 = !RD;
+PIN 17 = !SXTN;
+PIN 18 = !STS;
+PIN 19 = !CS;
+
+[A2..0] = [BA2..0];
+ASEL = !IND;
+RD = CS & IOR;
+SXTN = CS & !EGHT;
+STS = IND & LOW & HI & AEN & A2 & A1 & A0 & IOR;
+CS = HI & AEN & (!IND # (LOW & !(A2 & A1 & A0)));

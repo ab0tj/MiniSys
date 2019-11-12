@@ -1,0 +1,46 @@
+LISTING FOR LOGIC DESCRIPTION FILE: MS-ETH-U4.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 23 10:51:24 2019
+
+  1:Name     MS-Eth-U4 ;
+  2:PartNo   04 ;
+  3:Date     2/23/2019 ;
+  4:Revision 01 ;
+  5:Designer Engineer ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   g16v8 ;
+ 10:
+ 11:
+ 12:
+ 13:PIN 1 = ASEL;
+ 14:PIN 2 = A3;
+ 15:PIN 3 = A4;
+ 16:PIN 4 = A5;
+ 17:PIN 5 = A6;
+ 18:PIN 6 = A7;
+ 19:PIN 7 = A8;
+ 20:PIN 8 = A9;
+ 21:PIN 11 = !INT;
+ 22:PIN 12 = !IRQ;
+ 23:PIN 13 = eA9;
+ 24:PIN 14 = eA8;
+ 25:PIN 15 = eA7;
+ 26:PIN 16 = eA6;
+ 27:PIN 17 = eA5;
+ 28:PIN 18 = eA4;
+ 29:PIN 19 = eA3;
+ 30:
+ 31:IRQ = INT;
+ 32:IRQ.oe = INT;
+ 33:[eA9..3] = [A9..3] & ASEL;
+ 34:
+
+
+
+Jedec Fuse Checksum       (4825)
+Jedec Transmit Checksum   (e8b6)

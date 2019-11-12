@@ -1,0 +1,38 @@
+r RMAC.COM
+r LINK.COM
+r GENCPM.COM
+r GENCPM.DAT
+;
+r CPM3.LIB
+r MODEBAUD.LIB
+;
+r BIOSKRNL.ASM
+r BDOS3.SPR
+r SCB3.ASM
+r PCHRIO3.ASM
+r MOVE3.ASM
+r pboot3.asm
+r pdrvtbl3.asm
+r pFL3.ASM
+;
+RMAC BIOSKRNL.ASM
+RMAC SCB3.ASM
+RMAC PCHRIO3.ASM
+RMAC MOVE3.ASM
+RMAC PBOOT3.ASM
+RMAC PDRVTBL3.ASM
+RMAC PFL3.ASM
+;
+LINK BIOS3[B]=BIOSKRNL,SCB3,PBOOT3,PCHRIO3,MOVE3,PDRVTBL3,PFL3
+;
+;Note GENCPM.DAT holds previous values
+;This will be a Non-Banked version of CPM3
+;Note take care if you remove "auto" and do it yourself 
+;to have reasonable values that will not overload RAM in this
+;non-banked system
+;
+gencpm auto
+w cpm3.sys B
+;
+;Now copy the cpm3.sys to your 8" bootable floppy. Make sure the file
+;ccp.com is there as well.

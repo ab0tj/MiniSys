@@ -1,0 +1,861 @@
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Tue Apr 30 19:06:42 2019
+
+
+fit1508 Z:\PROJECTS\WINCUPL\8085-BUSCTRL\8085-BUSCTRL.tt2 -CUPL -dev P1508C84 -JTAG ON
+
+
+****** Initial fitting strategy and property ******
+ Pla_in_file = 8085-BUSCTRL.tt2
+ Pla_out_file = 8085-BUSCTRL.tt3
+ Jedec_file = 8085-BUSCTRL.jed
+ Vector_file = 8085-BUSCTRL.tmv
+ verilog_file = 8085-BUSCTRL.vt
+ Time_file = 
+ Log_file = 8085-BUSCTRL.fit
+ err_file = 
+ Device_name = PLCC84
+ Module_name = 
+ Package_type = PLCC
+ Preassign_file = 
+ Property_file = 
+ Sleep_mode = 
+ Preassignment = 
+ Security_mode = OFF
+ Pin_keep_mode = ON
+ Dedicated_input_clock = 
+ Dedicated_input_reset = 
+ Dedicated_input_oe = 
+ supporter = CUPL
+ optimize = ON
+ Soft_buffer = 
+ Xor_synthesis = OFF
+ Foldback_logic =  on
+ Expander = 
+ Cascade_logic = OFF
+ Dedicated_input = 
+ Output_fast = OFF
+ *******************************
+ Power down pin 1 = OFF
+ Power down pin 2 = OFF
+ power_reset = OFF
+ JTAG = ON
+ TDI pullup = ON
+ TMS pullup = ON
+ MC_power = OFF
+ Open_collector =  RFSH, 
+ ITD0 = ON
+ ITD1 = ON
+ ITD2 = ON
+ Fast_inlatch = off
+ *******************************
+Info: Z:\PROJECTS\WINCUPL\8085-BUSCTRL\8085-BUSCTRL uses 95% of the pins available in device PLCC84
+  If you wish to have more pins available for future logic changes
+  Atmel  recommends using a larger device
+---------------------------------------------------------
+ Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : ON 
+ ... 
+
+Performing global Output Enable pin assignments ...
+
+Performing global pin assignments ...
+--------------------------------------
+
+
+
+Final global control pins assignment (if applicable)...
+-------------------------------------------------------
+ALE assigned to pin  83
+RESET assigned to pin  1
+HLDA assigned to pin  84
+
+
+
+Performing input pin pre-assignments ...
+------------------------------------
+ALE assigned to pin  83
+RESET assigned to pin  1
+HLDA assigned to pin  84
+
+Attempt to place floating signals ...
+------------------------------------
+LA0 is placed at feedback node 601 (MC 1)
+LA1 is placed at feedback node 602 (MC 2)
+MA6 is placed at pin 12 (MC 3)
+MMUWR is placed at feedback node 604 (MC 4)
+MA4 is placed at pin 11 (MC 5)
+MA5 is placed at pin 10 (MC 6)
+MM is placed at feedback node 607 (MC 7)
+MD11 is placed at pin 9 (MC 8)
+LMA3 is placed at feedback node 609 (MC 9)
+LMA1 is placed at feedback node 610 (MC 10)
+MD12 is placed at pin 8 (MC 11)
+LMA2 is placed at feedback node 612 (MC 12)
+MD10 is placed at pin 6 (MC 13)
+MD8 is placed at pin 5 (MC 14)
+FB_236 is placed at foldback expander node 314 (MC 14)
+LMA0 is placed at feedback node 615 (MC 15)
+FB_235 is placed at foldback expander node 315 (MC 15)
+MD9 is placed at pin 4 (MC 16)
+FB_234 is placed at foldback expander node 316 (MC 16)
+MA1 is placed at pin 22 (MC 17)
+AO14 is placed at pin 21 (MC 19)
+MA0 is placed at pin 20 (MC 21)
+LA6 is placed at feedback node 622 (MC 22)
+LA5 is placed at feedback node 623 (MC 23)
+AO12 is placed at pin 18 (MC 24)
+AO13 is placed at pin 17 (MC 25)
+LA7 is placed at feedback node 626 (MC 26)
+AO15 is placed at pin 16 (MC 27)
+LA3 is placed at feedback node 628 (MC 28)
+MEMW is placed at pin 15 (MC 29)
+LA4 is placed at feedback node 630 (MC 30)
+LA2 is placed at feedback node 631 (MC 31)
+TDI is placed at pin 14 (MC 32)
+XXL_165 is placed at feedback node 632 (MC 32)
+AO19 is placed at pin 31 (MC 35)
+M1 is placed at pin 30 (MC 37)
+AO20 is placed at pin 29 (MC 38)
+AO22 is placed at pin 28 (MC 40)
+AO23 is placed at pin 27 (MC 43)
+MA3 is placed at pin 25 (MC 45)
+MA2 is placed at pin 24 (MC 46)
+TMS is placed at pin 23 (MC 48)
+MEMR is placed at pin 41 (MC 49)
+READY is placed at pin 40 (MC 51)
+MWE is placed at pin 39 (MC 53)
+RFSH is placed at pin 37 (MC 56)
+AO18 is placed at pin 36 (MC 57)
+AO16 is placed at pin 35 (MC 59)
+AO21 is placed at pin 34 (MC 61)
+AO17 is placed at pin 33 (MC 64)
+MD0 is placed at pin 44 (MC 65)
+MD1 is placed at pin 45 (MC 67)
+MD2 is placed at pin 46 (MC 69)
+MD3 is placed at pin 48 (MC 72)
+MD4 is placed at pin 49 (MC 73)
+MD5 is placed at pin 50 (MC 75)
+MD6 is placed at pin 51 (MC 77)
+MD7 is placed at pin 52 (MC 80)
+IOM is placed at pin 54 (MC 83)
+WR is placed at pin 55 (MC 85)
+AD2 is placed at pin 56 (MC 86)
+AD4 is placed at pin 57 (MC 88)
+MOE is placed at pin 58 (MC 91)
+IOR is placed at pin 60 (MC 93)
+IOW is placed at pin 61 (MC 94)
+TCK is placed at pin 62 (MC 96)
+AD3 is placed at pin 63 (MC 97)
+AD7 is placed at pin 64 (MC 99)
+AD5 is placed at pin 65 (MC 101)
+AD6 is placed at pin 67 (MC 104)
+S0 is placed at pin 68 (MC 105)
+S1 is placed at pin 69 (MC 107)
+AD1 is placed at pin 70 (MC 109)
+TDO is placed at pin 71 (MC 112)
+AD0 is placed at pin 73 (MC 115)
+AI15 is placed at pin 74 (MC 117)
+AI14 is placed at pin 75 (MC 118)
+RD is placed at pin 76 (MC 120)
+AI13 is placed at pin 77 (MC 123)
+AI12 is placed at pin 79 (MC 125)
+IOWT is placed at pin 80 (MC 126)
+MWT is placed at pin 81 (MC 128)
+
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                          R                                         
+                          M M   M         EH       I A   A   A                      
+                     M M  D D G D M M V   SL A G M O I V I   I                      
+                     A A  1 1 N 1 D D C   ED L N W W 1 C 1 R 1                      
+                     4 5  1 2 D 0 8 9 C   TA E D T T 2 C 3 D 4                      
+                    -------------------------------------------                     
+                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+                  /    10   8   6   4   2  84  82  80  78  76    \                 
+             MA6 | 12                    (*)                   74 | AI15            
+             VCC | 13                                          73 | AD0             
+             TDI | 14                                          72 | GND             
+            MEMW | 15                                          71 | TDO             
+            AO15 | 16                                          70 | AD1             
+            AO13 | 17                                          69 | S1              
+            AO12 | 18                                          68 | S0              
+             GND | 19                                          67 | AD6             
+             MA0 | 20                                          66 | VCC             
+            AO14 | 21                                          65 | AD5             
+             MA1 | 22                 ATF1508                  64 | AD7             
+             TMS | 23               84-Lead PLCC               63 | AD3             
+             MA2 | 24                                          62 | TCK             
+             MA3 | 25                                          61 | IOW             
+             VCC | 26                                          60 | IOR             
+            AO23 | 27                                          59 | GND             
+            AO22 | 28                                          58 | MOE             
+            AO20 | 29                                          57 | AD4             
+              M1 | 30                                          56 | AD2             
+            AO19 | 31                                          55 | WR              
+             GND | 32                                          54 | IOM             
+                  \     34  36  38  40  42  44  46  48  50  52   /                 
+                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+              	    --------------------------------------------                     
+                      A A A A R V M R M G V M M M G M M M M M V                     
+                      O O O O F C W E E N C D D D N D D D D D C                     
+                      1 2 1 1 S C E A M D C 0 1 2 D 3 4 5 6 7 C                     
+                      7 1 6 8 H     D R                                             
+                                    Y                                               
+
+
+
+VCC = Supply Voltage pin which must be connected to (5.0V or 3.0V)
+
+GND = GND pin which must be connected to ground
+
+TMS,TDI,TDO,TDI = JTAG pins which must reserved for the JTAG interface
+
+NC = Unused I/O pins which must be unconnected on the board
+
+Universal-Interconnect-Multiplexer assignments
+------------------------------------------------
+FanIn assignment for block A [21]
+{
+AD7,AD1,AD5,AD0,AD2,AD6,AD4,AD3,
+IOM,
+LA7,LA1,LA6,LA4,LA0,LA3,LA5,LA2,
+MMUWR,
+S0,S1,
+WR,
+}
+Multiplexer assignment for block A
+AD7			(MC15	P)   : MUX 1		Ref (G99p)
+MMUWR			(MC3	FB)  : MUX 2		Ref (A4fb)
+LA7			(MC6	FB)  : MUX 3		Ref (B26fb)
+AD1			(MC21	P)   : MUX 4		Ref (G109p)
+AD5			(MC16	P)   : MUX 7		Ref (G101p)
+S0			(MC18	P)   : MUX 8		Ref (G105p)
+AD0			(MC20	P)   : MUX 9		Ref (H115p)
+LA1			(MC2	FB)  : MUX 10		Ref (A2fb)
+AD2			(MC12	P)   : MUX 11		Ref (F86p)
+AD6			(MC17	P)   : MUX 15		Ref (G104p)
+LA6			(MC4	FB)  : MUX 16		Ref (B22fb)
+AD4			(MC14	P)   : MUX 17		Ref (F88p)
+LA4			(MC8	FB)  : MUX 19		Ref (B30fb)
+IOM			(MC10	P)   : MUX 21		Ref (F83p)
+WR			(MC11	P)   : MUX 23		Ref (F85p)
+AD3			(MC13	P)   : MUX 25		Ref (G97p)
+LA0			(MC1	FB)  : MUX 26		Ref (A1fb)
+S1			(MC19	P)   : MUX 28		Ref (G107p)
+LA3			(MC7	FB)  : MUX 37		Ref (B28fb)
+LA5			(MC5	FB)  : MUX 38		Ref (B23fb)
+LA2			(MC9	FB)  : MUX 39		Ref (B31fb)
+
+FanIn assignment for block B [23]
+{
+AI12,AD2,AI13,AD6,AD7,AD4,AI14,AD3,AD5,AI15,
+IOM,
+LMA0,LMA1,
+MD3,MD0,MD1,MM,MD2,MD12,MMUWR,
+S0,S1,
+WR,
+}
+Multiplexer assignment for block B
+IOM			(MC10	P)   : MUX 1		Ref (F83p)
+S0			(MC18	P)   : MUX 2		Ref (G105p)
+MD3			(MC9	P)   : MUX 5		Ref (E72p)
+S1			(MC19	P)   : MUX 6		Ref (G107p)
+MD0			(MC6	P)   : MUX 7		Ref (E65p)
+AI12			(MC22	P)   : MUX 8		Ref (H125p)
+AD2			(MC12	P)   : MUX 11		Ref (F86p)
+WR			(MC11	P)   : MUX 13		Ref (F85p)
+AI13			(MC23	P)   : MUX 14		Ref (H123p)
+MD1			(MC7	P)   : MUX 15		Ref (E67p)
+AD6			(MC17	P)   : MUX 17		Ref (G104p)
+AD7			(MC15	P)   : MUX 19		Ref (G99p)
+MM			(MC2	FB)  : MUX 20		Ref (A7fb)
+AD4			(MC14	P)   : MUX 21		Ref (F88p)
+MD2			(MC8	P)   : MUX 23		Ref (E69p)
+MD12			(MC4	P)   : MUX 24		Ref (A11p)
+AI14			(MC20	P)   : MUX 25		Ref (H118p)
+AD3			(MC13	P)   : MUX 27		Ref (G97p)
+AD5			(MC16	P)   : MUX 29		Ref (G101p)
+AI15			(MC21	P)   : MUX 31		Ref (H117p)
+LMA0			(MC5	FB)  : MUX 37		Ref (A15fb)
+MMUWR			(MC1	FB)  : MUX 38		Ref (A4fb)
+LMA1			(MC3	FB)  : MUX 39		Ref (A10fb)
+
+FanIn assignment for block C [13]
+{
+AI15,AI14,
+IOM,
+LMA2,LMA3,
+MD11,MD8,MD7,MD10,MM,MMUWR,
+S0,S1,
+}
+Multiplexer assignment for block C
+S0			(MC10	P)   : MUX 2		Ref (G105p)
+AI15			(MC13	P)   : MUX 3		Ref (H117p)
+LMA2			(MC5	FB)  : MUX 5		Ref (A12fb)
+S1			(MC11	P)   : MUX 6		Ref (G107p)
+MD11			(MC3	P)   : MUX 7		Ref (A8p)
+MD8			(MC7	P)   : MUX 8		Ref (A14p)
+AI14			(MC12	P)   : MUX 11		Ref (H118p)
+MD7			(MC8	P)   : MUX 14		Ref (E80p)
+LMA3			(MC4	FB)  : MUX 15		Ref (A9fb)
+MD10			(MC6	P)   : MUX 20		Ref (A13p)
+IOM			(MC9	P)   : MUX 21		Ref (F83p)
+MM			(MC2	FB)  : MUX 24		Ref (A7fb)
+MMUWR			(MC1	FB)  : MUX 38		Ref (A4fb)
+
+FanIn assignment for block D [12]
+{
+IOWT,IOM,
+MD6,MMUWR,MD9,MM,MD4,MWT,MD5,
+RD,
+WR,
+XXL_165,
+}
+Multiplexer assignment for block D
+MD6			(MC7	P)   : MUX 0		Ref (E77p)
+RD			(MC10	P)   : MUX 1		Ref (H120p)
+MMUWR			(MC1	FB)  : MUX 2		Ref (A4fb)
+MD9			(MC3	P)   : MUX 4		Ref (A16p)
+IOWT			(MC11	P)   : MUX 6		Ref (H126p)
+XXL_165			(MC4	FB)  : MUX 7		Ref (B32fb)
+MM			(MC2	FB)  : MUX 8		Ref (A7fb)
+WR			(MC9	P)   : MUX 13		Ref (F85p)
+MD4			(MC5	P)   : MUX 14		Ref (E73p)
+MWT			(MC12	P)   : MUX 20		Ref (H128p)
+IOM			(MC8	P)   : MUX 21		Ref (F83p)
+MD5			(MC6	P)   : MUX 32		Ref (E75p)
+
+FanIn assignment for block E [9]
+{
+AD7,AD4,AD1,AD3,AD0,AD2,AD6,AD5,
+MMUWR,
+}
+Multiplexer assignment for block E
+AD7			(MC5	P)   : MUX 1		Ref (G99p)
+MMUWR			(MC1	FB)  : MUX 2		Ref (A4fb)
+AD4			(MC4	P)   : MUX 3		Ref (F88p)
+AD1			(MC9	P)   : MUX 4		Ref (G109p)
+AD3			(MC3	P)   : MUX 7		Ref (G97p)
+AD0			(MC8	P)   : MUX 9		Ref (H115p)
+AD2			(MC2	P)   : MUX 11		Ref (F86p)
+AD6			(MC7	P)   : MUX 17		Ref (G104p)
+AD5			(MC6	P)   : MUX 29		Ref (G101p)
+
+FanIn assignment for block F [4]
+{
+IOM,
+MMUWR,
+RD,
+WR,
+}
+Multiplexer assignment for block F
+RD			(MC4	P)   : MUX 1		Ref (H120p)
+MMUWR			(MC1	FB)  : MUX 2		Ref (A4fb)
+WR			(MC3	P)   : MUX 13		Ref (F85p)
+IOM			(MC2	P)   : MUX 21		Ref (F83p)
+
+Creating JEDEC file Z:\PROJECTS\WINCUPL\8085-BUSCTRL\8085-BUSCTRL.jed ...
+
+PLCC84 programmed logic:
+-----------------------------------
+AO13 = ((!IOM & !MM.Q & AI13)
+	# (!IOM & MM.Q & MD1.PIN));
+
+AO12 = ((!IOM & !MM.Q & AI12)
+	# (!IOM & MM.Q & MD0.PIN));
+
+AO15 = ((!IOM & !MM.Q & AI15)
+	# (!IOM & MM.Q & MD3.PIN));
+
+AO14 = ((!IOM & !MM.Q & AI14)
+	# (!IOM & MM.Q & MD2.PIN));
+
+AO16 = (!IOM & MD4.PIN & MM.Q);
+
+AO18 = (!IOM & MD6.PIN & MM.Q);
+
+AO17 = (!IOM & MD5.PIN & MM.Q);
+
+AO20 = (!IOM & MD8.Q & MM.Q);
+
+AO19 = (!IOM & MD7.PIN & MM.Q);
+
+AO21 = (!IOM & MD9.Q & MM.Q);
+
+AO22 = (!IOM & MD10.Q & MM.Q);
+
+AO23 = (!IOM & MD11.Q & MM.Q);
+
+!IOR = (IOM & !RD);
+
+!IOW = (IOM & !WR);
+
+LA1.D = AD1;
+
+LA0.D = AD0;
+
+LA3.D = AD3;
+
+LA2.D = AD2;
+
+LA4.D = AD4;
+
+LA5.D = AD5;
+
+LA6.D = AD6;
+
+LMA0.D = AD0;
+
+LA7.D = AD7;
+
+LMA1.D = AD1;
+
+MA0 = ((!MMUWR.Q & AI12)
+	# (MMUWR.Q & LMA0.Q));
+
+LMA2.D = AD2;
+
+LMA3.D = AD3;
+
+M1 = (!IOM & S0 & S1);
+
+MA1 = ((!MMUWR.Q & AI13)
+	# (MMUWR.Q & LMA1.Q));
+
+MA2 = ((!MMUWR.Q & AI14)
+	# (MMUWR.Q & LMA2.Q));
+
+MA3 = ((!MMUWR.Q & AI15)
+	# (MMUWR.Q & LMA3.Q));
+
+MA4.D = AD0;
+
+MA6.D = AD2;
+
+MA5.D = AD1;
+
+MD0 = AD0;
+
+MD1 = AD1;
+
+MD2 = AD2;
+
+MD3 = AD3;
+
+MD4 = AD4;
+
+MD5 = AD5;
+
+MD6 = AD6;
+
+MD7 = AD7;
+
+MD9.D = AD1;
+
+MD8.D = AD0;
+
+MD10.D = AD2;
+
+MD11.D = AD3;
+
+MD12.D = AD4;
+
+!MEMR = (!IOM & !RD);
+
+MM.D = AD7;
+
+!MEMW = ((!IOM & !WR & !MD12.Q)
+	# (!IOM & !WR & !MM.Q));
+
+MOE = MMUWR.Q;
+
+MMUWR.D = (AD0 & AD1 & !AD2 & !AD3 & !AD4 & !AD5 & AD6 & !AD7 & IOM & S0 & !S1);
+
+READY = (IOWT & MWT);
+
+!MWE = (MMUWR.Q & !WR);
+
+RFSH = !XXL_165.Q;
+
+XXL_165.D = (!S0 & !S1);
+
+!FB_234 = (LA1.Q & !LA2.Q & !LA3.Q & !LA4.Q & !LA5.Q & LA6.Q & !LA7.Q & !WR & IOM & !LA0.Q);
+
+!FB_235 = (!LA1.Q & !LA2.Q & !LA3.Q & !LA4.Q & !LA5.Q & LA6.Q & !LA7.Q & !WR & IOM & !LA0.Q);
+
+!FB_236 = (!LA1.Q & !LA2.Q & !LA3.Q & !LA4.Q & !LA5.Q & LA6.Q & !LA7.Q & !WR & IOM & LA0.Q);
+
+AO13.OE = !HLDA;
+
+AO12.OE = !HLDA;
+
+AO15.OE = !HLDA;
+
+AO14.OE = !HLDA;
+
+AO16.OE = !HLDA;
+
+AO18.OE = !HLDA;
+
+AO17.OE = !HLDA;
+
+AO20.OE = !HLDA;
+
+AO19.OE = !HLDA;
+
+AO21.OE = !HLDA;
+
+AO22.OE = !HLDA;
+
+AO23.OE = !HLDA;
+
+IOR.OE = !HLDA;
+
+IOW.OE = !HLDA;
+
+LA1.C = !ALE;
+
+LA0.C = !ALE;
+
+LA3.C = !ALE;
+
+LA2.C = !ALE;
+
+LA4.C = !ALE;
+
+LA5.C = !ALE;
+
+LA6.C = !ALE;
+
+LMA0.C = FB_236;
+
+LA7.C = !ALE;
+
+LMA1.C = FB_236;
+
+LMA2.C = FB_236;
+
+LMA3.C = FB_236;
+
+M1.OE = !HLDA;
+
+MA4.C = FB_235;
+
+MA6.C = FB_235;
+
+MA5.C = FB_235;
+
+MD0.OE = MMUWR.Q;
+
+MD1.OE = MMUWR.Q;
+
+MD2.OE = MMUWR.Q;
+
+MD3.OE = MMUWR.Q;
+
+MD4.OE = MMUWR.Q;
+
+MD5.OE = MMUWR.Q;
+
+MD6.OE = MMUWR.Q;
+
+MD7.OE = MMUWR.Q;
+
+MD9.C = FB_234;
+
+MD9.OE = MMUWR.Q;
+
+MD8.C = FB_234;
+
+MD8.OE = MMUWR.Q;
+
+MD10.C = FB_234;
+
+MD10.OE = MMUWR.Q;
+
+MD11.C = FB_234;
+
+MD11.OE = MMUWR.Q;
+
+MD12.C = FB_234;
+
+MD12.OE = MMUWR.Q;
+
+MEMR.OE = !HLDA;
+
+MM.C = FB_235;
+
+MM.AR = RESET;
+
+MEMW.OE = !HLDA;
+
+MMUWR.C = !ALE;
+
+XXL_165.C = !ALE;
+
+
+PLCC84 Pin/Node Placement:
+------------------------------------
+Pin 1  = RESET;
+Pin 4  = MD9; /* MC 16 */
+Pin 5  = MD8; /* MC 14 */
+Pin 6  = MD10; /* MC 13 */
+Pin 8  = MD12; /* MC 11 */
+Pin 9  = MD11; /* MC 8 */
+Pin 10 = MA5; /* MC  6 */
+Pin 11 = MA4; /* MC  5 */
+Pin 12 = MA6; /* MC  3 */
+Pin 14 = TDI; /* MC 32 */ 
+Pin 15 = MEMW; /* MC 29 */ 
+Pin 16 = AO15; /* MC 27 */ 
+Pin 17 = AO13; /* MC 25 */ 
+Pin 18 = AO12; /* MC 24 */ 
+Pin 20 = MA0; /* MC 21 */ 
+Pin 21 = AO14; /* MC 19 */ 
+Pin 22 = MA1; /* MC 17 */ 
+Pin 23 = TMS; /* MC 48 */ 
+Pin 24 = MA2; /* MC 46 */ 
+Pin 25 = MA3; /* MC 45 */ 
+Pin 27 = AO23; /* MC 43 */ 
+Pin 28 = AO22; /* MC 40 */ 
+Pin 29 = AO20; /* MC 38 */ 
+Pin 30 = M1; /* MC 37 */ 
+Pin 31 = AO19; /* MC 35 */ 
+Pin 33 = AO17; /* MC 64 */ 
+Pin 34 = AO21; /* MC 61 */ 
+Pin 35 = AO16; /* MC 59 */ 
+Pin 36 = AO18; /* MC 57 */ 
+Pin 37 = RFSH; /* MC 56 */ 
+Pin 39 = MWE; /* MC 53 */ 
+Pin 40 = READY; /* MC 51 */ 
+Pin 41 = MEMR; /* MC 49 */ 
+Pin 44 = MD0; /* MC 65 */ 
+Pin 45 = MD1; /* MC 67 */ 
+Pin 46 = MD2; /* MC 69 */ 
+Pin 48 = MD3; /* MC 72 */ 
+Pin 49 = MD4; /* MC 73 */ 
+Pin 50 = MD5; /* MC 75 */ 
+Pin 51 = MD6; /* MC 77 */ 
+Pin 52 = MD7; /* MC 80 */ 
+Pin 54 = IOM; /* MC 83 */ 
+Pin 55 = WR; /* MC 85 */ 
+Pin 56 = AD2; /* MC 86 */ 
+Pin 57 = AD4; /* MC 88 */ 
+Pin 58 = MOE; /* MC 91 */ 
+Pin 60 = IOR; /* MC 93 */ 
+Pin 61 = IOW; /* MC 94 */ 
+Pin 62 = TCK; /* MC 96 */ 
+Pin 63 = AD3; /* MC 97 */ 
+Pin 64 = AD7; /* MC 99 */ 
+Pin 65 = AD5; /* MC 101 */ 
+Pin 67 = AD6; /* MC 104 */ 
+Pin 68 = S0; /* MC 105 */ 
+Pin 69 = S1; /* MC 107 */ 
+Pin 70 = AD1; /* MC 109 */ 
+Pin 71 = TDO; /* MC 112 */ 
+Pin 73 = AD0; /* MC 115 */ 
+Pin 74 = AI15; /* MC 117 */ 
+Pin 75 = AI14; /* MC 118 */ 
+Pin 76 = RD; /* MC 120 */ 
+Pin 77 = AI13; /* MC 123 */ 
+Pin 79 = AI12; /* MC 125 */ 
+Pin 80 = IOWT; /* MC 126 */ 
+Pin 81 = MWT; /* MC 128 */ 
+Pin 83 = ALE;
+Pin 84 = HLDA;
+PINNODE 314 = FB_236; /* MC 14 Foldback */
+PINNODE 315 = FB_235; /* MC 15 Foldback */
+PINNODE 316 = FB_234; /* MC 16 Foldback */
+PINNODE 601 = LA0; /* MC 1 Feedback */
+PINNODE 602 = LA1; /* MC 2 Feedback */
+PINNODE 604 = MMUWR; /* MC 4 Feedback */
+PINNODE 607 = MM; /* MC 7 Feedback */
+PINNODE 609 = LMA3; /* MC 9 Feedback */
+PINNODE 610 = LMA1; /* MC 10 Feedback */
+PINNODE 612 = LMA2; /* MC 12 Feedback */
+PINNODE 615 = LMA0; /* MC 15 Feedback */
+PINNODE 622 = LA6; /* MC 22 Feedback */
+PINNODE 623 = LA5; /* MC 23 Feedback */
+PINNODE 626 = LA7; /* MC 26 Feedback */
+PINNODE 628 = LA3; /* MC 28 Feedback */
+PINNODE 630 = LA4; /* MC 30 Feedback */
+PINNODE 631 = LA2; /* MC 31 Feedback */
+PINNODE 632 = XXL_165; /* MC 32 Feedback */
+
+** Resource Usage **
+
+
+DCERP Field = Summary of Allocations.
+|||||
+|||||_Preset [p,-]       ==  p = PT preset, - No Preset.
+||||
+||||__Reset [g,r,-]      ==  g= Global AR, r = PT reset, - No reset.
+|||
+|||___Clock Enable [e,-] ==  e = Product Term, - always enabled, - none.
+||
+||____Clock [c,g,-],     ==  c = Product term, g = Global term, - No Clock.
+|
+|_____Type [C,D,L,T],    ==  Register type C= combin, D=dff, L=latch, T=tff.
+
+For input only = INPUT.
+
+MCell Pin# Oe   PinDrive  DCERP  FBDrive  DCERP  Foldback  CascadeOut     TotPT output_slew
+MC1   0         --               LA0      Dg---  --        --             1     slow
+MC2   0         --               LA1      Dg---  --        --             1     slow
+MC3   12   on   MA6       Dc---  --              --        --             2     slow
+MC4   0         --               MMUWR    Dg---  --        --             1     slow
+MC5   11   on   MA4       Dc---  --              --        --             2     slow
+MC6   10   on   MA5       Dc---  --              --        --             2     slow
+MC7   0         --               MM       Dc-g-  --        --             2     slow
+MC8   9    PT   MD11      Dc---  --              --        --             3     slow
+MC9   0         --               LMA3     Dc---  --        --             2     slow
+MC10  0         --               LMA1     Dc---  --        --             2     slow
+MC11  8    PT   MD12      Dc---  --              --        --             3     slow
+MC12  0         --               LMA2     Dc---  --        --             2     slow
+MC13  6    PT   MD10      Dc---  --              --        --             3     slow
+MC14  5    PT   MD8       Dc---  --              FB_236    --             4     slow
+MC15  0         --               LMA0     Dc---  FB_235    --             3     slow
+MC16  4    PT   MD9       Dc---  --              FB_234    --             4     slow
+MC17  22   on   MA1       C----  --              --        --             2     slow
+MC18  0         --               --              --        --             0     slow
+MC19  21   OE0  AO14      C----  --              --        --             2     slow
+MC20  0         --               --              --        --             0     slow
+MC21  20   on   MA0       C----  --              --        --             2     slow
+MC22  0         --               LA6      Dg---  --        --             1     slow
+MC23  0         --               LA5      Dg---  --        --             1     slow
+MC24  18   OE0  AO12      C----  --              --        --             2     slow
+MC25  17   OE0  AO13      C----  --              --        --             2     slow
+MC26  0         --               LA7      Dg---  --        --             1     slow
+MC27  16   OE0  AO15      C----  --              --        --             2     slow
+MC28  0         --               LA3      Dg---  --        --             1     slow
+MC29  15   OE0  MEMW      C----  --              --        --             2     slow
+MC30  0         --               LA4      Dg---  --        --             1     slow
+MC31  0         --               LA2      Dg---  --        --             1     slow
+MC32  14   --   TDI       INPUT  XXL_165  Dg---  --        --             1     slow
+MC33  0         --               --              --        --             0     slow
+MC34  0         --               --              --        --             0     slow
+MC35  31   OE0  AO19      C----  --              --        --             1     slow
+MC36  0         --               --              --        --             0     slow
+MC37  30   OE0  M1        C----  --              --        --             1     slow
+MC38  29   OE0  AO20      C----  --              --        --             1     slow
+MC39  0         --               --              --        --             0     slow
+MC40  28   OE0  AO22      C----  --              --        --             1     slow
+MC41  0         --               --              --        --             0     slow
+MC42  0         --               --              --        --             0     slow
+MC43  27   OE0  AO23      C----  --              --        --             1     slow
+MC44  0         --               --              --        --             0     slow
+MC45  25   on   MA3       C----  --              --        --             2     slow
+MC46  24   on   MA2       C----  --              --        --             2     slow
+MC47  0         --               --              --        --             0     slow
+MC48  23   --   TMS       INPUT  --              --        --             0     slow
+MC49  41   OE0  MEMR      C----  --              --        --             1     slow
+MC50  0         --               --              --        --             0     slow
+MC51  40   on   READY     C----  --              --        --             1     slow
+MC52  0         --               --              --        --             0     slow
+MC53  39   on   MWE       C----  --              --        --             1     slow
+MC54  0         --               --              --        --             0     slow
+MC55  0         --               --              --        --             0     slow
+MC56  37   on   RFSH      C----  --              --        --             1     slow
+MC57  36   OE0  AO18      C----  --              --        --             1     slow
+MC58  0         --               --              --        --             0     slow
+MC59  35   OE0  AO16      C----  --              --        --             1     slow
+MC60  0         --               --              --        --             0     slow
+MC61  34   OE0  AO21      C----  --              --        --             1     slow
+MC62  0         --               --              --        --             0     slow
+MC63  0         --               --              --        --             0     slow
+MC64  33   OE0  AO17      C----  --              --        --             1     slow
+MC65  44   PT   MD0       C----  --              --        --             2     slow
+MC66  0         --               --              --        --             0     slow
+MC67  45   PT   MD1       C----  --              --        --             2     slow
+MC68  0         --               --              --        --             0     slow
+MC69  46   PT   MD2       C----  --              --        --             2     slow
+MC70  0         --               --              --        --             0     slow
+MC71  0         --               --              --        --             0     slow
+MC72  48   PT   MD3       C----  --              --        --             2     slow
+MC73  49   PT   MD4       C----  --              --        --             2     slow
+MC74  0         --               --              --        --             0     slow
+MC75  50   PT   MD5       C----  --              --        --             2     slow
+MC76  0         --               --              --        --             0     slow
+MC77  51   PT   MD6       C----  --              --        --             2     slow
+MC78  0         --               --              --        --             0     slow
+MC79  0         --               --              --        --             0     slow
+MC80  52   PT   MD7       C----  --              --        --             2     slow
+MC81  0         --               --              --        --             0     slow
+MC82  0         --               --              --        --             0     slow
+MC83  54   --   IOM       INPUT  --              --        --             0     slow
+MC84  0         --               --              --        --             0     slow
+MC85  55   --   WR        INPUT  --              --        --             0     slow
+MC86  56   --   AD2       INPUT  --              --        --             0     slow
+MC87  0         --               --              --        --             0     slow
+MC88  57   --   AD4       INPUT  --              --        --             0     slow
+MC89  0         --               --              --        --             0     slow
+MC90  0         --               --              --        --             0     slow
+MC91  58   on   MOE       C----  --              --        --             1     slow
+MC92  0         --               --              --        --             0     slow
+MC93  60   OE0  IOR       C----  --              --        --             1     slow
+MC94  61   OE0  IOW       C----  --              --        --             1     slow
+MC95  0         --               --              --        --             0     slow
+MC96  62   --   TCK       INPUT  --              --        --             0     slow
+MC97  63   --   AD3       INPUT  --              --        --             0     slow
+MC98  0         --               --              --        --             0     slow
+MC99  64   --   AD7       INPUT  --              --        --             0     slow
+MC100 0         --               --              --        --             0     slow
+MC101 65   --   AD5       INPUT  --              --        --             0     slow
+MC102 0         --               --              --        --             0     slow
+MC103 0         --               --              --        --             0     slow
+MC104 67   --   AD6       INPUT  --              --        --             0     slow
+MC105 68   --   S0        INPUT  --              --        --             0     slow
+MC106 0         --               --              --        --             0     slow
+MC107 69   --   S1        INPUT  --              --        --             0     slow
+MC108 0         --               --              --        --             0     slow
+MC109 70   --   AD1       INPUT  --              --        --             0     slow
+MC110 0         --               --              --        --             0     slow
+MC111 0         --               --              --        --             0     slow
+MC112 71   --   TDO       INPUT  --              --        --             0     slow
+MC113 0         --               --              --        --             0     slow
+MC114 0         --               --              --        --             0     slow
+MC115 73   --   AD0       INPUT  --              --        --             0     slow
+MC116 0         --               --              --        --             0     slow
+MC117 74   --   AI15      INPUT  --              --        --             0     slow
+MC118 75   --   AI14      INPUT  --              --        --             0     slow
+MC119 0         --               --              --        --             0     slow
+MC120 76   --   RD        INPUT  --              --        --             0     slow
+MC121 0         --               --              --        --             0     slow
+MC122 0         --               --              --        --             0     slow
+MC123 77   --   AI13      INPUT  --              --        --             0     slow
+MC124 0         --               --              --        --             0     slow
+MC125 79   --   AI12      INPUT  --              --        --             0     slow
+MC126 80   --   IOWT      INPUT  --              --        --             0     slow
+MC127 0         --               --              --        --             0     slow
+MC128 81   --   MWT       INPUT  --              --        --             0     slow
+MC0   2         --               --              --        --             0     slow
+MC0   1         RESET     INPUT  --              --        --             0     slow
+MC0   84        HLDA      INPUT  --              --        --             0     slow
+MC0   83        ALE       INPUT  --              --        --             0     slow
+
+Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
+A: LC1	- LC16		16/16(100%)	8/16(50%)	3/16(18%)	37/80(46%)	(21)	0
+B: LC17	- LC32		14/16(87%)	8/16(50%)	0/16(0%)	21/80(26%)	(23)	0
+C: LC33	- LC48		7/16(43%)	8/16(50%)	0/16(0%)	9/80(11%)	(13)	0
+D: LC49	- LC64		8/16(50%)	8/16(50%)	0/16(0%)	8/80(10%)	(12)	0
+E: LC65	- LC80		8/16(50%)	8/16(50%)	0/16(0%)	16/80(20%)	(9)	0
+F: LC81	- LC96		3/16(18%)	8/16(50%)	0/16(0%)	3/80(3%)	(4)	0
+G: LC97	- LC112		0/16(0%)	8/16(50%)	0/16(0%)	0/80(0%)	(0)	0
+H: LC113- LC128		0/16(0%)	8/16(50%)	0/16(0%)	0/80(0%)	(0)	0
+
+Total dedicated input used:	3/4 	(75%)
+Total I/O pins used		64/64 	(100%)
+Total Logic cells used 		56/128 	(43%)
+Total Flip-Flop used 		23/128 	(17%)
+Total Foldback logic used 	3/128 	(2%)
+Total Nodes+FB/MCells 		59/128 	(46%)
+Total cascade used 		0
+Total input pins 		26
+Total output pins 		41
+Total Pts 			94
+Creating pla file Z:\PROJECTS\WINCUPL\8085-BUSCTRL\8085-BUSCTRL.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+
+----------------  End fitter, Design FITS
+$Device PLCC84 fits 
+FIT1508 completed in 0.00 seconds

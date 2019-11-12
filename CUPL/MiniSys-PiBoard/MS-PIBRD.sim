@@ -1,0 +1,95 @@
+%SIGNAL
+PIN   7 =  A0 
+PIN   6 =  A1 
+PIN   5 = !ADDR_MATCH 
+PIN  20 = !CON_IOR 
+PIN  21 = !CON_IOW 
+PIN  12 = !CON_R 
+PIN  17 =  CON_SI 
+PIN  18 =  CON_SO 
+PIN  11 =  CON_W 
+PIN  10 = !HAK 
+PIN   9 = !HRQ 
+PIN   2 =  IOM 
+PIN  27 = !IOR 
+PIN  26 = !IOW 
+PIN  25 = !MEMR 
+PIN  24 = !MEMW 
+PIN  23 =  PI_REQ 
+PIN   4 = !RD 
+PIN  13 = !RESET 
+PIN  19 = !STS_IOR 
+PIN  16 =  SV 
+PIN   3 = !WR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CON_IOR =>
+    A0 & !A1 & !ADDR_MATCH & HAK & !IOR & RESET
+
+CON_IOW =>
+    A0 & !A1 & !ADDR_MATCH & HAK & !IOW & RESET
+
+CON_SI =>
+    CON_IOR & CON_SI & RESET
+  # CON_IOR & CON_W & RESET
+
+CON_SO =>
+    CON_SO & RESET & !SV
+  # !CON_IOW & RESET & !SV
+  # CON_R & CON_SO & RESET
+  # !CON_IOW & CON_R & RESET
+
+IOR =>
+    IOM & !RD
+
+IOR.oe  =>
+    !HAK & RESET
+
+IOW =>
+    IOM & SV & !WR
+
+IOW.oe  =>
+    !HAK & RESET
+
+MEMR =>
+    !IOM & !RD
+
+MEMR.oe  =>
+    !HAK & RESET
+
+MEMW =>
+    !IOM & SV & !WR
+
+MEMW.oe  =>
+    !HAK & RESET
+
+PI_REQ =>
+    !A0 & !A1 & !ADDR_MATCH & HAK & !IOW & RESET
+  # HAK & PI_REQ & RESET
+
+STS_IOR =>
+    !A0 & !A1 & !ADDR_MATCH & HAK & !IOR & RESET
+
+CON_IOR.oe  =>
+    1 
+
+CON_IOW.oe  =>
+    1 
+
+CON_SI.oe  =>
+    1 
+
+CON_SO.oe  =>
+    1 
+
+PI_REQ.oe  =>
+    1 
+
+STS_IOR.oe  =>
+    1 
+
+%END

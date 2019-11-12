@@ -1,0 +1,544 @@
+
+*******************************************************************************
+                                 8085-BUSCTRL
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          f1508ispplcc84  Library DLIB-h-40-2
+Created         Tue Apr 30 19:06:41 2019
+Name            8085-BUSCTRL 
+Partno          8085 
+Revision        01 
+Date            12/13/2018 
+Designer        Alex 
+Company         AB0TJ 
+Assembly        None 
+Location        
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+ALTCHWR =>
+    IOM & LA0 & !LA1 & !LA2 & !LA3 & !LA4 & !LA5 & LA6 & !LA7 & WR
+
+AO12 =>
+    AI12 & !IOM & !MM
+  # !IOM & MD0 & MM
+
+AO12.oe  =>
+    !HLDA
+
+AO13 =>
+    AI13 & !IOM & !MM
+  # !IOM & MD1 & MM
+
+AO13.oe  =>
+    !HLDA
+
+AO14 =>
+    AI14 & !IOM & !MM
+  # !IOM & MD2 & MM
+
+AO14.oe  =>
+    !HLDA
+
+AO15 =>
+    AI15 & !IOM & !MM
+  # !IOM & MD3 & MM
+
+AO15.oe  =>
+    !HLDA
+
+AO16 =>
+    !IOM & MD4 & MM
+
+AO16.oe  =>
+    !HLDA
+
+AO17 =>
+    !IOM & MD5 & MM
+
+AO17.oe  =>
+    !HLDA
+
+AO18 =>
+    !IOM & MD6 & MM
+
+AO18.oe  =>
+    !HLDA
+
+AO19 =>
+    !IOM & MD7 & MM
+
+AO19.oe  =>
+    !HLDA
+
+AO20 =>
+    !IOM & MD8 & MM
+
+AO20.oe  =>
+    !HLDA
+
+AO21 =>
+    !IOM & MD9 & MM
+
+AO21.oe  =>
+    !HLDA
+
+AO22 =>
+    !IOM & MD10 & MM
+
+AO22.oe  =>
+    !HLDA
+
+AO23 =>
+    !IOM & MD11 & MM
+
+AO23.oe  =>
+    !HLDA
+
+CFGWR =>
+    IOM & !LA0 & !LA1 & !LA2 & !LA3 & !LA4 & !LA5 & LA6 & !LA7 & WR
+
+DLTCHWR =>
+    IOM & !LA0 & LA1 & !LA2 & !LA3 & !LA4 & !LA5 & LA6 & !LA7 & WR
+
+IOR =>
+    !IOM
+  # !RD
+
+IOR.oe  =>
+    !HLDA
+
+IOW =>
+    !IOM
+  # !WR
+
+IOW.oe  =>
+    !HLDA
+
+LA0.d  =>
+    AD0
+
+LA0.ck  =>
+    !ALE
+
+LA1.d  =>
+    AD1
+
+LA1.ck  =>
+    !ALE
+
+LA2.d  =>
+    AD2
+
+LA2.ck  =>
+    !ALE
+
+LA3.d  =>
+    AD3
+
+LA3.ck  =>
+    !ALE
+
+LA4.d  =>
+    AD4
+
+LA4.ck  =>
+    !ALE
+
+LA5.d  =>
+    AD5
+
+LA5.ck  =>
+    !ALE
+
+LA6.d  =>
+    AD6
+
+LA6.ck  =>
+    !ALE
+
+LA7.d  =>
+    AD7
+
+LA7.ck  =>
+    !ALE
+
+LMA0.d  =>
+    AD0
+
+LMA0.ck  =>
+    !ALTCHWR
+
+LMA1.d  =>
+    AD1
+
+LMA1.ck  =>
+    !ALTCHWR
+
+LMA2.d  =>
+    AD2
+
+LMA2.ck  =>
+    !ALTCHWR
+
+LMA3.d  =>
+    AD3
+
+LMA3.ck  =>
+    !ALTCHWR
+
+M1 =>
+    !IOM & S0 & S1
+
+M1.oe  =>
+    !HLDA
+
+MA0 =>
+    AI12 & !MMUWR
+  # LMA0 & MMUWR
+
+MA1 =>
+    AI13 & !MMUWR
+  # LMA1 & MMUWR
+
+MA2 =>
+    AI14 & !MMUWR
+  # LMA2 & MMUWR
+
+MA3 =>
+    AI15 & !MMUWR
+  # LMA3 & MMUWR
+
+MA4.d  =>
+    AD0
+
+MA4.ck  =>
+    !CFGWR
+
+MA5.d  =>
+    AD1
+
+MA5.ck  =>
+    !CFGWR
+
+MA6.d  =>
+    AD2
+
+MA6.ck  =>
+    !CFGWR
+
+MD0 =>
+    AD0
+
+MD0.oe  =>
+    MMUWR
+
+MD1 =>
+    AD1
+
+MD1.oe  =>
+    MMUWR
+
+MD2 =>
+    AD2
+
+MD2.oe  =>
+    MMUWR
+
+MD3 =>
+    AD3
+
+MD3.oe  =>
+    MMUWR
+
+MD4 =>
+    AD4
+
+MD4.oe  =>
+    MMUWR
+
+MD5 =>
+    AD5
+
+MD5.oe  =>
+    MMUWR
+
+MD6 =>
+    AD6
+
+MD6.oe  =>
+    MMUWR
+
+MD7 =>
+    AD7
+
+MD7.oe  =>
+    MMUWR
+
+MD8.d  =>
+    AD0
+
+MD8.ck  =>
+    !DLTCHWR
+
+MD8.oe  =>
+    MMUWR
+
+MD9.d  =>
+    AD1
+
+MD9.ck  =>
+    !DLTCHWR
+
+MD9.oe  =>
+    MMUWR
+
+MD10.d  =>
+    AD2
+
+MD10.ck  =>
+    !DLTCHWR
+
+MD10.oe  =>
+    MMUWR
+
+MD11.d  =>
+    AD3
+
+MD11.ck  =>
+    !DLTCHWR
+
+MD11.oe  =>
+    MMUWR
+
+MD12.d  =>
+    AD4
+
+MD12.ck  =>
+    !DLTCHWR
+
+MD12.oe  =>
+    MMUWR
+
+MEMR =>
+    IOM
+  # !RD
+
+MEMR.oe  =>
+    !HLDA
+
+MEMW =>
+    IOM
+  # !WR
+  # MD12 & MM
+
+MEMW.oe  =>
+    !HLDA
+
+MM.d  =>
+    AD7
+
+MM.ar  =>
+    RESET
+
+MM.ck  =>
+    !CFGWR
+
+MMUWR.d  =>
+    AD0 & AD1 & !AD2 & !AD3 & !AD4 & !AD5 & AD6 & !AD7 & IOM & S0 & !S1
+
+MMUWR.ck  =>
+    !ALE
+
+MOE =>
+    !MMUWR
+
+MWE =>
+    MMUWR & WR
+
+READY =>
+    !IOWT & !MWT
+
+RFSH.d  =>
+    !S0 & !S1
+
+RFSH.ck  =>
+    !ALE
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    AD0                         73       V        -       -       -     
+    AD1                         70       V        -       -       -     
+    AD2                         56       V        -       -       -     
+    AD3                         63       V        -       -       -     
+    AD4                         57       V        -       -       -     
+    AD5                         65       V        -       -       -     
+    AD6                         67       V        -       -       -     
+    AD7                         64       V        -       -       -     
+    AI12                        79       V        -       -       -     
+    AI13                        77       V        -       -       -     
+    AI14                        75       V        -       -       -     
+    AI15                        74       V        -       -       -     
+    ALE                         83       V        -       -       -     
+    ALTCHWR                     0        N        1       0       1     
+    AO12                        18       V        2       0       1     
+    AO12                oe      18       X        1       0       1     
+    AO13                        17       V        2       0       1     
+    AO13                oe      17       X        1       0       1     
+    AO14                        21       V        2       0       1     
+    AO14                oe      21       X        1       0       1     
+    AO15                        16       V        2       0       1     
+    AO15                oe      16       X        1       0       1     
+    AO16                        35       V        1       0       1     
+    AO16                oe      35       X        1       0       1     
+    AO17                        33       V        1       0       1     
+    AO17                oe      33       X        1       0       1     
+    AO18                        36       V        1       0       1     
+    AO18                oe      36       X        1       0       1     
+    AO19                        31       V        1       0       1     
+    AO19                oe      31       X        1       0       1     
+    AO20                        29       V        1       0       1     
+    AO20                oe      29       X        1       0       1     
+    AO21                        34       V        1       0       1     
+    AO21                oe      34       X        1       0       1     
+    AO22                        28       V        1       0       1     
+    AO22                oe      28       X        1       0       1     
+    AO23                        27       V        1       0       1     
+    AO23                oe      27       X        1       0       1     
+    CFGWR                       0        N        1       0       1     
+    DLTCHWR                     0        N        1       0       1     
+    HLDA                        84       V        -       -       -     
+ !  INTA                        2        V        -       -       -     
+    IOM                         54       V        -       -       -     
+    IOR                         60       V        2       0       1     
+    IOR                 oe      60       X        1       0       1     
+    IOW                         61       V        2       0       1     
+    IOW                 oe      61       X        1       0       1     
+ !  IOWT                        80       V        -       -       -     
+    LA0                         0        N        -       -       -     
+    LA0                 d       0        M        1       0       1     
+    LA0                 ck      0        M        1       0       1     
+    LA1                         0        N        -       -       -     
+    LA1                 d       0        M        1       0       1     
+    LA1                 ck      0        M        1       0       1     
+    LA2                         0        N        -       -       -     
+    LA2                 d       0        M        1       0       1     
+    LA2                 ck      0        M        1       0       1     
+    LA3                         0        N        -       -       -     
+    LA3                 d       0        M        1       0       1     
+    LA3                 ck      0        M        1       0       1     
+    LA4                         0        N        -       -       -     
+    LA4                 d       0        M        1       0       1     
+    LA4                 ck      0        M        1       0       1     
+    LA5                         0        N        -       -       -     
+    LA5                 d       0        M        1       0       1     
+    LA5                 ck      0        M        1       0       1     
+    LA6                         0        N        -       -       -     
+    LA6                 d       0        M        1       0       1     
+    LA6                 ck      0        M        1       0       1     
+    LA7                         0        N        -       -       -     
+    LA7                 d       0        M        1       0       1     
+    LA7                 ck      0        M        1       0       1     
+    LMA0                        0        N        -       -       -     
+    LMA0                d       0        M        1       0       1     
+    LMA0                ck      0        M        1       0       1     
+    LMA1                        0        N        -       -       -     
+    LMA1                d       0        M        1       0       1     
+    LMA1                ck      0        M        1       0       1     
+    LMA2                        0        N        -       -       -     
+    LMA2                d       0        M        1       0       1     
+    LMA2                ck      0        M        1       0       1     
+    LMA3                        0        N        -       -       -     
+    LMA3                d       0        M        1       0       1     
+    LMA3                ck      0        M        1       0       1     
+    M1                          30       V        1       0       1     
+    M1                  oe      30       X        1       0       1     
+    MA0                         20       V        2       0       1     
+    MA1                         22       V        2       0       1     
+    MA2                         24       V        2       0       1     
+    MA3                         25       V        2       0       1     
+    MA4                         11       V        -       -       -     
+    MA4                 d       11       X        1       0       1     
+    MA4                 ck      11       X        1       0       1     
+    MA5                         10       V        -       -       -     
+    MA5                 d       10       X        1       0       1     
+    MA5                 ck      10       X        1       0       1     
+    MA6                         12       V        -       -       -     
+    MA6                 d       12       X        1       0       1     
+    MA6                 ck      12       X        1       0       1     
+    MD0                         44       V        1       0       1     
+    MD0                 oe      44       X        1       0       1     
+    MD1                         45       V        1       0       1     
+    MD1                 oe      45       X        1       0       1     
+    MD2                         46       V        1       0       1     
+    MD2                 oe      46       X        1       0       1     
+    MD3                         48       V        1       0       1     
+    MD3                 oe      48       X        1       0       1     
+    MD4                         49       V        1       0       1     
+    MD4                 oe      49       X        1       0       1     
+    MD5                         50       V        1       0       1     
+    MD5                 oe      50       X        1       0       1     
+    MD6                         51       V        1       0       1     
+    MD6                 oe      51       X        1       0       1     
+    MD7                         52       V        1       0       1     
+    MD7                 oe      52       X        1       0       1     
+    MD8                         5        V        -       -       -     
+    MD8                 d       5        X        1       0       1     
+    MD8                 ck      5        X        1       0       1     
+    MD8                 oe      5        X        1       0       1     
+    MD9                         4        V        -       -       -     
+    MD9                 d       4        X        1       0       1     
+    MD9                 ck      4        X        1       0       1     
+    MD9                 oe      4        X        1       0       1     
+    MD10                        6        V        -       -       -     
+    MD10                d       6        X        1       0       1     
+    MD10                ck      6        X        1       0       1     
+    MD10                oe      6        X        1       0       1     
+    MD11                        9        V        -       -       -     
+    MD11                d       9        X        1       0       1     
+    MD11                ck      9        X        1       0       1     
+    MD11                oe      9        X        1       0       1     
+    MD12                        8        V        -       -       -     
+    MD12                d       8        X        1       0       1     
+    MD12                ck      8        X        1       0       1     
+    MD12                oe      8        X        1       0       1     
+    MEMR                        41       V        2       0       1     
+    MEMR                oe      41       X        1       0       1     
+    MEMW                        15       V        3       0       1     
+    MEMW                oe      15       X        1       0       1     
+    MM                          0        N        -       -       -     
+    MM                  d       0        M        1       0       1     
+    MM                  ar      0        M        1       0       1     
+    MM                  ck      0        M        1       0       1     
+    MMUWR                       0        N        -       -       -     
+    MMUWR               d       0        M        1       0       1     
+    MMUWR               ck      0        M        1       0       1     
+ !  MOE                         58       V        1       0       1     
+ !  MWE                         39       V        1       0       1     
+ !  MWT                         81       V        -       -       -     
+ !  RD                          76       V        -       -       -     
+    READY                       40       V        1       0       1     
+    RESET                       1        V        -       -       -     
+ !  RFSH                        37       V        -       -       -     
+ !  RFSH                d       37       X        1       0       1     
+    RFSH                ck      37       X        1       0       1     
+    S0                          68       V        -       -       -     
+    S1                          69       V        -       -       -     
+ !  WR                          55       V        -       -       -     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+

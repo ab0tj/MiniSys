@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name MiniSys-Breakout-rescue)(type Legacy)(uri ${KIPRJMOD}/MiniSys-Breakout-rescue.lib)(options "")(descr ""))
+)

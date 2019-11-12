@@ -1,0 +1,192 @@
+{COMPONENT Z:\PROJECTS\WINCUPL\MINISYS-8MB\8MB-SRAM.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Tue Mar 12 20:15:48 2019 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P A23 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P A0 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P BHE' {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P MOVL' {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P MEMR' {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P MEMW' {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P UPPER {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P SI {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P SEL {Pt "I/O"}{Lq 0}{Ploc 310 20}}
+   {P BRDSEL' {Pt "I/O"}{Lq 0}{Ploc 310 40}}
+   {P WR' {Pt "I/O"}{Lq 0}{Ploc 310 60}}
+   {P RD' {Pt "I/O"}{Lq 0}{Ploc 310 80}}
+   {P WEH' {Pt "I/O"}{Lq 0}{Ploc 310 100}}
+   {P WEL' {Pt "I/O"}{Lq 0}{Ploc 310 120}}
+   {P OEH' {Pt "I/O"}{Lq 0}{Ploc 310 140}}
+   {P OEL' {Pt "I/O"}{Lq 0}{Ploc 310 160}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 205 190}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 290 30}
+   {Pnl 290 50}
+   {Pnl 290 70}
+   {Pnl 290 90}
+   {Pnl 290 110}
+   {Pnl 290 130}
+   {Pnl 290 150}
+   {Pnl 290 170}
+
+   {Sd A 1 2 3 4 5 6 7 11 12 13 14 15 16 17 18 19}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 180 280 0}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 120 120 100 120}
+   {C 125 120 5}
+   {L 120 100 100 100}
+   {C 125 100 5}
+   {L 120 80 100 80}
+   {C 125 80 5}
+   {L 120 60 100 60}
+   {C 125 60 5}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
+   {L 280 20 310 20}
+   {C 285 40 5}
+   {L 290 40 310 40}
+   {C 285 60 5}
+   {L 290 60 310 60}
+   {C 285 80 5}
+   {L 290 80 310 80}
+   {C 285 100 5}
+   {L 290 100 310 100}
+   {C 285 120 5}
+   {L 290 120 310 120}
+   {C 285 140 5}
+   {L 290 140 310 140}
+   {C 285 160 5}
+   {L 290 160 310 160}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "A23" 140 160}
+   {T "A0" 140 140}
+   {T "BHE'" 140 120}
+   {T "MOVL'" 140 100}
+   {T "MEMR'" 140 80}
+   {T "MEMW'" 140 60}
+   {T "UPPER" 140 40}
+   {T "SI" 140 20}
+   [Tj "RC"]
+   {T "SEL" 270 20}
+   {T "BRDSEL'" 270 40}
+   {T "WR'" 270 60}
+   {T "RD'" 270 80}
+   {T "WEH'" 270 100}
+   {T "WEL'" 270 120}
+   {T "OEH'" 270 140}
+   {T "OEL'" 270 160}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "G16V8MA" 205 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD Z:\PROJECTS\WINCUPL\MINISYS-8MB\8MB-SRAM 205 180}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N A23
+   }
+   {N A0
+   }
+   {N BHE'
+   }
+   {N MOVL'
+   }
+   {N MEMR'
+   }
+   {N MEMW'
+   }
+   {N UPPER
+   }
+   {N SI
+   }
+   {N SEL
+   }
+   {N BRDSEL'
+   }
+   {N WR'
+   }
+   {N RD'
+   }
+   {N WEH'
+   }
+   {N WEL'
+   }
+   {N OEH'
+   }
+   {N OEL'
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

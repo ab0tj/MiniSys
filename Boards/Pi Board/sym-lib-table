@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name 22v10)(type Legacy)(uri Z:/Projects/KiCad/N8VEM-KiCAD/22v10.lib)(options "")(descr ""))
+  (lib (name Pi-Board-rescue)(type Legacy)(uri "${KIPRJMOD}/Pi Board-rescue.lib")(options "")(descr ""))
+)

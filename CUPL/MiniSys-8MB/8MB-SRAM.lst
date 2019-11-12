@@ -1,0 +1,50 @@
+LISTING FOR LOGIC DESCRIPTION FILE: 8MB-SRAM.pld                     Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Mar 12 20:15:48 2019
+
+  1:Name     8MB-SRAM ;
+  2:PartNo   8M ;
+  3:Date     3/3/2019 ;
+  4:Revision 01 ;
+  5:Designer Alex ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   g16v8 ;
+ 10:
+ 11:PIN  1 = A23;
+ 12:PIN  2 = A0;
+ 13:PIN  3 = !BHE;
+ 14:PIN  4 = !MOVL;
+ 15:PIN  5 = !MEMR;
+ 16:PIN  6 = !MEMW;
+ 17:PIN  7 = UPPER;
+ 18:PIN 11 = SI;
+ 19:
+ 20:PIN 12 = SEL;
+ 21:PIN 13 = !BRDSEL;
+ 22:PIN 14 = !WR;
+ 23:PIN 15 = !RD;
+ 24:PIN 16 = !WEH;
+ 25:PIN 17 = !WEL;
+ 26:PIN 18 = !OEH;
+ 27:PIN 19 = !OEL;
+ 28:
+ 29:SEL = (SI # (A0 & MEMR) # (MEMW & BHE & !A0)) & !((!A0 & MEMR) # (MEMW & !BHE));        // Flip-flop
+
+ 30:BRDSEL = (UPPER $ A23) & !MOVL;
+ 31:WR = WEH # WEL;
+ 32:RD = BRDSEL & MEMR;
+ 33:WEH = BRDSEL & MEMW & (A0 # BHE);
+ 34:WEL = BRDSEL & MEMW & !A0;
+ 35:OEH = BRDSEL & MEMR;
+ 36:OEL = BRDSEL & MEMR;
+ 37:
+
+
+
+Jedec Fuse Checksum       (6a6e)
+Jedec Transmit Checksum   (2ccf)

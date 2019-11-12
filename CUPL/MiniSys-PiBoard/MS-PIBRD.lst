@@ -1,0 +1,65 @@
+LISTING FOR LOGIC DESCRIPTION FILE: MS-PIBRD.pld                     Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Feb 22 22:29:21 2019
+
+  1:Name     MS-PiBrd ;
+  2:PartNo   3.14 ;
+  3:Date     2/5/2019 ;
+  4:Revision 01 ;
+  5:Designer Engineer ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   g22v10lcc ;
+ 10:
+ 11:/* *************** INPUT PINS *********************/
+ 12:PIN  2 = IOM;           /* High = IO, Low = Memory */
+ 13:PIN  3 = !WR;           /* Write buffers active */
+ 14:PIN  4 = !RD;           /* Read operation */
+ 15:PIN  5 = !ADDR_MATCH; /* Board is being addressed */
+ 16:PIN  6 = A1;            /* A1 from bus */
+ 17:PIN  7 = A0;            /* A0 from bus */
+ 18:PIN  9 = !HRQ;  /* Hold request */
+ 19:PIN 10 = !HAK;  /* Hold acknowledge */
+ 20:PIN 11 = CON_W; /* Pi write to console port */
+ 21:PIN 12 = !CON_R;        /* Pi read from console port */
+ 22:PIN 13 = !RESET;        /* Reset signal from bus */
+ 23:PIN 16 = SV;            /* Status valid signal */
+ 24:
+ 25:/* *************** OUTPUT PINS *********************/
+ 26:PIN 17 = CON_SI;        /* Console input status */
+ 27:PIN 18 = CON_SO;        /* Console output status */
+ 28:PIN 19 = !STS_IOR;      /* Output enable for status port */
+ 29:PIN 20 = !CON_IOR;      /* Output enable for console port (input) */
+ 30:PIN 21 = !CON_IOW;      /* Clock for console port (output) */
+ 31:PIN 23 = PI_REQ;        /* Pi Request flag */
+ 32:PIN 24 = !MEMW; /* Memory write (to bus) */
+ 33:PIN 25 = !MEMR; /* Memory read (to bus) */
+ 34:PIN 26 = !IOW;  /* IO write (to bus) */
+ 35:PIN 27 = !IOR;  /* IO read (to bus) */
+ 36:
+ 37:/* *********** LOGIC EQUATIONS **********************/
+ 38:CON_SI = (CON_SI # CON_W) & !CON_IOR & !RESET;  /* Flip-flop: Set by CON_W, reset by CON_IOR */
+ 39:CON_SO = (CON_SO # CON_IOW) & !(CON_R & SV) & !RESET;   /* Flip-flop: Set by CON_IOW, reset by CON_R */
+ 40:STS_IOR = !HAK & ADDR_MATCH & !A1 & !A0 & IOR & !RESET; /* Bus read from I/O port 0 */
+ 41:CON_IOR = !HAK & ADDR_MATCH & !A1 & A0 & IOR & !RESET;  /* Bus read from I/O port 1 */
+ 42:CON_IOW = !HAK & ADDR_MATCH & !A1 & A0 & IOW & !RESET;  /* Bus write to I/O port 1 */
+ 43:PI_REQ = (PI_REQ # (ADDR_MATCH & !A1 & !A0 & IOW)) & !HAK & !RESET;     /* Flip-flop: Set by write to port 0, reset by HAK */
+ 44:MEMW = !IOM & WR & SV;
+ 45:MEMW.oe = HAK & !RESET;
+ 46:MEMR = !IOM & RD;
+ 47:MEMR.oe = HAK & !RESET;
+ 48:IOW = IOM & WR & SV;
+ 49:IOW.oe = HAK & !RESET;
+ 50:IOR = IOM & RD;
+ 51:IOR.oe = HAK & !RESET;
+ 52:
+ 53:
+
+
+
+Jedec Fuse Checksum       (88fa)
+Jedec Transmit Checksum   (c569)

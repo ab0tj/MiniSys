@@ -1,0 +1,29 @@
+Name     MS-Eth-U2 ;
+PartNo   02 ;
+Date     2/23/2019 ;
+Revision 01 ;
+Designer Engineer ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g16v8as ;
+
+
+
+PIN 1 = !B15;
+PIN 2 = !B14;
+PIN 3 = !B13;
+PIN 4 = !B12;
+PIN 5 = !B11;
+PIN 6 = !B10;
+PIN 9 = A15;
+PIN 11 = A14;
+PIN 12 = A13;
+PIN 13 = A12;
+PIN 14 = A11;
+PIN 16 = !M2;
+PIN 17 = A10;
+PIN 19 = M1;
+
+M1 = !(A15 $ B15) & !(A14 $ B14) & !(A13 $ B13);
+M2 = M1 & !(A12 $ B12) & !(A11 $ B11) & !(A10 $ B10);

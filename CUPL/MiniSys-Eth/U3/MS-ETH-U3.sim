@@ -1,0 +1,52 @@
+%SIGNAL
+PIN  14 =  A0 
+PIN  13 =  A1 
+PIN  12 =  A2 
+PIN   9 =  AEN 
+PIN  15 =  ASEL 
+PIN   7 =  BA0 
+PIN   6 =  BA1 
+PIN   5 =  BA2 
+PIN  19 = !CS 
+PIN   4 = !EGHT 
+PIN   2 = !HI 
+PIN   3 = !IND 
+PIN   8 = !IOR 
+PIN   1 = !LOW 
+PIN  16 = !RD 
+PIN  18 = !STS 
+PIN  17 = !SXTN 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+A0 =>
+    BA0
+
+A1 =>
+    BA1
+
+A2 =>
+    BA2
+
+ASEL =>
+    IND
+
+CS =>
+    AEN & !HI & IND
+  # !A2 & AEN & !HI & !LOW
+  # !A1 & AEN & !HI & !LOW
+  # !A0 & AEN & !HI & !LOW
+
+RD =>
+    !CS & !IOR
+
+STS =>
+    A0 & A1 & A2 & AEN & !HI & !IND & !IOR & !LOW
+
+SXTN =>
+    !CS & EGHT
+
+%END

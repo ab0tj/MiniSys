@@ -1,0 +1,15 @@
+Name     DRAMCTRL;
+PartNo   31;
+Date     11/29/2018;
+Revision 01;
+Designer Alex;
+Company  AB0TJ;
+Assembly None;
+Location ;
+Device   virtual;
+
+
+ORDER: CLK, !RESET, !MEMR, !MEMW, A23, !RFSH, !BHE, A0, !MOVL, T0, T1, T2, T3, T4, T5, T6, T7, !RAS0, !RAS1, !RAS2, !RAS3, !MUX, !CAS0, !CAS1, !CAS2, !CAS3, !OE, !WE, !WAIT, CLK2, R0, R1, R2, R3, R4, R5, R6, R7, R8, R9, !INTA; 
+
+
+VECTORS:

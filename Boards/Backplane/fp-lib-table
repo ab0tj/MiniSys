@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name 5145154-4)(type Legacy)(uri Z:/Projects/KiCad/N8VEM-KiCAD/5145154-4.mod)(options "")(descr ""))
+  (lib (name ATX-24PIN)(type KiCad)(uri Z:/Projects/KiCad/N8VEM-KiCAD/ATX-24PIN.pretty)(options "")(descr ""))
+)

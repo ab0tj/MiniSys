@@ -1,0 +1,133 @@
+Name     8085-BUSCTRL ;
+PartNo   8085 ;
+Date     12/13/2018 ;
+Revision 01 ;
+Designer Alex ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   f1508ispplcc84 ;
+
+/* CheapBus 8085 CPU board bus controller with paged MMU */
+
+property atmel { logic_doubling = on };
+property atmel { jtag = on };
+property atmel { tdi_pullup = on };
+property atmel { tms_pullup = on };
+property atmel { open_collector = RFSH };
+
+PIN  8 = MD12;	// D12 line from SRAM
+PIN  9 = MD11;	// D11 line from SRAM
+PIN  6 = MD10;	// D10 line from SRAM
+PIN  4 = MD9;		// D9 line from SRAM
+PIN  5 = MD8;		// D8 line from SRAM
+PIN 52 = MD7;		// D7 line from SRAM
+PIN 51 = MD6;		// D6 line from SRAM
+PIN 50 = MD5;		// D5 line from SRAM
+PIN 49 = MD4;		// D4 line from SRAM
+PIN 48 = MD3;		// D3 line from SRAM
+PIN 46 = MD2;		// D2 line from SRAM
+PIN 45 = MD1;		// D1 line from SRAM
+PIN 44 = MD0;		// D0 line from SRAM
+PIN 12 = MA6;		// A6 line to SRAM
+PIN 10 = MA5;		// A5 line to SRAM
+PIN 11 = MA4;		// A4 line to SRAM
+PIN 25 = MA3;		// A3 line to SRAM
+PIN 24 = MA2;		// A2 line to SRAM
+PIN 22 = MA1;		// A1 line to SRAM
+PIN 20 = MA0;		// A0 line to SRAM
+PIN 58 = !MOE;	// OE to SRAM
+PIN 39 = !MWE;	// WE to SRAM
+PIN 64 = AD7;		// AD7 line from CPU
+PIN 67 = AD6;		// AD6 line from CPU
+PIN 65 = AD5;		// AD5 line from CPU
+PIN 57 = AD4;		// AD4 line from CPU
+PIN 63 = AD3;		// AD3 line from CPU
+PIN 56 = AD2;		// AD2 line from CPU
+PIN 70 = AD1;		// AD1 line from CPU
+PIN 73 = AD0;		// AD0 line from CPU
+PIN 74 = AI15;	// A15 line from CPU
+PIN 75 = AI14;	// A14 line from CPU
+PIN 77 = AI13;	// A13 line from CPU
+PIN 79 = AI12;	// A12 line from CPU
+PIN 27 = AO23;	// A23 line to bus
+PIN 28 = AO22;	// A22 line to bus
+PIN 34 = AO21;	// A21 line to bus
+PIN 29 = AO20;	// A20 line to bus
+PIN 31 = AO19;	// A19 line to bus
+PIN 36 = AO18;	// A18 line to bus
+PIN 33 = AO17;	// A17 line to bus
+PIN 35 = AO16;	// A16 line to bus
+PIN 16 = AO15;	// A15 line to bus
+PIN 21 = AO14;	// A14 line to bus
+PIN 17 = AO13;	// A13 line to bus
+PIN 18 = AO12;	// A12 line to bus
+PIN 61 = IOW;		// IO write to bus	/* IOW, IOR, MEMR, and MEMW don't get tristated if they're set to invert here (why?) */
+PIN 60 = IOR;		// IO read to bus
+PIN 15 = MEMW;	// Memory write to bus
+PIN 41 = MEMR;	// Memory read to bus
+PIN 76 = !RD;		// RD signal from CPU
+PIN 55 = !WR;		// WR signal from CPU
+PIN 54 = IOM;		// IO/M from CPU
+PIN 68 = S0;		// S0 from CPU
+PIN 69 = S1;		// S1 from CPU
+PIN 83 = ALE;		// ALE from CPU
+PIN  1 = RESET;	// Reset from CPU
+PIN 30 = M1;		// M1 to bus
+PIN 84 = HLDA;	// HLDA from CPU
+PIN 37 = !RFSH;	// Refresh signal to bus (CPU halted)
+PIN 40 = READY;	// Ready signal to CPU
+PIN 80 = !IOWT;	// IO wait signal from bus
+PIN 81 = !MWT;	// Memory wait from bus
+PIN  2 = !INTA;	// INTA from CPU
+
+PINNODE  0  = MM;	/* MMU enabled */
+PINNODE [0..0] = [LA7..0];	/* Latched address from AD bus */
+PINNODE [0..0] = [LMA3..0];	/* Latched page address */
+PINNODE  0  = MMUWR;	/* Write cycle to page register */
+PINNODE  0  = DLTCHWR;	/* Write to high data bits latch */
+PINNODE  0  = ALTCHWR;	/* Write to page address latch */
+PINNODE  0  = CFGWR;	/* Write to config port */
+
+/* Latch low address from AD lines */
+[LA7..0].d = [AD7..0];
+[LA7..0].ck = !ALE;
+
+/* Bus control signals */
+IOW = !(IOM & WR);	/* IO write signal to the bus */
+IOW.oe = !HLDA;	/* Tristate during HLDA */
+IOR = !(IOM & RD);	/* IO read signal to the bus */
+IOR.oe = !HLDA;
+MEMW = !(!IOM & WR & !(MM & MD12));	/* Memory write, MD12 = write protect */
+MEMW.oe = !HLDA;
+MEMR = !(!IOM & RD);	/* Memory read */
+MEMR.oe = !HLDA;
+M1 = !IOM & S1 & S0;	/* Opcode fetch status */
+M1.oe = !HLDA;
+READY = !IOWT & !MWT;	/* Lump IO and memory into one wait request */
+RFSH.d = !S0 & !S1;	/* HALT status */
+RFSH.ck = !ALE;
+
+/* MMU equations */
+MMUWR.d = IOM & !S1 & S0 & !AD7 & AD6 & !AD5 & !AD4 & !AD3 & !AD2 & AD1 & AD0;	/* IO write status, port 43h */
+MMUWR.ck = !ALE;	/* Latch status on ALE falling edge */
+CFGWR = IOM & WR & !LA7 & LA6 & !LA5 & !LA4 & !LA3 & !LA2 & !LA1 & !LA0;	/* IO write to 40h (control port) */
+MM.d = AD7;		/* Data bit 7 = MMU enable */
+MM.ck = !CFGWR;
+MM.ar = RESET;	/* Disable MMU on reset */
+[MA6..4].d = [AD2..0];	/* Latch MA5 and MA4 (config select) from control port */
+[MA6..4].ck = !CFGWR;
+DLTCHWR = IOM & WR & !LA7 & LA6 & !LA5 & !LA4 & !LA3 & !LA2 & LA1 & !LA0;	/* IO write to 42h (high data bits) */
+[MD12..8].d = [AD4..0];
+[MD12..8].ck = !DLTCHWR;
+ALTCHWR = IOM & WR & !LA7 & LA6 & !LA5 & !LA4 & !LA3 & !LA2 & !LA1 & LA0;	/* IO write to 41h (page address) */
+[LMA3..0].d = [AD3..0];
+[LMA3..0].ck = !ALTCHWR;
+[MD7..0] = [AD7..0];		/* Low SRAM bits come directly from data bus */
+[MD12..0].oe = MMUWR;	/* IO cycle to 43h (low data bits) */
+MWE = MMUWR & WR;		/* IO write to 43h (writes data to SRAM) */
+MOE = !MMUWR;			/* Output when not inputting */
+[MA3..0] = ([AI15..12] & !MMUWR) # ([LMA3..0] & MMUWR);	/* SRAM address from CPU address lines unless we're writing to it */
+[AO23..16] = ([MD11..4] & MM & !IOM);	/* A23-16 zero when MMU not enabled or during IO cycle */
+[AO15..12] = (([MD3..0] & MM) # ([AI15..12] & !MM)) & !IOM;	/* A15-12 from CPU if MMU disabled, or zero during IO cycle */
+[AO23..12].oe = !HLDA;	/* Don't drive address bus during HLDA */

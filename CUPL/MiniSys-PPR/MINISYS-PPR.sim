@@ -1,0 +1,86 @@
+%SIGNAL
+PIN   7 =  A0 
+PIN   6 =  A1 
+PIN   5 =  A2 
+PIN   4 =  A3 
+PIN   9 =  AEN 
+PIN  25 =  DIR 
+PIN   2 = !HI 
+PIN  12 =  INT 
+PIN  13 = !INTA 
+PIN  10 = !IOR 
+PIN  11 = !IOW 
+PIN   3 =  LO 
+PIN  20 = !PIC_CS 
+PIN  17 = !PIT_CS 
+PIN  24 = !RD 
+PIN  18 =  RTC_AS 
+PIN  19 = !RTC_CS 
+PIN  21 = !STS 
+PIN  23 = !WR 
+PIN  26 = !bINT 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+DIR =>
+    A3 & AEN & !HI & !IOR & LO
+  # !INTA
+
+PIC_CS =>
+    A1 & A2 & A3 & AEN & !HI & LO
+
+PIT_CS =>
+    !A2 & A3 & AEN & !HI & LO
+
+RD =>
+    !IOR
+
+RTC_AS =>
+    A0 & !A1 & A2 & A3 & AEN & !HI & !IOW & LO
+
+RTC_CS =>
+    !A0 & !A1 & A2 & A3 & AEN & !HI & LO
+
+STS =>
+    A0 & A1 & A2 & !A3 & AEN & !HI & !IOR & LO
+
+WR =>
+    !A3 & !IOW
+  # !A2 & !IOW
+  # A1 & !IOW
+  # !A0 & !IOW
+
+bINT =>
+    INT
+
+bINT.oe  =>
+    INT
+
+DIR.oe  =>
+    1 
+
+PIC_CS.oe  =>
+    1 
+
+PIT_CS.oe  =>
+    1 
+
+RD.oe  =>
+    1 
+
+RTC_AS.oe  =>
+    1 
+
+RTC_CS.oe  =>
+    1 
+
+STS.oe  =>
+    1 
+
+WR.oe  =>
+    1 
+
+%END

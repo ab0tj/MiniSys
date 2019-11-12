@@ -1,0 +1,460 @@
+
+*******************************************************************************
+                                   DRAMCTRL
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          f1508ispplcc84  Library DLIB-h-40-2
+Created         Tue Feb 12 22:51:31 2019
+Name            DRAMCTRL 
+Partno          31 
+Revision        01 
+Date            11/29/2018 
+Designer        Alex 
+Company         AB0TJ 
+Assembly        None 
+Location        
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+BA0 =>
+    A0
+
+CAS =>
+    MEMR & T1
+  # MEMW & T1
+
+CAS0 =>
+    !A0 & MEMW & T1
+  # !A0 & MEMR & T1
+  # T4
+  # T5
+  # T6
+
+CAS1 =>
+    A0 & MEMW & T1
+  # A0 & MEMR & T1
+  # BHE & MEMW & T1
+  # BHE & MEMR & T1
+  # T4
+  # T5
+  # T6
+
+CAS2 =>
+    CAS0
+
+CAS3 =>
+    CAS1
+
+M16 =>
+    !MOVL
+
+MA0 =>
+    A12 & !MUX
+  # A1 & MUX
+
+MA1 =>
+    A13 & !MUX
+  # A2 & MUX
+
+MA2 =>
+    A14 & !MUX
+  # A3 & MUX
+
+MA3 =>
+    A15 & !MUX
+  # A4 & MUX
+
+MA4 =>
+    A16 & !MUX
+  # A5 & MUX
+
+MA5 =>
+    A17 & !MUX
+  # A6 & MUX
+
+MA6 =>
+    A18 & !MUX
+  # A7 & MUX
+
+MA7 =>
+    A19 & !MUX
+  # A8 & MUX
+
+MA8 =>
+    A20 & !MUX
+  # A9 & MUX
+
+MA9 =>
+    A21 & !MUX
+  # A10 & MUX
+
+MA10 =>
+    A22 & !MUX
+  # A11 & MUX
+
+MA11 =>
+    MOVL
+
+MUX =>
+    !CLK & T0
+  # T1
+
+OE =>
+    MEMR & !MOVL & !T4 & !T5 & !T6 & !T7
+
+R0.d  =>
+    !R0 & !R1
+
+R0.ar  =>
+    !RFSH
+
+R0.ck  =>
+    CLK
+
+R1.d  =>
+    R0
+
+R1.ar  =>
+    !RFSH
+
+R1.ck  =>
+    CLK
+
+R2.t  =>
+    R1
+
+R2.ar  =>
+    !RFSH
+
+R2.ck  =>
+    CLK
+
+R3.t  =>
+    R1 & R2
+
+R3.ar  =>
+    !RFSH
+
+R3.ck  =>
+    CLK
+
+R4.t  =>
+    R1 & R2 & R3
+
+R4.ar  =>
+    !RFSH
+
+R4.ck  =>
+    CLK
+
+R5.t  =>
+    R1 & R2 & R3 & R4
+
+R5.ar  =>
+    !RFSH
+
+R5.ck  =>
+    CLK
+
+R6.t  =>
+    R1 & R2 & R3 & R4 & R5
+
+R6.ar  =>
+    !RFSH
+
+R6.ck  =>
+    CLK
+
+R7.t  =>
+    R1 & R2 & R3 & R4 & R5 & R6
+
+R7.ar  =>
+    !RFSH
+
+R7.ck  =>
+    CLK
+
+R8.t  =>
+    R1 & R2 & R3 & R4 & R5 & R6 & R7
+
+R8.ar  =>
+    !RFSH
+
+R8.ck  =>
+    CLK
+
+R9.t  =>
+    R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8
+
+R9.ar  =>
+    !RFSH
+
+R9.ck  =>
+    CLK
+
+RAS =>
+    T0 & !T3
+
+RAS0 =>
+    !A23 & T0 & !T3
+  # T5
+  # T6
+
+RAS1 =>
+    RAS0
+
+RAS2 =>
+    A23 & T0 & !T3
+  # T5
+  # T6
+
+RAS3 =>
+    RAS2
+
+RCYC =>
+    T4
+  # T5
+  # T6
+  # T7
+
+T0.d  =>
+    MEMW & !MOVL & !T4 & !T5 & !T6 & !T7
+  # MEMR & !MOVL & !T4 & !T5 & !T6 & !T7
+
+T0.ck  =>
+    CLK
+
+T1.d  =>
+    T0
+
+T1.ck  =>
+    CLK
+
+T2.d  =>
+    T1
+
+T2.ck  =>
+    CLK
+
+T3.d  =>
+    T2
+
+T3.ck  =>
+    CLK
+
+T4.d  =>
+    !T0 & T3 & !T5
+  # !R2 & !R3 & !R4 & !R5 & !R6 & !R7 & !R8 & !R9 & RFSH & !T5
+  # INTA & !T5
+  # RESET & !T5
+  # MEMW & MOVL & !T5
+  # MEMR & MOVL & !T5
+
+T4.ar  =>
+    !T7 & T8
+
+T4.ck  =>
+    CLK
+
+T5.d  =>
+    T4
+
+T5.ar  =>
+    !T7 & T8
+
+T5.ck  =>
+    CLK
+
+T6.d  =>
+    T5
+
+T6.ar  =>
+    !T7 & T8
+
+T6.ck  =>
+    CLK
+
+T7.d  =>
+    T6
+
+T7.ar  =>
+    !T7 & T8
+
+T7.ck  =>
+    CLK
+
+T8.d  =>
+    T7
+
+T8.ar  =>
+    !T7 & T8
+
+T8.ck  =>
+    CLK
+
+WAIT =>
+    MEMR & !MOVL & !T2
+  # MEMW & !MOVL & !T2
+
+WE =>
+    MEMW & !MOVL & !T4 & !T5 & !T6 & !T7
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    A0                          41       V        -       -       -     
+    A1                          35       V        -       -       -     
+    A2                          49       V        -       -       -     
+    A3                          51       V        -       -       -     
+    A4                          54       V        -       -       -     
+    A5                          56       V        -       -       -     
+    A6                          61       V        -       -       -     
+    A7                          58       V        -       -       -     
+    A8                          64       V        -       -       -     
+    A9                          67       V        -       -       -     
+    A10                         69       V        -       -       -     
+    A11                         73       V        -       -       -     
+    A12                         34       V        -       -       -     
+    A13                         50       V        -       -       -     
+    A14                         52       V        -       -       -     
+    A15                         55       V        -       -       -     
+    A16                         57       V        -       -       -     
+    A17                         63       V        -       -       -     
+    A18                         60       V        -       -       -     
+    A19                         65       V        -       -       -     
+    A20                         68       V        -       -       -     
+    A21                         70       V        -       -       -     
+    A22                         74       V        -       -       -     
+    A23                         36       V        -       -       -     
+ !  AEN                         84       V        -       -       -     
+    BA0                         28       V        1       0       1     
+ !  BHE                         37       V        -       -       -     
+    CAS                         0        I        2       -       -     
+ !  CAS0                        4        V        5       0       1     
+ !  CAS1                        5        V        7       0       1     
+ !  CAS2                        30       V        1       0       1     
+ !  CAS3                        29       V        1       0       1     
+    CLK                         83       V        -       -       -     
+    CLK1                        2        V        -       -       -     
+    CLK2                        81       V        -       -       -     
+    D0                          76       V        -       -       -     
+    D1                          75       V        -       -       -     
+ !  INTA                        45       V        -       -       -     
+ !  IOW                         1        V        -       -       -     
+ !  M16                         80       V        1       0       1     
+    MA0                         9        V        2       0       1     
+    MA1                         15       V        2       0       1     
+    MA2                         16       V        2       0       1     
+    MA3                         17       V        2       0       1     
+    MA4                         18       V        2       0       1     
+    MA5                         21       V        2       0       1     
+    MA6                         20       V        2       0       1     
+    MA7                         22       V        2       0       1     
+    MA8                         24       V        2       0       1     
+    MA9                         25       V        2       0       1     
+    MA10                        27       V        2       0       1     
+    MA11                        77       V        1       0       1     
+    MA12                        79       V        -       -       -     
+ !  MEMR                        39       V        -       -       -     
+ !  MEMW                        40       V        -       -       -     
+ !  MOVL                        44       V        -       -       -     
+    MUX                         0        N        2       0       1     
+ !  OE                          11       V        1       0       1     
+    R0                          0        N        -       -       -     
+    R0                  d       0        M        1       0       1     
+    R0                  ar      0        M        1       0       1     
+    R0                  ck      0        M        1       0       1     
+    R1                          0        N        -       -       -     
+    R1                  d       0        M        1       0       1     
+    R1                  ar      0        M        1       0       1     
+    R1                  ck      0        M        1       0       1     
+    R2                          0        N        -       -       -     
+    R2                  t       0        M        1       0       1     
+    R2                  ar      0        M        1       0       1     
+    R2                  ck      0        M        1       0       1     
+    R3                          0        N        -       -       -     
+    R3                  t       0        M        1       0       1     
+    R3                  ar      0        M        1       0       1     
+    R3                  ck      0        M        1       0       1     
+    R4                          0        N        -       -       -     
+    R4                  t       0        M        1       0       1     
+    R4                  ar      0        M        1       0       1     
+    R4                  ck      0        M        1       0       1     
+    R5                          0        N        -       -       -     
+    R5                  t       0        M        1       0       1     
+    R5                  ar      0        M        1       0       1     
+    R5                  ck      0        M        1       0       1     
+    R6                          0        N        -       -       -     
+    R6                  t       0        M        1       0       1     
+    R6                  ar      0        M        1       0       1     
+    R6                  ck      0        M        1       0       1     
+    R7                          0        N        -       -       -     
+    R7                  t       0        M        1       0       1     
+    R7                  ar      0        M        1       0       1     
+    R7                  ck      0        M        1       0       1     
+    R8                          0        N        -       -       -     
+    R8                  t       0        M        1       0       1     
+    R8                  ar      0        M        1       0       1     
+    R8                  ck      0        M        1       0       1     
+    R9                          0        N        -       -       -     
+    R9                  t       0        M        1       0       1     
+    R9                  ar      0        M        1       0       1     
+    R9                  ck      0        M        1       0       1     
+    RAS                         0        I        1       -       -     
+ !  RAS0                        6        V        3       0       1     
+ !  RAS1                        31       V        1       0       1     
+ !  RAS2                        8        V        3       0       1     
+ !  RAS3                        33       V        1       0       1     
+    RCYC                        0        I        4       -       -     
+ !  RESET                       46       V        -       -       -     
+ !  RFSH                        48       V        -       -       -     
+    T0                          0        N        -       -       -     
+    T0                  d       0        M        2       0       1     
+    T0                  ck      0        M        1       0       1     
+    T1                          0        N        -       -       -     
+    T1                  d       0        M        1       0       1     
+    T1                  ck      0        M        1       0       1     
+    T2                          0        N        -       -       -     
+    T2                  d       0        M        1       0       1     
+    T2                  ck      0        M        1       0       1     
+    T3                          0        N        -       -       -     
+    T3                  d       0        M        1       0       1     
+    T3                  ck      0        M        1       0       1     
+    T4                          0        N        -       -       -     
+    T4                  d       0        M        6       0       1     
+    T4                  ar      0        M        1       0       1     
+    T4                  ck      0        M        1       0       1     
+    T5                          0        N        -       -       -     
+    T5                  d       0        M        1       0       1     
+    T5                  ar      0        M        1       0       1     
+    T5                  ck      0        M        1       0       1     
+    T6                          0        N        -       -       -     
+    T6                  d       0        M        1       0       1     
+    T6                  ar      0        M        1       0       1     
+    T6                  ck      0        M        1       0       1     
+    T7                          0        N        -       -       -     
+    T7                  d       0        M        1       0       1     
+    T7                  ar      0        M        1       0       1     
+    T7                  ck      0        M        1       0       1     
+    T8                          0        N        -       -       -     
+    T8                  d       0        M        1       0       1     
+    T8                  ar      0        M        1       0       1     
+    T8                  ck      0        M        1       0       1     
+ !  WAIT                        10       V        2       0       1     
+ !  WE                          12       V        1       0       1     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+

@@ -1,0 +1,33 @@
+Name     MS-Eth-U4 ;
+PartNo   04 ;
+Date     2/23/2019 ;
+Revision 01 ;
+Designer Engineer ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g16v8 ;
+
+
+
+PIN 1 = ASEL;
+PIN 2 = A3;
+PIN 3 = A4;
+PIN 4 = A5;
+PIN 5 = A6;
+PIN 6 = A7;
+PIN 7 = A8;
+PIN 8 = A9;
+PIN 11 = !INT;
+PIN 12 = !IRQ;
+PIN 13 = eA9;
+PIN 14 = eA8;
+PIN 15 = eA7;
+PIN 16 = eA6;
+PIN 17 = eA5;
+PIN 18 = eA4;
+PIN 19 = eA3;
+
+IRQ = INT;
+IRQ.oe = INT;
+[eA9..3] = [A9..3] & ASEL;

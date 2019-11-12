@@ -1,0 +1,134 @@
+Name     DRAMCTRL ;
+PartNo   31 ;
+Date     11/29/2018 ;
+Revision 01 ;
+Designer Alex ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   F1508ISPPLCC84 ;
+
+PROPERTY ATMEL { jtag=on };
+PROPERTY ATMEL { output_fast=on };
+PROPERTY ATMEL { security=off };
+PROPERTY ATMEL { TDI_PULLUP = ON };
+PROPERTY ATMEL { TMS_PULLUP = ON };
+PROPERTY ATMEL { open_collector=WAIT,M16 };
+PROPERTY ATMEL { preassign=keep };
+
+PIN 83 = CLK;		/* 50MHz square wave input */
+PIN 39 = !MEMR;	/* Memory read cycle */
+PIN 40 = !MEMW;	/* Memory write cycle */
+PIN  1 = !IOW;	/* IO Write */
+PIN 84 = !AEN;	/* Address enable */
+PIN 45 = !INTA;	/* Interrupt Acknowledge */
+PIN 44 = !MOVL;	/* Memory overlay active */
+PIN 48 = !RFSH;	/* Initiate refresh cycle(s) */
+PIN 46 = !RESET;	/* Reset signal from bus */
+PIN 75 = D1;		/* D1 from bus */
+PIN 76 = D0;		/* D0 from bus */
+PIN 77 = MA11;	/* A11 to DRAM */
+PIN 81 = CLK2;	/* Refresh timer clock */
+PIN 80 = !M16;	/* M16 from bus */
+PIN 79 = MA12;	/* A12 to DRAM */
+PIN  2 = CLK1;	/* CLK1 from bus */
+PIN 36 = A23;		/* A23 from bus */
+PIN 74 = A22;		/* A22 from bus */
+PIN 70 = A21;		/* A21 from bus */
+PIN 68 = A20;		/* A20 from bus */
+PIN 65 = A19;		/* A19 from bus */
+PIN 60 = A18;		/* A18 from bus */
+PIN 63 = A17;		/* A17 from bus */
+PIN 57 = A16;		/* A16 from bus */
+PIN 55 = A15;		/* A15 from bus */
+PIN 52 = A14;		/* A14 from bus */
+PIN 50 = A13;		/* A13 from bus */
+PIN 34 = A12;		/* A12 from bus */
+PIN 73 = A11;		/* A11 from bus */
+PIN 69 = A10;		/* A10 from bus */
+PIN 67 = A9;		/* A9 from bus */
+PIN 64 = A8;		/* A8 from bus */
+PIN 58 = A7;		/* A7 from bus */
+PIN 61 = A6;		/* A6 from bus */
+PIN 56 = A5;		/* A5 from bus */
+PIN 54 = A4;		/* A4 from bus */
+PIN 51 = A3;		/* A3 from bus */
+PIN 49 = A2;		/* A2 from bus */
+PIN 35 = A1;		/* A1 from bus */
+PIN 41 = A0;		/* A0 from bus */
+PIN 37 = !BHE;	/* Bus high enable */
+PIN 27 = MA10;	/* A10 to DRAM */
+PIN 25 = MA9;		/* A9 to DRAM */
+PIN 24 = MA8;		/* A8 to DRAM */
+PIN 22 = MA7;		/* A7 to DRAM */
+PIN 20 = MA6;		/* A6 to DRAM */
+PIN 21 = MA5;		/* A5 to DRAM */
+PIN 18 = MA4;		/* A4 to DRAM */
+PIN 17 = MA3;		/* A3 to DRAM */
+PIN 16 = MA2;		/* A2 to DRAM */
+PIN 15 = MA1;		/* A1 to DRAM */
+PIN  9 = MA0;		/* A0 to DRAM */
+PIN 28 = BA0;		/* A0 to the data MUXes */
+PIN  6 = !RAS0;	/* RAS for lower DRAM bank */
+PIN 31 = !RAS1;	/* Spare RAS */
+PIN  8 = !RAS2;	/* RAS for upper DRAM bank */
+PIN 33 = !RAS3;	/* Spare RAS */
+PIN  4 = !CAS0;	/* Lower byte CAS */
+PIN  5 = !CAS1;	/* Upper byte CAS */
+PIN 30 = !CAS2;	/* Lower byte CAS (tied to CAS0 in this configuration) */
+PIN 29 = !CAS3;	/* Upper bytes CAS byte CAS (tied to CAS1 in this configuration) */
+PIN 12 = !WE;		/* Write Enable output to DRAM */
+PIN 11 = !OE;		/* Data out to bus buffer enable */
+PIN 10 = !WAIT;	/* Memory not ready flag */
+
+PINNODE  0  = T0;		/* Memory cycle 0ns */
+PINNODE  0  = T1;		/* Memory cycle 20ns */
+PINNODE  0  = T2;		/* Memory cycle 40ns */
+PINNODE  0  = T3;		/* Memory cycle 60ns */
+PINNODE  0  = T4;		/* Refresh 0ns */
+PINNODE  0  = T5;		/* Refresh 20ns */
+PINNODE  0  = T6;		/* Refresh 40ns */
+PINNODE  0  = T7;		/* Refresh 60ns */
+PINNODE  0  = T8;		/* Refresh 80ns */
+PINNODE [0..0] = [R0..9];	/* Clock divider for refresh timer */
+PINNODE  0  = MUX;	/* Select row/column address */
+
+[T0..T8].ck = CLK;
+[T4..T8].ar = !T7 & T8;
+T0.d = !RCYC & (MEMR # MEMW) & !MOVL;
+[T1..T3].d = [T0..T2];
+T4.d = (((RFSH & ![R2..9]:&) # ((MEMR # MEMW) & MOVL) # INTA # RESET) # (T3 & !T0)) & !T5;	/* Initiate a CBR refresh */
+[T5..T8].d = [T4..T7];
+[R0..9].ck = CLK;
+[R0..9].ar = !RFSH;
+R0.d = !R0 & !R1;
+R1.d = R0;
+R2.t = R1; 		/* CLK/6 */
+R3.t = R1 & R2;	/* CLK/12 */
+R4.t = [R1..3]:&;	/* CLK/24 */
+R5.t = [R1..4]:&;	/* CLK/48 */
+R6.t = [R1..5]:&;	/* CLK/96 */
+R7.t = [R1..6]:&;	/* CLK/192 */
+R8.t = [R1..7]:&;	/* CLK/384 */
+R9.t = [R1..8]:&;	/* CLK/768 */
+
+RCYC = T4 # T5 # T6 # T7;
+RAS = T0 & !T3;
+RAS0 = (RAS & !A23) # T5 # T6;
+RAS1 = RAS0;
+RAS2 = (RAS & A23) # T5 # T6;
+RAS3 = RAS2;
+CAS = (MEMR # MEMW) & T1;
+CAS0 = (CAS & !A0) # T4 # T5 # T6;
+CAS1 = (CAS & (A0 # BHE)) # T4 # T5 # T6;
+CAS2 = CAS0;
+CAS3 = CAS1;
+WE = MEMW & !MOVL & !RCYC;
+MUX = (T0 & !CLK) # T1;
+OE = MEMR & !MOVL & !RCYC;
+WAIT = (MEMR # MEMW) & !T2 & !MOVL;
+
+[MA10..MA0] = ([A22..A12] & !MUX) # ([A11..A1] & MUX);
+MA11 = MOVL;	/* Should tie pin low */
+BA0 = A0;
+M16 = !MOVL;

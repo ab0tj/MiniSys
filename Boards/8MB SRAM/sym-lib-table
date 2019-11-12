@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name SamacSys_Parts)(type Legacy)(uri //armin/alex/Projects/KiCad/N8VEM-KiCAD/SamacSys_Parts.lib)(options "")(descr ""))
+  (lib (name 8MB-SRAM-rescue)(type Legacy)(uri "${KIPRJMOD}/8MB SRAM-rescue.lib")(options "")(descr ""))
+)

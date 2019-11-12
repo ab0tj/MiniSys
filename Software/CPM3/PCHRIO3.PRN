@@ -1,0 +1,378 @@
+CP/M RMAC ASSEM 1.1	#001	CHARACTER I/O HANDLER FOR CP/M 3.0
+
+                	TITLE	'CHARACTER I/O HANDLER FOR CP/M 3.0'
+                
+                	; DEFINE LOGICAL VALUES:
+ FFFF =         TRUE		EQU	-1
+ 0000 =         FALSE		EQU	NOT TRUE
+                
+                	; DETERMINE IF FOR BANK SELECT OR NOT:
+ 0000 =         BANKED		EQU	FALSE	;<------------------- BANKED VERSION
+                
+                	; DEFINE PUBLIC LABELS:
+                	PUBLIC	?CINIT,?CI,?CO,?CIST,?COST
+                	PUBLIC	@CTBL
+                
+                	; DEFINE EXTERNAL LABELS AND ENTRY POINTS:
+                	IF	BANKED
+                	EXTRN	@CBNK
+                	EXTRN	?BNKSL
+                	ENDIF
+                	EXTRN	?PMSG
+                
+                
+                	; EQUATES FOR MODE BYTE BIT FIELDS
+                
+ 0001 =         MB$INPUT	EQU 0000$0001B	; DEVICE MAY DO INPUT
+ 0002 =         MB$OUTPUT	EQU 0000$0010B	; DEVICE MAY DO OUTPUT
+ 0003 =         MB$IN$OUT	EQU MB$INPUT+MB$OUTPUT
+                
+ 0004 =         MB$SOFT$BAUD	EQU 0000$0100B	; SOFTWARE SELECTABLE BAUD RATES
+                
+ 0008 =         MB$SERIAL	EQU 0000$1000B	; DEVICE MAY USE PROTOCOL
+ 0010 =         MB$XON$XOFF	EQU 0001$0000B	; XON/XOFF PROTOCOL ENABLED
+                
+ 0000 =         BAUD$NONE	EQU 0		; NO BAUD RATE ASSOCIATED WITH THIS DEVICE
+ 0001 =         BAUD$50		EQU 1		; 50 BAUD
+ 0002 =         BAUD$75		EQU 2		; 75 BAUD
+ 0003 =         BAUD$110	EQU 3		; 110 BAUD
+ 0004 =         BAUD$134	EQU 4		; 134.5 BAUD
+ 0005 =         BAUD$150	EQU 5		; 150 BAUD
+ 0006 =         BAUD$300	EQU 6		; 300 BAUD
+ 0007 =         BAUD$600	EQU 7		; 600 BAUD
+ 0008 =         BAUD$1200	EQU 8		; 1200 BAUD
+ 0009 =         BAUD$1800	EQU 9		; 1800 BAUD
+ 000A =         BAUD$2400	EQU 10		; 2400 BAUD
+ 000B =         BAUD$3600	EQU 11		; 3600 BAUD
+ 000C =         BAUD$4800	EQU 12		; 4800 BAUD
+ 000D =         BAUD$7200	EQU 13		; 7200 BAUD
+ 000E =         BAUD$9600	EQU 14		; 9600 BAUD
+ 000F =         BAUD$19200	EQU 15		; 19.2K BAUD
+                
+                ; MiniSys Equates
+ FFF0 =         shm$base equ 0fff0h
+ FFF0 =         shm$cmd equ shm$base
+ FFF1 =         shm$data equ shm$base + 1
+ FFF3 =         shm$track equ shm$base + 3
+ FFF5 =         shm$sect equ shm$base + 5
+ FFF7 =         shm$dma equ shm$base + 7
+CP/M RMAC ASSEM 1.1	#002	CHARACTER I/O HANDLER FOR CP/M 3.0
+
+ FFF9 =         shm$drive equ shm$base + 9
+ 0000 =         cmd$readsec equ 0
+ 0001 =         cmd$writesec equ 1
+ 0002 =         cmd$chkdisk equ 2
+                
+                	; WILL START OFF IN COMMON MEMORY FOR BANKED OR NON-BANKED SYSTEMS:
+                	CSEG
+                
+                
+                	IF	BANKED
+                	; WE PROVIDE ALTERNATE DEFINITIONS OF THE ROUTINE ENTRY POINTS IF
+                	;  WE ARE RUNNING A BANKED SYSTEM VERSUS A NON-BANKED SYSTEM:
+                
+                	;;;;; ?CINIT
+                	; ENTER HERE FOR BANKED SYSTEMS FOR DEVICE INITIALIZATIONS:
+                ?CINIT:
+                	LXI	H,BCINIT	;POINT TO BANKED ROUTINE ADDRESS
+                	JR	BANKIO		;GO TO DISPATCHER
+                
+                	;;;;; ?CI
+                	; ENTER HERE FOR BANKED SYSTEM DEVICE INPUT:
+                ?CI:	LXI	H,BCI		;POINT TO BANKED ROUTINE ADDRESS
+                	JR	BANKIO		;GO TO DISPATCHER
+                
+                	;;;;; ?CO
+                	; ENTER HERE FOR BANKED SYSTEM DEVICE OUTPUT:
+                ?CO:	LXI	H,BCO		;POINT TO BANKED ROUTINE ADDRESS
+                	JR	BANKIO		;GO TO DISPATCHER
+                
+                	;;;;; ?CIST
+                	; ENTER HERE FOR BANKED SYSTEM DEVICE INPUT STATUS:
+                ?CIST:	LXI	H,BCIST		;POINT TO BANKED ROUTINE ADDRESS
+                	JR	BANKIO		;GO TO DISPATCHER
+                
+                	;;;;; ?COST
+                	; ENTER HERE FOR BANKED SYSTEM DEVICE OUTPUT STATUS:
+                ?COST:	LXI	H,BCOST		;POINT TO BANKED ROUTINE ADDRESS
+                
+                
+                	;;;;; BANKIO
+                	; ROUTINE DISPATCHES TO BANKED PORTION OF CHARACTER I/O ROUTINES:
+                BANKIO:
+                	SSPD	SPSAVE		;SAVE CURRENT STACK POINTER
+                	LXI	SP,IOSP		; AND USE LOCAL STACK FOR I/O
+                	LDA	@CBNK		;GET CURRENT BANK
+                	PUSH	PSW		;SAVE ON LOCAL STACK
+                	XRA	A		;WE WILL SELECT BANK 0 (OP SYS)
+                	CALL	?BNKSL
+                	LXI	D,BIORET	;RETURN ADDRESS IN [DE]
+                	PUSH	D		;PUT IT ON STACK FOR RETURN
+                	PCHL			;DISPATCH TO BANKED PART OF ROUTINE
+                
+                	; ARRIVE HERE AFTER DEVICE HANDLER FINISHED:
+                BIORET:
+                	POP	D		;GET PREVIOUS CURRENT BANK TO [D]
+                	PUSH	PSW		;SAVE HANDLER RETURNED RESULT (IF ANY)
+CP/M RMAC ASSEM 1.1	#003	CHARACTER I/O HANDLER FOR CP/M 3.0
+
+                	MOV	A,D		;RESELECT PREVIOUS CURRENT BANK
+                	CALL	?BNKSL
+                	POP	PSW		;GET BACK RESULT CODE TO [A]
+                	LSPD	SPSAVE		;RESTORE PREVIOUS STACK
+                	RET			;AND RETURN...
+                	ENDIF
+                
+                
+                	;;;;;
+                	;;;;; ACTUAL DEVICE HANDLERS
+                	;;;;;
+                
+                
+                	;;;;; ?CINIT (BCINIT FOR BANKED)
+                	; PHYSICAL CODE FOR DEVICE INITIALIZATION:
+                	IF	BANKED
+                	DSEG			;CAN PUT IN BANKED SEGMENT IF BANKED
+                BCINIT:
+                	ELSE
+                ?CINIT:
+                	ENDIF
+ 0000 41        	MOV	B,C		;ON ENTRY DEVICE # IS IN [C] BUT WE NEED
+                				;IT IN [B]
+ 0001 CDB000    	CALL	DEV$DISPATCH	;GO TO CORRECT INIT ROUTINE
+ 0004 BF00      	DW	CINIT0		;INIT FOR DEVICE 0
+ 0006 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 1
+ 0008 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 2
+ 000A EC00      	DW	NULL$INIT	;INIT FOR DEVICE 3
+ 000C EC00      	DW	NULL$INIT	;INIT FOR DEVICE 4
+ 000E EC00      	DW	NULL$INIT	;INIT FOR DEVICE 5
+ 0010 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 6
+ 0012 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 7
+ 0014 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 8
+ 0016 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 9
+ 0018 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 10
+ 001A EC00      	DW	NULL$INIT	;INIT FOR DEVICE 11
+ 001C EC00      	DW	NULL$INIT	;INIT FOR DEVICE 12
+ 001E EC00      	DW	NULL$INIT	;INIT FOR DEVICE 13
+ 0020 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 14
+ 0022 EC00      	DW	NULL$INIT	;INIT FOR DEVICE 15
+                
+                
+                	;;;;; ?CI (BCI FOR BANKED)
+                	; PHYSICAL CODE FOR DEVICE INPUT:
+                	IF	BANKED
+                BCI:
+                	ELSE
+                ?CI:
+                	ENDIF
+ 0024 CDB000    	CALL	DEV$DISPATCH
+ 0027 C800      	DW	CI0			;DEVICE 0 INPUT
+ 0029 EA00      	DW	NULL$CI		;DEVICE 1 INPUT
+ 002B EA00      	DW	NULL$CI		;DEVICE 2 INPUT
+ 002D EA00      	DW	NULL$CI		;DEVICE 3 INPUT
+ 002F EA00      	DW	NULL$CI		;DEVICE 4 INPUT
+ 0031 EA00      	DW	NULL$CI		;DEVICE 5 INPUT
+CP/M RMAC ASSEM 1.1	#004	CHARACTER I/O HANDLER FOR CP/M 3.0
+
+ 0033 EA00      	DW	NULL$CI		;DEVICE 6 INPUT
+ 0035 EA00      	DW	NULL$CI		;DEVICE 7 INPUT
+ 0037 EA00      	DW	NULL$CI		;DEVICE 8 INPUT
+ 0039 EA00      	DW	NULL$CI		;DEVICE 9 INPUT
+ 003B EA00      	DW	NULL$CI		;DEVICE 10 INPUT
+ 003D EA00      	DW	NULL$CI		;DEVICE 11 INPUT
+ 003F EA00      	DW	NULL$CI		;DEVICE 12 INPUT
+ 0041 EA00      	DW	NULL$CI		;DEVICE 13 INPUT
+ 0043 EA00      	DW	NULL$CI		;DEVICE 14 INPUT
+ 0045 EA00      	DW	NULL$CI		;DEVICE 15 INPUT
+                
+                
+                	;;;;; ?CO (BCO FOR BANKED)
+                	; PHYSICAL CODE FOR DEVICE OUTPUT:
+                	IF	BANKED
+                BCO:
+                	ELSE
+                ?CO:
+                	ENDIF
+ 0047 CDB000    	CALL	DEV$DISPATCH	;GO TO CORRECT DEVICE OUTPUT HANDLER
+ 004A DD00      	DW	CO0			;DEVICE 0 OUTPUT
+ 004C EC00      	DW	NULL$CO		;DEVICE 1 OUTPUT
+ 004E EC00      	DW	NULL$CO		;DEVICE 2 OUTPUT
+ 0050 EC00      	DW	NULL$CO		;DEVICE 3 OUTPUT
+ 0052 EC00      	DW	NULL$CO		;DEVICE 4 OUTPUT
+ 0054 EC00      	DW	NULL$CO		;DEVICE 5 OUTPUT
+ 0056 EC00      	DW	NULL$CO		;DEVICE 6 OUTPUT
+ 0058 EC00      	DW	NULL$CO		;DEVICE 7 OUTPUT
+ 005A EC00      	DW	NULL$CO		;DEVICE 8 OUTPUT
+ 005C EC00      	DW	NULL$CO		;DEVICE 9 OUTPUT
+ 005E EC00      	DW	NULL$CO		;DEVICE 10 OUTPUT
+ 0060 EC00      	DW	NULL$CO		;DEVICE 11 OUTPUT
+ 0062 EC00      	DW	NULL$CO		;DEVICE 12 OUTPUT
+ 0064 EC00      	DW	NULL$CO		;DEVICE 13 OUTPUT
+ 0066 EC00      	DW	NULL$CO		;DEVICE 14 OUTPUT
+ 0068 EC00      	DW	NULL$CO		;DEVICE 15 OUTPUT
+                
+                
+                	;;;;; ?CIST (BCIST FOR BANKED)
+                	; PHYSICAL CODE FOR DEVICE INPUT STATUS:
+                	IF	BANKED
+                BCIST:
+                	ELSE
+                ?CIST:
+                	ENDIF
+ 006A CDB000    	CALL	DEV$DISPATCH
+ 006D C000      	DW	CIST0		;DEVICE 0 INPUT STATUS
+ 006F E800      	DW	NULL$CIST	;DEVICE 1 INPUT STATUS
+ 0071 E800      	DW	NULL$CIST	;DEVICE 2 INPUT STATUS
+ 0073 E800      	DW	NULL$CIST	;DEVICE 3 INPUT STATUS
+ 0075 E800      	DW	NULL$CIST	;DEVICE 4 INPUT STATUS
+ 0077 E800      	DW	NULL$CIST	;DEVICE 5 INPUT STATUS
+ 0079 E800      	DW	NULL$CIST	;DEVICE 6 INPUT STATUS
+ 007B E800      	DW	NULL$CIST	;DEVICE 7 INPUT STATUS
+ 007D E800      	DW	NULL$CIST	;DEVICE 8 INPUT STATUS
+ 007F E800      	DW	NULL$CIST	;DEVICE 9 INPUT STATUS
+CP/M RMAC ASSEM 1.1	#005	CHARACTER I/O HANDLER FOR CP/M 3.0
+
+ 0081 E800      	DW	NULL$CIST	;DEVICE 10 INPUT STATUS
+ 0083 E800      	DW	NULL$CIST	;DEVICE 11 INPUT STATUS
+ 0085 E800      	DW	NULL$CIST	;DEVICE 12 INPUT STATUS
+ 0087 E800      	DW	NULL$CIST	;DEVICE 13 INPUT STATUS
+ 0089 E800      	DW	NULL$CIST	;DEVICE 14 INPUT STATUS
+ 008B E800      	DW	NULL$CIST	;DEVICE 15 INPUT STATUS
+                
+                
+                	;;;;; ?COST (BCOST FOR BANKED)
+                	; PHYSICAL CODE FOR DEVICE OUTPUT STATUS:
+                	IF	BANKED
+                BCOST:
+                	ELSE
+                ?COST:
+                	ENDIF
+ 008D CDB000    	CALL	DEV$DISPATCH	;GO TO CONSOLE OUTPUT STATUS HANDLER
+ 0090 D400      	DW	COST0		;DEVICE 0 OUTPUT STATUS
+ 0092 E800      	DW	NULL$COST	;DEVICE 1 OUTPUT STATUS
+ 0094 E800      	DW	NULL$COST	;DEVICE 2 OUTPUT STATUS
+ 0096 E800      	DW	NULL$COST	;DEVICE 3 OUTPUT STATUS
+ 0098 E800      	DW	NULL$COST	;DEVICE 4 OUTPUT STATUS
+ 009A E800      	DW	NULL$COST	;DEVICE 5 OUTPUT STATUS
+ 009C E800      	DW	NULL$COST	;DEVICE 6 OUTPUT STATUS
+ 009E E800      	DW	NULL$COST	;DEVICE 7 OUTPUT STATUS
+ 00A0 E800      	DW	NULL$COST	;DEVICE 8 OUTPUT STATUS
+ 00A2 E800      	DW	NULL$COST	;DEVICE 9 OUTPUT STATUS
+ 00A4 E800      	DW	NULL$COST	;DEVICE 10 OUTPUT STATUS
+ 00A6 E800      	DW	NULL$COST	;DEVICE 11 OUTPUT STATUS
+ 00A8 E800      	DW	NULL$COST	;DEVICE 12 OUTPUT STATUS
+ 00AA E800      	DW	NULL$COST	;DEVICE 13 OUTPUT STATUS
+ 00AC E800      	DW	NULL$COST	;DEVICE 14 OUTPUT STATUS
+ 00AE E800      	DW	NULL$COST	;DEVICE 15 OUTPUT STATUS
+                
+                
+                	;;;;; DEV$DISPATCH
+                	; ROUTINE JUMPS TO CORRECT DEVICE HANDLER:
+                DEV$DISPATCH:
+ 00B0 78        	MOV	A,B		;GET DEVICE # TO [A]
+ 00B1 32ED00    	STA	DEV$CODE	;SAVE FOR LATER USE
+ 00B4 87        	ADD	A		;X2 FOR WORD OFFSET
+ 00B5 E1        	POP	H		;RETURN ADDRESS IS 1ST PARAMETER ADDRESS
+ 00B6 5F        	MOV	E,A		;SET UP OFFSET IN [DE]
+ 00B7 1600      	MVI	D,0
+ 00B9 19        	DAD	D		;[HL] = PTR TO HANDLER ADDRESS
+ 00BA 5E        	MOV	E,M		;GET HANDLER ADDRESS TO [DE]
+ 00BB 23        	INX	H
+ 00BC 56        	MOV	D,M
+ 00BD EB        	XCHG			;PUT IN [HL]
+ 00BE E9        	PCHL			;AND DISPATCH TO IT...
+                
+                
+                	;;;;;
+                	;;;;; PHYSICAL DEVICE HANDLER CODE:
+                	;;;;;
+                ;
+                
+CP/M RMAC ASSEM 1.1	#006	CHARACTER I/O HANDLER FOR CP/M 3.0
+
+                	;;;;; DEVICE 0 HANDLERS (MiniSys Console)
+                CINIT0:	; DEVICE 0 INITIALIZATION 
+ 00BF C9        	RET
+                ;
+                ; 
+                ;<<<<<<<<<<<<<<<<<<< MAIN CONSOL STATUS ROUTINE >>>>>>>>>>>>>>>>>>>>>>
+                CIST0:				; DEVICE 0 INPUT STATUS:
+                CSTS:
+ 00C0 DB00      	in 0
+ 00C2 E601      	ani 1
+ 00C4 C8        	rz				; will be zero if nothing waiting
+ 00C5 AF        	xra a
+ 00C6 3D        	dcr a
+ 00C7 C9        	ret				; a = FF if something waiting
+                ;
+                ;
+                ;<<<<<<<<<<<<<<<<<<<< MAIN CONSOL INPUT ROUTINE >>>>>>>>>>>>>>>>>>>>
+                ;
+                CI0:				;DEVICE 0 INPUT:
+                CI:
+ 00C8 DB00      	in 0
+ 00CA E601      	ani 1
+ 00CC CAC800    	jz CI			; wait for a char
+                
+ 00CF DB01      	in 1			; get the char
+ 00D1 E67F      	ANI	7FH			; mask off high bit
+ 00D3 C9        	RET
+                ;
+                ;<<<<<<<<<<<<<<<<<<<<<< MAIN CONSOL OUTPUT ROUTINE >>>>>>>>>>>>>>>>>>>>>>>>>
+                ;
+                COST0:	; DEVICE 0 OUTPUT STATUS (Return FF if ready):
+ 00D4 DB00      	in 0
+ 00D6 2F        	cma
+ 00D7 E602      	ani 02h
+ 00D9 C8        	rz
+ 00DA AF        	xra a
+ 00DB 3D        	dcr a
+ 00DC C9        	RET
+                ;
+                CO0:				; DEVICE 0 OUTPUT:
+                CO:
+ 00DD DB00      	in 0
+ 00DF E602      	ani 02h
+ 00E1 C2DD00    	jnz CO
+ 00E4 79        	mov a,c
+ 00E5 D301      	out 1
+ 00E7 C9        	ret			; done
+                ;
+                ;
+                	;;;;; NULL ROUTINES:
+                NULL$CIST:
+                NULL$COST:
+ 00E8 AF        	XRA	A		;RETURN A FALSE STATUS RESULT
+ 00E9 C9        	RET
+                NULL$CI:
+ 00EA 3E1A      	MVI	A,1AH		;FOR INPUT RETURN A CNTL-Z (EOF)
+CP/M RMAC ASSEM 1.1	#007	CHARACTER I/O HANDLER FOR CP/M 3.0
+
+                NULL$INIT:
+                NULL$CO:
+                NULL$RET:
+ 00EC C9        	RET			;HARMLESS RETURN
+                
+                
+                	; STORAGE FOR DEVICE CODE -- CAN RESIDE IN SAME SEGMENT AS THE BULK
+                	;  OF CHARACTER I/O ROUTINES:
+ 00ED           DEV$CODE:	DS	1
+                
+                	;;;;; CHRTBL
+                	; CHARACTER DEVICE TABLE
+                	CSEG			;MUST RESIDE IN COMMON MEMORY
+                @CTBL:
+ 00EE 434F4E2020	DB	'CON   '		;CONSOLE (DEVICE 0)
+ 00F4 03        	DB	MB$IN$OUT
+ 00F5 00        	DB	BAUD$NONE
+                
+ 0001 =         MAX$DEVICES	EQU	($-@CTBL)/8	;# DEVICES IN TABLE
+ 00F6 00        	DB	0			;TABLE TERMINATOR
+                
+                
+                	; OTHER DATA AREAS:
+ 00F7           	DS	24		;CHARACTER I/O LOCAL STACK
+ 010F =         IOSP	EQU	$
+ 010F           SPSAVE	DS	2
+                
+ 0111           	END

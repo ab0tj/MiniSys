@@ -1,0 +1,73 @@
+%SIGNAL
+PIN   2 =  A3 
+PIN   3 =  A4 
+PIN   4 =  A5 
+PIN   5 =  A6 
+PIN   6 =  A7 
+PIN   7 =  A8 
+PIN   8 =  A9 
+PIN   1 =  ASEL 
+PIN  11 = !INT 
+PIN  12 = !IRQ 
+PIN  19 =  eA3 
+PIN  18 =  eA4 
+PIN  17 =  eA5 
+PIN  16 =  eA6 
+PIN  15 =  eA7 
+PIN  14 =  eA8 
+PIN  13 =  eA9 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+IRQ =>
+    !INT
+
+IRQ.oe  =>
+    !INT
+
+eA3 =>
+    A3 & ASEL
+
+eA4 =>
+    A4 & ASEL
+
+eA5 =>
+    A5 & ASEL
+
+eA6 =>
+    A6 & ASEL
+
+eA7 =>
+    A7 & ASEL
+
+eA8 =>
+    A8 & ASEL
+
+eA9 =>
+    A9 & ASEL
+
+eA3.oe  =>
+    1 
+
+eA4.oe  =>
+    1 
+
+eA5.oe  =>
+    1 
+
+eA6.oe  =>
+    1 
+
+eA7.oe  =>
+    1 
+
+eA8.oe  =>
+    1 
+
+eA9.oe  =>
+    1 
+
+%END

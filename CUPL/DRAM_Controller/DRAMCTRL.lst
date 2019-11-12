@@ -1,0 +1,162 @@
+LISTING FOR LOGIC DESCRIPTION FILE: DRAMCTRL.pld                     Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Feb 12 22:51:30 2019
+
+  1:Name     DRAMCTRL ;
+  2:PartNo   31 ;
+  3:Date     11/29/2018 ;
+  4:Revision 01 ;
+  5:Designer Alex ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   F1508ISPPLCC84 ;
+ 10:
+ 11:PROPERTY ATMEL { jtag=on };
+ 12:PROPERTY ATMEL { output_fast=on };
+ 13:PROPERTY ATMEL { security=off };
+ 14:PROPERTY ATMEL { TDI_PULLUP = ON };
+ 15:PROPERTY ATMEL { TMS_PULLUP = ON };
+ 16:PROPERTY ATMEL { open_collector=WAIT,M16 };
+ 17:PROPERTY ATMEL { preassign=keep };
+ 18:
+ 19:PIN 83 = CLK;           /* 50MHz square wave input */
+ 20:PIN 39 = !MEMR; /* Memory read cycle */
+ 21:PIN 40 = !MEMW; /* Memory write cycle */
+ 22:PIN  1 = !IOW;  /* IO Write */
+ 23:PIN 84 = !AEN;  /* Address enable */
+ 24:PIN 45 = !INTA; /* Interrupt Acknowledge */
+ 25:PIN 44 = !MOVL; /* Memory overlay active */
+ 26:PIN 48 = !RFSH; /* Initiate refresh cycle(s) */
+ 27:PIN 46 = !RESET;        /* Reset signal from bus */
+ 28:PIN 75 = D1;            /* D1 from bus */
+ 29:PIN 76 = D0;            /* D0 from bus */
+ 30:PIN 77 = MA11;  /* A11 to DRAM */
+ 31:PIN 81 = CLK2;  /* Refresh timer clock */
+ 32:PIN 80 = !M16;  /* M16 from bus */
+ 33:PIN 79 = MA12;  /* A12 to DRAM */
+ 34:PIN  2 = CLK1;  /* CLK1 from bus */
+ 35:PIN 36 = A23;           /* A23 from bus */
+ 36:PIN 74 = A22;           /* A22 from bus */
+ 37:PIN 70 = A21;           /* A21 from bus */
+ 38:PIN 68 = A20;           /* A20 from bus */
+ 39:PIN 65 = A19;           /* A19 from bus */
+ 40:PIN 60 = A18;           /* A18 from bus */
+ 41:PIN 63 = A17;           /* A17 from bus */
+ 42:PIN 57 = A16;           /* A16 from bus */
+ 43:PIN 55 = A15;           /* A15 from bus */
+ 44:PIN 52 = A14;           /* A14 from bus */
+ 45:PIN 50 = A13;           /* A13 from bus */
+ 46:PIN 34 = A12;           /* A12 from bus */
+ 47:PIN 73 = A11;           /* A11 from bus */
+ 48:PIN 69 = A10;           /* A10 from bus */
+ 49:PIN 67 = A9;            /* A9 from bus */
+ 50:PIN 64 = A8;            /* A8 from bus */
+ 51:PIN 58 = A7;            /* A7 from bus */
+ 52:PIN 61 = A6;            /* A6 from bus */
+ 53:PIN 56 = A5;            /* A5 from bus */
+
+LISTING FOR LOGIC DESCRIPTION FILE: DRAMCTRL.pld                     Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Feb 12 22:51:30 2019
+
+ 54:PIN 54 = A4;            /* A4 from bus */
+ 55:PIN 51 = A3;            /* A3 from bus */
+ 56:PIN 49 = A2;            /* A2 from bus */
+ 57:PIN 35 = A1;            /* A1 from bus */
+ 58:PIN 41 = A0;            /* A0 from bus */
+ 59:PIN 37 = !BHE;  /* Bus high enable */
+ 60:PIN 27 = MA10;  /* A10 to DRAM */
+ 61:PIN 25 = MA9;           /* A9 to DRAM */
+ 62:PIN 24 = MA8;           /* A8 to DRAM */
+ 63:PIN 22 = MA7;           /* A7 to DRAM */
+ 64:PIN 20 = MA6;           /* A6 to DRAM */
+ 65:PIN 21 = MA5;           /* A5 to DRAM */
+ 66:PIN 18 = MA4;           /* A4 to DRAM */
+ 67:PIN 17 = MA3;           /* A3 to DRAM */
+ 68:PIN 16 = MA2;           /* A2 to DRAM */
+ 69:PIN 15 = MA1;           /* A1 to DRAM */
+ 70:PIN  9 = MA0;           /* A0 to DRAM */
+ 71:PIN 28 = BA0;           /* A0 to the data MUXes */
+ 72:PIN  6 = !RAS0; /* RAS for lower DRAM bank */
+ 73:PIN 31 = !RAS1; /* Spare RAS */
+ 74:PIN  8 = !RAS2; /* RAS for upper DRAM bank */
+ 75:PIN 33 = !RAS3; /* Spare RAS */
+ 76:PIN  4 = !CAS0; /* Lower byte CAS */
+ 77:PIN  5 = !CAS1; /* Upper byte CAS */
+ 78:PIN 30 = !CAS2; /* Lower byte CAS (tied to CAS0 in this configuration) */
+ 79:PIN 29 = !CAS3; /* Upper bytes CAS byte CAS (tied to CAS1 in this configuration) */
+ 80:PIN 12 = !WE;           /* Write Enable output to DRAM */
+ 81:PIN 11 = !OE;           /* Data out to bus buffer enable */
+ 82:PIN 10 = !WAIT; /* Memory not ready flag */
+ 83:
+ 84:PINNODE  0  = T0;               /* Memory cycle 0ns */
+ 85:PINNODE  0  = T1;               /* Memory cycle 20ns */
+ 86:PINNODE  0  = T2;               /* Memory cycle 40ns */
+ 87:PINNODE  0  = T3;               /* Memory cycle 60ns */
+ 88:PINNODE  0  = T4;               /* Refresh 0ns */
+ 89:PINNODE  0  = T5;               /* Refresh 20ns */
+ 90:PINNODE  0  = T6;               /* Refresh 40ns */
+ 91:PINNODE  0  = T7;               /* Refresh 60ns */
+ 92:PINNODE  0  = T8;               /* Refresh 80ns */
+ 93:PINNODE [0..0] = [R0..9];       /* Clock divider for refresh timer */
+ 94:PINNODE  0  = MUX;      /* Select row/column address */
+ 95:
+ 96:[T0..T8].ck = CLK;
+ 97:[T4..T8].ar = !T7 & T8;
+ 98:T0.d = !RCYC & (MEMR # MEMW) & !MOVL;
+ 99:[T1..T3].d = [T0..T2];
+100:T4.d = (((RFSH & ![R2..9]:&) # ((MEMR # MEMW) & MOVL) # INTA # RESET) # (T3 & !T0)) & !T5;      /* Initiate a CBR refresh */
+101:[T5..T8].d = [T4..T7];
+102:[R0..9].ck = CLK;
+103:[R0..9].ar = !RFSH;
+104:R0.d = !R0 & !R1;
+105:R1.d = R0;
+106:R2.t = R1;              /* CLK/6 */
+107:R3.t = R1 & R2; /* CLK/12 */
+
+LISTING FOR LOGIC DESCRIPTION FILE: DRAMCTRL.pld                     Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Feb 12 22:51:30 2019
+
+108:R4.t = [R1..3]:&;       /* CLK/24 */
+109:R5.t = [R1..4]:&;       /* CLK/48 */
+110:R6.t = [R1..5]:&;       /* CLK/96 */
+111:R7.t = [R1..6]:&;       /* CLK/192 */
+112:R8.t = [R1..7]:&;       /* CLK/384 */
+113:R9.t = [R1..8]:&;       /* CLK/768 */
+114:
+115:RCYC = T4 # T5 # T6 # T7;
+116:RAS = T0 & !T3;
+117:RAS0 = (RAS & !A23) # T5 # T6;
+118:RAS1 = RAS0;
+119:RAS2 = (RAS & A23) # T5 # T6;
+120:RAS3 = RAS2;
+121:CAS = (MEMR # MEMW) & T1;
+122:CAS0 = (CAS & !A0) # T4 # T5 # T6;
+123:CAS1 = (CAS & (A0 # BHE)) # T4 # T5 # T6;
+124:CAS2 = CAS0;
+125:CAS3 = CAS1;
+126:WE = MEMW & !MOVL & !RCYC;
+127:MUX = (T0 & !CLK) # T1;
+128:OE = MEMR & !MOVL & !RCYC;
+129:WAIT = (MEMR # MEMW) & !T2 & !MOVL;
+130:
+131:[MA10..MA0] = ([A22..A12] & !MUX) # ([A11..A1] & MUX);
+132:MA11 = MOVL;    /* Should tie pin low */
+133:BA0 = A0;
+134:M16 = !MOVL;
+135:
+136:
+
+
+

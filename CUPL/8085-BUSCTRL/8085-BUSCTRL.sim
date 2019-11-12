@@ -1,0 +1,438 @@
+%SIGNAL
+PIN  73 =  AD0 
+PIN  70 =  AD1 
+PIN  56 =  AD2 
+PIN  63 =  AD3 
+PIN  57 =  AD4 
+PIN  65 =  AD5 
+PIN  67 =  AD6 
+PIN  64 =  AD7 
+PIN  79 =  AI12 
+PIN  77 =  AI13 
+PIN  75 =  AI14 
+PIN  74 =  AI15 
+PIN  83 =  ALE 
+PIN   0 =  ALTCHWR 
+PIN  18 =  AO12 
+PIN  17 =  AO13 
+PIN  21 =  AO14 
+PIN  16 =  AO15 
+PIN  35 =  AO16 
+PIN  33 =  AO17 
+PIN  36 =  AO18 
+PIN  31 =  AO19 
+PIN  29 =  AO20 
+PIN  34 =  AO21 
+PIN  28 =  AO22 
+PIN  27 =  AO23 
+PIN   0 =  CFGWR 
+PIN   0 =  DLTCHWR 
+PIN  84 =  HLDA 
+PIN   2 = !INTA 
+PIN  54 =  IOM 
+PIN  60 =  IOR 
+PIN  61 =  IOW 
+PIN  80 = !IOWT 
+PIN   0 =  LA0 
+PIN   0 =  LA1 
+PIN   0 =  LA2 
+PIN   0 =  LA3 
+PIN   0 =  LA4 
+PIN   0 =  LA5 
+PIN   0 =  LA6 
+PIN   0 =  LA7 
+PIN   0 =  LMA0 
+PIN   0 =  LMA1 
+PIN   0 =  LMA2 
+PIN   0 =  LMA3 
+PIN  30 =  M1 
+PIN  20 =  MA0 
+PIN  22 =  MA1 
+PIN  24 =  MA2 
+PIN  25 =  MA3 
+PIN  11 =  MA4 
+PIN  10 =  MA5 
+PIN  12 =  MA6 
+PIN  44 =  MD0 
+PIN  45 =  MD1 
+PIN  46 =  MD2 
+PIN  48 =  MD3 
+PIN  49 =  MD4 
+PIN  50 =  MD5 
+PIN  51 =  MD6 
+PIN  52 =  MD7 
+PIN   5 =  MD8 
+PIN   4 =  MD9 
+PIN   6 =  MD10 
+PIN   9 =  MD11 
+PIN   8 =  MD12 
+PIN  41 =  MEMR 
+PIN  15 =  MEMW 
+PIN   0 =  MM 
+PIN   0 =  MMUWR 
+PIN  58 = !MOE 
+PIN  39 = !MWE 
+PIN  81 = !MWT 
+PIN  76 = !RD 
+PIN  40 =  READY 
+PIN   1 =  RESET 
+PIN  37 = !RFSH 
+PIN  68 =  S0 
+PIN  69 =  S1 
+PIN  55 = !WR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+ALTCHWR =>
+    IOM & LA0 & !LA1 & !LA2 & !LA3 & !LA4 & !LA5 & LA6 & !LA7 & WR
+
+AO12 =>
+    AI12 & !IOM & !MM
+  # !IOM & MD0 & MM
+
+AO12.oe  =>
+    !HLDA
+
+AO13 =>
+    AI13 & !IOM & !MM
+  # !IOM & MD1 & MM
+
+AO13.oe  =>
+    !HLDA
+
+AO14 =>
+    AI14 & !IOM & !MM
+  # !IOM & MD2 & MM
+
+AO14.oe  =>
+    !HLDA
+
+AO15 =>
+    AI15 & !IOM & !MM
+  # !IOM & MD3 & MM
+
+AO15.oe  =>
+    !HLDA
+
+AO16 =>
+    !IOM & MD4 & MM
+
+AO16.oe  =>
+    !HLDA
+
+AO17 =>
+    !IOM & MD5 & MM
+
+AO17.oe  =>
+    !HLDA
+
+AO18 =>
+    !IOM & MD6 & MM
+
+AO18.oe  =>
+    !HLDA
+
+AO19 =>
+    !IOM & MD7 & MM
+
+AO19.oe  =>
+    !HLDA
+
+AO20 =>
+    !IOM & MD8 & MM
+
+AO20.oe  =>
+    !HLDA
+
+AO21 =>
+    !IOM & MD9 & MM
+
+AO21.oe  =>
+    !HLDA
+
+AO22 =>
+    !IOM & MD10 & MM
+
+AO22.oe  =>
+    !HLDA
+
+AO23 =>
+    !IOM & MD11 & MM
+
+AO23.oe  =>
+    !HLDA
+
+CFGWR =>
+    IOM & !LA0 & !LA1 & !LA2 & !LA3 & !LA4 & !LA5 & LA6 & !LA7 & WR
+
+DLTCHWR =>
+    IOM & !LA0 & LA1 & !LA2 & !LA3 & !LA4 & !LA5 & LA6 & !LA7 & WR
+
+IOR =>
+    !IOM
+  # !RD
+
+IOR.oe  =>
+    !HLDA
+
+IOW =>
+    !IOM
+  # !WR
+
+IOW.oe  =>
+    !HLDA
+
+LA0.d  =>
+    AD0
+
+LA0.ck  =>
+    !ALE
+
+LA1.d  =>
+    AD1
+
+LA1.ck  =>
+    !ALE
+
+LA2.d  =>
+    AD2
+
+LA2.ck  =>
+    !ALE
+
+LA3.d  =>
+    AD3
+
+LA3.ck  =>
+    !ALE
+
+LA4.d  =>
+    AD4
+
+LA4.ck  =>
+    !ALE
+
+LA5.d  =>
+    AD5
+
+LA5.ck  =>
+    !ALE
+
+LA6.d  =>
+    AD6
+
+LA6.ck  =>
+    !ALE
+
+LA7.d  =>
+    AD7
+
+LA7.ck  =>
+    !ALE
+
+LMA0.d  =>
+    AD0
+
+LMA0.ck  =>
+    !ALTCHWR
+
+LMA1.d  =>
+    AD1
+
+LMA1.ck  =>
+    !ALTCHWR
+
+LMA2.d  =>
+    AD2
+
+LMA2.ck  =>
+    !ALTCHWR
+
+LMA3.d  =>
+    AD3
+
+LMA3.ck  =>
+    !ALTCHWR
+
+M1 =>
+    !IOM & S0 & S1
+
+M1.oe  =>
+    !HLDA
+
+MA0 =>
+    AI12 & !MMUWR
+  # LMA0 & MMUWR
+
+MA1 =>
+    AI13 & !MMUWR
+  # LMA1 & MMUWR
+
+MA2 =>
+    AI14 & !MMUWR
+  # LMA2 & MMUWR
+
+MA3 =>
+    AI15 & !MMUWR
+  # LMA3 & MMUWR
+
+MA4.d  =>
+    AD0
+
+MA4.ck  =>
+    !CFGWR
+
+MA5.d  =>
+    AD1
+
+MA5.ck  =>
+    !CFGWR
+
+MA6.d  =>
+    AD2
+
+MA6.ck  =>
+    !CFGWR
+
+MD0 =>
+    AD0
+
+MD0.oe  =>
+    MMUWR
+
+MD1 =>
+    AD1
+
+MD1.oe  =>
+    MMUWR
+
+MD2 =>
+    AD2
+
+MD2.oe  =>
+    MMUWR
+
+MD3 =>
+    AD3
+
+MD3.oe  =>
+    MMUWR
+
+MD4 =>
+    AD4
+
+MD4.oe  =>
+    MMUWR
+
+MD5 =>
+    AD5
+
+MD5.oe  =>
+    MMUWR
+
+MD6 =>
+    AD6
+
+MD6.oe  =>
+    MMUWR
+
+MD7 =>
+    AD7
+
+MD7.oe  =>
+    MMUWR
+
+MD8.d  =>
+    AD0
+
+MD8.ck  =>
+    !DLTCHWR
+
+MD8.oe  =>
+    MMUWR
+
+MD9.d  =>
+    AD1
+
+MD9.ck  =>
+    !DLTCHWR
+
+MD9.oe  =>
+    MMUWR
+
+MD10.d  =>
+    AD2
+
+MD10.ck  =>
+    !DLTCHWR
+
+MD10.oe  =>
+    MMUWR
+
+MD11.d  =>
+    AD3
+
+MD11.ck  =>
+    !DLTCHWR
+
+MD11.oe  =>
+    MMUWR
+
+MD12.d  =>
+    AD4
+
+MD12.ck  =>
+    !DLTCHWR
+
+MD12.oe  =>
+    MMUWR
+
+MEMR =>
+    IOM
+  # !RD
+
+MEMR.oe  =>
+    !HLDA
+
+MEMW =>
+    IOM
+  # !WR
+  # MD12 & MM
+
+MEMW.oe  =>
+    !HLDA
+
+MM.d  =>
+    AD7
+
+MM.ar  =>
+    RESET
+
+MM.ck  =>
+    !CFGWR
+
+MMUWR.d  =>
+    AD0 & AD1 & !AD2 & !AD3 & !AD4 & !AD5 & AD6 & !AD7 & IOM & S0 & !S1
+
+MMUWR.ck  =>
+    !ALE
+
+MOE =>
+    !MMUWR
+
+MWE =>
+    MMUWR & WR
+
+READY =>
+    !IOWT & !MWT
+
+RFSH.d  =>
+    !S0 & !S1
+
+RFSH.ck  =>
+    !ALE
+
+%END

@@ -1,0 +1,212 @@
+
+*******************************************************************************
+                                   MS-Eth-U4
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          g16v8ma  Library DLIB-h-40-8
+Created         Sat Feb 23 10:51:25 2019
+Name            MS-Eth-U4 
+Partno          04 
+Revision        01 
+Date            2/23/2019 
+Designer        Engineer 
+Company         AB0TJ 
+Assembly        None 
+Location        
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+IRQ =>
+    INT
+
+IRQ.oe  =>
+    INT
+
+eA3 =>
+    A3 & ASEL
+
+eA4 =>
+    A4 & ASEL
+
+eA5 =>
+    A5 & ASEL
+
+eA6 =>
+    A6 & ASEL
+
+eA7 =>
+    A7 & ASEL
+
+eA8 =>
+    A8 & ASEL
+
+eA9 =>
+    A9 & ASEL
+
+eA3.oe  =>
+    1 
+
+eA4.oe  =>
+    1 
+
+eA5.oe  =>
+    1 
+
+eA6.oe  =>
+    1 
+
+eA7.oe  =>
+    1 
+
+eA8.oe  =>
+    1 
+
+eA9.oe  =>
+    1 
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    A3                          2        V        -       -       -     
+    A4                          3        V        -       -       -     
+    A5                          4        V        -       -       -     
+    A6                          5        V        -       -       -     
+    A7                          6        V        -       -       -     
+    A8                          7        V        -       -       -     
+    A9                          8        V        -       -       -     
+    ASEL                        1        V        -       -       -     
+ !  INT                         11       V        -       -       -     
+ !  IRQ                         12       V        1       7       1     
+    IRQ                 oe      12       X        1       1       1     
+    eA3                         19       V        1       7       1     
+    eA4                         18       V        1       7       1     
+    eA5                         17       V        1       7       1     
+    eA6                         16       V        1       7       1     
+    eA7                         15       V        1       7       1     
+    eA8                         14       V        1       7       1     
+    eA9                         13       V        1       7       1     
+    eA3                 oe      19       D        1       1       0     
+    eA4                 oe      18       D        1       1       0     
+    eA5                 oe      17       D        1       1       0     
+    eA6                 oe      16       D        1       1       0     
+    eA7                 oe      15       D        1       1       0     
+    eA8                 oe      14       D        1       1       0     
+    eA9                 oe      13       D        1       1       0     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+
+
+===============================================================================
+                                   Fuse Plot
+===============================================================================
+
+Syn   02192 - Ac0   02193 - 
+
+Pin #19  02048  Pol -  02120  Ac1 - 
+ 00000 -------------------------------- 
+ 00032 x-x----------------------------- 
+ 00064 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00096 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00128 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00160 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00192 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00224 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #18  02049  Pol -  02121  Ac1 - 
+ 00256 -------------------------------- 
+ 00288 --x-x--------------------------- 
+ 00320 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00352 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00384 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00416 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00448 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00480 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #17  02050  Pol -  02122  Ac1 - 
+ 00512 -------------------------------- 
+ 00544 --x-----x----------------------- 
+ 00576 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00608 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00640 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00704 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #16  02051  Pol -  02123  Ac1 - 
+ 00768 -------------------------------- 
+ 00800 --x---------x------------------- 
+ 00832 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00896 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00928 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00960 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00992 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #15  02052  Pol -  02124  Ac1 - 
+ 01024 -------------------------------- 
+ 01056 --x-------------x--------------- 
+ 01088 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01120 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01152 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01184 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01216 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01248 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #14  02053  Pol -  02125  Ac1 - 
+ 01280 -------------------------------- 
+ 01312 --x-----------------x----------- 
+ 01344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01376 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01440 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01472 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01504 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #13  02054  Pol -  02126  Ac1 - 
+ 01536 -------------------------------- 
+ 01568 --x---------------------x------- 
+ 01600 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01632 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01664 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01696 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01728 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01760 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #12  02055  Pol x  02127  Ac1 - 
+ 01792 -------------------------------x 
+ 01824 -------------------------------x 
+ 01856 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01888 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01920 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01952 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01984 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+
+
+LEGEND    X : fuse not blown 
+          - : fuse blown 
+
+===============================================================================
+                                 Chip Diagram
+===============================================================================
+
+                               ______________
+                              |  MS-Eth-U4   |
+                     ASEL x---|1           20|---x Vcc                      
+                       A3 x---|2           19|---x eA3                      
+                       A4 x---|3           18|---x eA4                      
+                       A5 x---|4           17|---x eA5                      
+                       A6 x---|5           16|---x eA6                      
+                       A7 x---|6           15|---x eA7                      
+                       A8 x---|7           14|---x eA8                      
+                       A9 x---|8           13|---x eA9                      
+                          x---|9           12|---x !IRQ                     
+                      GND x---|10          11|---x !INT                     
+                              |______________|
+

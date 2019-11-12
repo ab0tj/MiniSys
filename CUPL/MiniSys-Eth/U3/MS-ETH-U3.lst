@@ -1,0 +1,49 @@
+LISTING FOR LOGIC DESCRIPTION FILE: MS-ETH-U3.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Mon Feb 25 22:23:55 2019
+
+  1:Name     MS-Eth-U3 ;
+  2:PartNo   03 ;
+  3:Date     2/23/2019 ;
+  4:Revision 01 ;
+  5:Designer Engineer ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   g16v8as ;
+ 10:
+ 11:
+ 12:
+ 13:PIN 1 = !LOW;
+ 14:PIN 2 = !HI;
+ 15:PIN 3 = !IND;
+ 16:PIN 4 = !EGHT;
+ 17:PIN 5 = BA2;
+ 18:PIN 6 = BA1;
+ 19:PIN 7 = BA0;
+ 20:PIN 8 = !IOR;
+ 21:PIN 9 = AEN;
+ 22:PIN 12 = A2;
+ 23:PIN 13 = A1;
+ 24:PIN 14 = A0;
+ 25:PIN 15 = ASEL;
+ 26:PIN 16 = !RD;
+ 27:PIN 17 = !SXTN;
+ 28:PIN 18 = !STS;
+ 29:PIN 19 = !CS;
+ 30:
+ 31:[A2..0] = [BA2..0];
+ 32:ASEL = !IND;
+ 33:RD = CS & IOR;
+ 34:SXTN = CS & !EGHT;
+ 35:STS = IND & LOW & HI & AEN & A2 & A1 & A0 & IOR;
+ 36:CS = HI & AEN & (!IND # (LOW & !(A2 & A1 & A0)));
+ 37:
+
+
+
+Jedec Fuse Checksum       (32e1)
+Jedec Transmit Checksum   (c1b7)

@@ -1,0 +1,189 @@
+{COMPONENT Z:\PROJECTS\WINCUPL\MINISYS-ETH\U4\MS-ETH-U4.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Sat Feb 23 10:51:25 2019 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P ASEL {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P A3 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P A4 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P A5 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P A6 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P A7 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P A8 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P A9 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P INT' {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P IRQ' {Pt "I/O"}{Lq 0}{Ploc 280 20}}
+   {P EA9 {Pt "I/O"}{Lq 0}{Ploc 280 40}}
+   {P EA8 {Pt "I/O"}{Lq 0}{Ploc 280 60}}
+   {P EA7 {Pt "I/O"}{Lq 0}{Ploc 280 80}}
+   {P EA6 {Pt "I/O"}{Lq 0}{Ploc 280 100}}
+   {P EA5 {Pt "I/O"}{Lq 0}{Ploc 280 120}}
+   {P EA4 {Pt "I/O"}{Lq 0}{Ploc 280 140}}
+   {P EA3 {Pt "I/O"}{Lq 0}{Ploc 280 160}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 190 210}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 260 30}
+   {Pnl 260 50}
+   {Pnl 260 70}
+   {Pnl 260 90}
+   {Pnl 260 110}
+   {Pnl 260 130}
+   {Pnl 260 150}
+   {Pnl 260 170}
+
+   {Sd A 1 2 3 4 5 6 7 8 11 12 13 14 15 16 17 18 19}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 200 250 0}
+   {L 130 180 100 180}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 120 20 100 20}
+   {C 125 20 5}
+   {C 255 20 5}
+   {L 260 20 280 20}
+   {L 250 40 280 40}
+   {L 250 60 280 60}
+   {L 250 80 280 80}
+   {L 250 100 280 100}
+   {L 250 120 280 120}
+   {L 250 140 280 140}
+   {L 250 160 280 160}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "ASEL" 140 180}
+   {T "A3" 140 160}
+   {T "A4" 140 140}
+   {T "A5" 140 120}
+   {T "A6" 140 100}
+   {T "A7" 140 80}
+   {T "A8" 140 60}
+   {T "A9" 140 40}
+   {T "INT'" 140 20}
+   [Tj "RC"]
+   {T "IRQ'" 240 20}
+   {T "EA9" 240 40}
+   {T "EA8" 240 60}
+   {T "EA7" 240 80}
+   {T "EA6" 240 100}
+   {T "EA5" 240 120}
+   {T "EA4" 240 140}
+   {T "EA3" 240 160}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "G16V8MA" 190 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD Z:\PROJECTS\WINCUPL\MINISYS-ETH\U4\MS-ETH-U4 190 200}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N ASEL
+   }
+   {N A3
+   }
+   {N A4
+   }
+   {N A5
+   }
+   {N A6
+   }
+   {N A7
+   }
+   {N A8
+   }
+   {N A9
+   }
+   {N INT'
+   }
+   {N IRQ'
+   }
+   {N EA9
+   }
+   {N EA8
+   }
+   {N EA7
+   }
+   {N EA6
+   }
+   {N EA5
+   }
+   {N EA4
+   }
+   {N EA3
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

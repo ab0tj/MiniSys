@@ -1,0 +1,42 @@
+LISTING FOR LOGIC DESCRIPTION FILE: MS-ETH-U2.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 23 12:07:44 2019
+
+  1:Name     MS-Eth-U2 ;
+  2:PartNo   02 ;
+  3:Date     2/23/2019 ;
+  4:Revision 01 ;
+  5:Designer Engineer ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   g16v8as ;
+ 10:
+ 11:
+ 12:
+ 13:PIN 1 = !B15;
+ 14:PIN 2 = !B14;
+ 15:PIN 3 = !B13;
+ 16:PIN 4 = !B12;
+ 17:PIN 5 = !B11;
+ 18:PIN 6 = !B10;
+ 19:PIN 9 = A15;
+ 20:PIN 11 = A14;
+ 21:PIN 12 = A13;
+ 22:PIN 13 = A12;
+ 23:PIN 14 = A11;
+ 24:PIN 16 = !M2;
+ 25:PIN 17 = A10;
+ 26:PIN 19 = M1;
+ 27:
+ 28:M1 = !(A15 $ B15) & !(A14 $ B14) & !(A13 $ B13);
+ 29:M2 = M1 & !(A12 $ B12) & !(A11 $ B11) & !(A10 $ B10);
+ 30:
+
+
+
+Jedec Fuse Checksum       (3b18)
+Jedec Transmit Checksum   (e86d)

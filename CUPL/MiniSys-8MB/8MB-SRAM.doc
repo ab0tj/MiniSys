@@ -1,0 +1,220 @@
+
+*******************************************************************************
+                                   8MB-SRAM
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          g16v8ma  Library DLIB-h-40-8
+Created         Tue Mar 12 20:15:48 2019
+Name            8MB-SRAM 
+Partno          8M 
+Revision        01 
+Date            3/3/2019 
+Designer        Alex 
+Company         AB0TJ 
+Assembly        None 
+Location        
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+BRDSEL =>
+    A23 & !MOVL & !UPPER
+  # !A23 & !MOVL & UPPER
+
+OEH =>
+    BRDSEL & MEMR
+
+OEL =>
+    BRDSEL & MEMR
+
+RD =>
+    BRDSEL & MEMR
+
+SEL =>
+    A0 & !MEMW & SI
+  # A0 & MEMR & !MEMW
+  # !MEMR & !MEMW & SI
+  # BHE & !MEMR & SI
+  # !A0 & BHE & !MEMR & MEMW
+  # A0 & BHE & SI
+  # A0 & BHE & MEMR
+
+WEH =>
+    BHE & BRDSEL & MEMW
+  # A0 & BRDSEL & MEMW
+
+WEL =>
+    !A0 & BRDSEL & MEMW
+
+WR =>
+    WEH
+  # WEL
+
+BRDSEL.oe  =>
+    1 
+
+OEH.oe  =>
+    1 
+
+OEL.oe  =>
+    1 
+
+RD.oe  =>
+    1 
+
+SEL.oe  =>
+    1 
+
+WEH.oe  =>
+    1 
+
+WEL.oe  =>
+    1 
+
+WR.oe  =>
+    1 
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    A0                          2        V        -       -       -     
+    A23                         1        V        -       -       -     
+ !  BHE                         3        V        -       -       -     
+ !  BRDSEL                      13       V        2       7       1     
+ !  MEMR                        5        V        -       -       -     
+ !  MEMW                        6        V        -       -       -     
+ !  MOVL                        4        V        -       -       -     
+ !  OEH                         18       V        1       7       1     
+ !  OEL                         19       V        1       7       1     
+ !  RD                          15       V        1       7       1     
+    SEL                         12       V        7       7       1     
+    SI                          11       V        -       -       -     
+    UPPER                       7        V        -       -       -     
+ !  WEH                         16       V        2       7       1     
+ !  WEL                         17       V        1       7       1     
+ !  WR                          14       V        2       7       1     
+    BRDSEL              oe      13       D        1       1       0     
+    OEH                 oe      18       D        1       1       0     
+    OEL                 oe      19       D        1       1       0     
+    RD                  oe      15       D        1       1       0     
+    SEL                 oe      12       D        1       1       0     
+    WEH                 oe      16       D        1       1       0     
+    WEL                 oe      17       D        1       1       0     
+    WR                  oe      14       D        1       1       0     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+
+
+===============================================================================
+                                   Fuse Plot
+===============================================================================
+
+Syn   02192 - Ac0   02193 - 
+
+Pin #19  02048  Pol x  02120  Ac1 - 
+ 00000 -------------------------------- 
+ 00032 -------------x-------------x---- 
+ 00064 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00096 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00128 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00160 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00192 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00224 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #18  02049  Pol x  02121  Ac1 - 
+ 00256 -------------------------------- 
+ 00288 -------------x-------------x---- 
+ 00320 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00352 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00384 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00416 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00448 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00480 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #17  02050  Pol x  02122  Ac1 - 
+ 00512 -------------------------------- 
+ 00544 -x---------------x---------x---- 
+ 00576 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00608 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00640 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00704 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #16  02051  Pol x  02123  Ac1 - 
+ 00768 -------------------------------- 
+ 00800 -----x-----------x---------x---- 
+ 00832 x----------------x---------x---- 
+ 00864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00896 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00928 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00960 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00992 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #15  02052  Pol x  02124  Ac1 - 
+ 01024 -------------------------------- 
+ 01056 -------------x-------------x---- 
+ 01088 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01120 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01152 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01184 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01216 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01248 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #14  02053  Pol x  02125  Ac1 - 
+ 01280 -------------------------------- 
+ 01312 ---------------x---------------- 
+ 01344 -----------x-------------------- 
+ 01376 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01440 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01472 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01504 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #13  02054  Pol x  02126  Ac1 - 
+ 01536 -------------------------------- 
+ 01568 --x-----x------------x---------- 
+ 01600 ---x----x-----------x----------- 
+ 01632 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01664 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01696 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01728 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01760 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #12  02055  Pol -  02127  Ac1 - 
+ 01792 -------------------------------- 
+ 01824 x---------------x-------------x- 
+ 01856 x------------x--x--------------- 
+ 01888 ------------x---x-------------x- 
+ 01920 -----x------x-----------------x- 
+ 01952 -x---x------x----x-------------- 
+ 01984 x----x------------------------x- 
+ 02016 x----x-------x------------------ 
+
+
+LEGEND    X : fuse not blown 
+          - : fuse blown 
+
+===============================================================================
+                                 Chip Diagram
+===============================================================================
+
+                               ______________
+                              |   8MB-SRAM   |
+                      A23 x---|1           20|---x Vcc                      
+                       A0 x---|2           19|---x !OEL                     
+                     !BHE x---|3           18|---x !OEH                     
+                    !MOVL x---|4           17|---x !WEL                     
+                    !MEMR x---|5           16|---x !WEH                     
+                    !MEMW x---|6           15|---x !RD                      
+                    UPPER x---|7           14|---x !WR                      
+                          x---|8           13|---x !BRDSEL                  
+                          x---|9           12|---x SEL                      
+                      GND x---|10          11|---x SI                       
+                              |______________|
+

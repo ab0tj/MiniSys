@@ -1,0 +1,39 @@
+Name     186EB-GAL2 ;
+PartNo   186-02 ;
+Date     9/27/2019 ;
+Revision 01 ;
+Designer Alex ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g16v8 ;
+
+/* *************** INPUT PINS *********************/
+PIN 1   = !IOWT                   ; /* IO Wait State                   */ 
+PIN 2   = !MWT                    ; /* Memory Wait State               */ 
+PIN 3   = !IO16                   ; /* IO16 from Bus                   */ 
+PIN 4   = A0                      ; /* A0 from CPU                     */ 
+PIN 5   = !BHE                    ; /* BHE from CPU                    */ 
+PIN 6   = !DEN                    ; /* Data ENable from CPU            */ 
+PIN 7   = !INT                    ; /* INT from bus                    */
+PIN 8   = !NMI                    ; /* NMI from Bus                    */
+PIN 9   = !HOLD                   ; /* HOLD from bus                   */ 
+PIN 11  = IO                      ; /* IO from GAL1                    */ 
+
+/* *************** OUTPUT PINS *********************/
+/* PIN 12  = M1                      ; /* M1 to bus                       */ 
+PIN 13  = READY                   ; /* READY to CPU                    */ 
+PIN 14  = oHOLD                   ; /* HOLD to CPU                     */
+PIN 15  = oNMI                    ; /* NMI to CPU                      */  
+PIN 16  = oINT                    ; /* INT to CPU                      */
+PIN 17  = !XCE                    ; /* Cross buffer enable             */
+PIN 18  = !HCE                    ; /* High data buffer enable         */
+PIN 19  = !LCE                    ; /* Low data buffer enable          */
+
+READY = !IOWT & !MWT;
+oHOLD = HOLD;
+oNMI = NMI;
+oINT = INT;
+LCE = DEN & !(IO & A0);
+HCE = DEN & !(IO & A0);
+XCE = DEN & IO & A0;

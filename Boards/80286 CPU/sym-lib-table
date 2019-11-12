@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name SamacSys_Parts)(type Legacy)(uri //armin/alex/Projects/KiCad/N8VEM-KiCAD/SamacSys_Parts.lib)(options "")(descr ""))
+  (lib (name s100_80286_V2-cache)(type Legacy)(uri "${KIPRJMOD}/s100_80286 V2-cache.lib")(options "")(descr ""))
+)

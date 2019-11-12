@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name 5145154-4)(type Legacy)(uri Z:/Projects/KiCad/N8VEM-KiCAD/5145154-4.lib)(options "")(descr ""))
+  (lib (name conn)(type Legacy)(uri Z:/Projects/KiCad/N8VEM-KiCAD/conn.lib)(options "")(descr ""))
+  (lib (name ds1813)(type Legacy)(uri Z:/Projects/KiCad/N8VEM-KiCAD/ds1813.lib)(options "")(descr ""))
+  (lib (name MiniSys-Backplane-rescue)(type Legacy)(uri ${KIPRJMOD}/MiniSys-Backplane-rescue.lib)(options "")(descr ""))
+)

@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name footprints)(type KiCad)(uri Z:/Projects/KiCad/N8VEM-KiCAD/TX24120RLTH1E/footprints.pretty)(options "")(descr ""))
+)

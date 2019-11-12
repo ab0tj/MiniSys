@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name "ATF1508-AS_(84-PLCC)")(type Legacy)(uri "Z:/Projects/KiCad/N8VEM-KiCAD/ATF1508-AS (84-PLCC).lib")(options "")(descr ""))
+  (lib (name 16MB-DRAM-rescue)(type Legacy)(uri "${KIPRJMOD}/16MB DRAM-rescue.lib")(options "")(descr ""))
+)

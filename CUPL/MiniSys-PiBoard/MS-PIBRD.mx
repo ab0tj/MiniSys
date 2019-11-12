@@ -1,0 +1,51 @@
+Name     MS-PiBrd ;
+PartNo   3.14 ;
+Date     2/5/2019 ;
+Revision 01 ;
+Designer Engineer ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g22v10lcc ;
+
+/* *************** INPUT PINS *********************/
+PIN  2 = IOM;		/* High = IO, Low = Memory */
+PIN  3 = !WR;		/* Write buffers active */
+PIN  4 = !RD;		/* Read operation */
+PIN  5 = !ADDR_MATCH; /* Board is being addressed */
+PIN  6 = A1;		/* A1 from bus */
+PIN  7 = A0;		/* A0 from bus */
+PIN  9 = !HRQ;	/* Hold request */
+PIN 10 = !HAK;	/* Hold acknowledge */
+PIN 11 = CON_W;	/* Pi write to console port */
+PIN 12 = !CON_R;	/* Pi read from console port */
+PIN 13 = !RESET;	/* Reset signal from bus */
+PIN 16 = SV;		/* Status valid signal */
+
+/* *************** OUTPUT PINS *********************/
+PIN 17 = CON_SI;	/* Console input status */
+PIN 18 = CON_SO;	/* Console output status */
+PIN 19 = !STS_IOR;	/* Output enable for status port */
+PIN 20 = !CON_IOR;	/* Output enable for console port (input) */
+PIN 21 = !CON_IOW;	/* Clock for console port (output) */
+PIN 23 = PI_REQ;	/* Pi Request flag */
+PIN 24 = !MEMW;	/* Memory write (to bus) */
+PIN 25 = !MEMR;	/* Memory read (to bus) */
+PIN 26 = !IOW;	/* IO write (to bus) */
+PIN 27 = !IOR;	/* IO read (to bus) */
+
+/* *********** LOGIC EQUATIONS **********************/
+CON_SI = (CON_SI # CON_W) & !CON_IOR & !RESET;	/* Flip-flop: Set by CON_W, reset by CON_IOR */
+CON_SO = (CON_SO # CON_IOW) & !(CON_R & SV) & !RESET;	/* Flip-flop: Set by CON_IOW, reset by CON_R */
+STS_IOR = !HAK & ADDR_MATCH & !A1 & !A0 & IOR & !RESET;	/* Bus read from I/O port 0 */
+CON_IOR = !HAK & ADDR_MATCH & !A1 & A0 & IOR & !RESET;	/* Bus read from I/O port 1 */
+CON_IOW = !HAK & ADDR_MATCH & !A1 & A0 & IOW & !RESET;	/* Bus write to I/O port 1 */
+PI_REQ = (PI_REQ # (ADDR_MATCH & !A1 & !A0 & IOW)) & !HAK & !RESET;	/* Flip-flop: Set by write to port 0, reset by HAK */
+MEMW = !IOM & WR & SV;
+MEMW.oe = HAK & !RESET;
+MEMR = !IOM & RD;
+MEMR.oe = HAK & !RESET;
+IOW = IOM & WR & SV;
+IOW.oe = HAK & !RESET;
+IOR = IOM & RD;
+IOR.oe = HAK & !RESET;

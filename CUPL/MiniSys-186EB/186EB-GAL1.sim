@@ -1,0 +1,75 @@
+%SIGNAL
+PIN   2 = !BKPRT 
+PIN  15 = !BKWR 
+PIN   8 = !DEN 
+PIN   9 =  DTR 
+PIN  11 =  HLDA 
+PIN  12 =  IO 
+PIN  19 = !IOR 
+PIN  18 = !IOW 
+PIN  14 = !M1 
+PIN  17 = !MEMR 
+PIN  16 = !MEMW 
+PIN   3 = !RD 
+PIN   5 =  S0 
+PIN   6 =  S1 
+PIN   7 =  S2 
+PIN   1 = !WP 
+PIN   4 = !WR 
+PIN  13 = !oHLDA 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+BKWR =>
+    !BKPRT & !WR
+
+IO =>
+    S0 & !S1 & !S2
+  # !S0 & S1 & !S2
+
+IOR =>
+    !RD & S0 & !S1 & !S2
+
+IOR.oe  =>
+    !HLDA
+
+IOW =>
+    !S0 & S1 & !S2 & WP & !WR
+
+IOW.oe  =>
+    !HLDA
+
+M1 =>
+    !S0 & !S1 & S2
+
+M1.oe  =>
+    !HLDA
+
+MEMR =>
+    !RD & S0 & !S1 & S2
+
+MEMR.oe  =>
+    !HLDA
+
+MEMW =>
+    !S0 & S1 & S2 & WP & !WR
+
+MEMW.oe  =>
+    !HLDA
+
+oHLDA =>
+    HLDA
+
+BKWR.oe  =>
+    1 
+
+IO.oe  =>
+    1 
+
+oHLDA.oe  =>
+    1 
+
+%END

@@ -1,0 +1,36 @@
+Name     8MB-SRAM ;
+PartNo   8M ;
+Date     3/3/2019 ;
+Revision 01 ;
+Designer Alex ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g16v8 ;
+
+PIN  1 = A23;
+PIN  2 = A0;
+PIN  3 = !BHE;
+PIN  4 = !MOVL;
+PIN  5 = !MEMR;
+PIN  6 = !MEMW;
+PIN  7 = UPPER;
+PIN 11 = SI;
+
+PIN 12 = SEL;
+PIN 13 = !BRDSEL;
+PIN 14 = !WR;
+PIN 15 = !RD;
+PIN 16 = !WEH;
+PIN 17 = !WEL;
+PIN 18 = !OEH;
+PIN 19 = !OEL;
+
+SEL = (SI # (A0 & MEMR) # (MEMW & BHE & !A0)) & !((!A0 & MEMR) # (MEMW & !BHE));	// Flip-flop
+BRDSEL = (UPPER $ A23) & !MOVL;
+WR = WEH # WEL;
+RD = BRDSEL & MEMR;
+WEH = BRDSEL & MEMW & (A0 # BHE);
+WEL = BRDSEL & MEMW & !A0;
+OEH = BRDSEL & MEMR;
+OEL = BRDSEL & MEMR;

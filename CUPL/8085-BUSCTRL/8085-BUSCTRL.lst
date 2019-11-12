@@ -1,0 +1,224 @@
+LISTING FOR LOGIC DESCRIPTION FILE: 8085-BUSCTRL.pld                 Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Apr 30 19:06:41 2019
+
+  1:Name     8085-BUSCTRL ;
+  2:PartNo   8085 ;
+  3:Date     12/13/2018 ;
+  4:Revision 01 ;
+  5:Designer Alex ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   f1508ispplcc84 ;
+ 10:
+ 11:/* CheapBus 8085 CPU board bus controller with paged MMU */
+ 12:
+ 13:property atmel { logic_doubling = on };
+ 14:property atmel { jtag = on };
+ 15:property atmel { tdi_pullup = on };
+ 16:property atmel { tms_pullup = on };
+ 17:property atmel { open_collector = RFSH };
+ 18:
+ 19:PIN  8 = MD12;  // D12 line from SRAM
+
+ 20:PIN  9 = MD11;  // D11 line from SRAM
+
+ 21:PIN  6 = MD10;  // D10 line from SRAM
+
+ 22:PIN  4 = MD9;           // D9 line from SRAM
+
+ 23:PIN  5 = MD8;           // D8 line from SRAM
+
+ 24:PIN 52 = MD7;           // D7 line from SRAM
+
+ 25:PIN 51 = MD6;           // D6 line from SRAM
+
+ 26:PIN 50 = MD5;           // D5 line from SRAM
+
+ 27:PIN 49 = MD4;           // D4 line from SRAM
+
+ 28:PIN 48 = MD3;           // D3 line from SRAM
+
+ 29:PIN 46 = MD2;           // D2 line from SRAM
+
+ 30:PIN 45 = MD1;           // D1 line from SRAM
+
+ 31:PIN 44 = MD0;           // D0 line from SRAM
+
+ 32:PIN 12 = MA6;           // A6 line to SRAM
+
+ 33:PIN 10 = MA5;           // A5 line to SRAM
+
+ 34:PIN 11 = MA4;           // A4 line to SRAM
+
+ 35:PIN 25 = MA3;           // A3 line to SRAM
+
+ 36:PIN 24 = MA2;           // A2 line to SRAM
+
+ 37:PIN 22 = MA1;           // A1 line to SRAM
+
+ 38:PIN 20 = MA0;           // A0 line to SRAM
+
+ 39:PIN 58 = !MOE;  // OE to SRAM
+
+ 40:PIN 39 = !MWE;  // WE to SRAM
+
+ 41:PIN 64 = AD7;           // AD7 line from CPU
+
+ 42:PIN 67 = AD6;           // AD6 line from CPU
+
+ 43:PIN 65 = AD5;           // AD5 line from CPU
+
+ 44:PIN 57 = AD4;           // AD4 line from CPU
+
+ 45:PIN 63 = AD3;           // AD3 line from CPU
+
+ 46:PIN 56 = AD2;           // AD2 line from CPU
+
+ 47:PIN 70 = AD1;           // AD1 line from CPU
+
+ 48:PIN 73 = AD0;           // AD0 line from CPU
+
+ 49:PIN 74 = AI15;  // A15 line from CPU
+
+ 50:PIN 75 = AI14;  // A14 line from CPU
+
+ 51:PIN 77 = AI13;  // A13 line from CPU
+
+ 52:PIN 79 = AI12;  // A12 line from CPU
+
+ 53:PIN 27 = AO23;  // A23 line to bus
+
+
+LISTING FOR LOGIC DESCRIPTION FILE: 8085-BUSCTRL.pld                 Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Apr 30 19:06:41 2019
+
+ 54:PIN 28 = AO22;  // A22 line to bus
+
+ 55:PIN 34 = AO21;  // A21 line to bus
+
+ 56:PIN 29 = AO20;  // A20 line to bus
+
+ 57:PIN 31 = AO19;  // A19 line to bus
+
+ 58:PIN 36 = AO18;  // A18 line to bus
+
+ 59:PIN 33 = AO17;  // A17 line to bus
+
+ 60:PIN 35 = AO16;  // A16 line to bus
+
+ 61:PIN 16 = AO15;  // A15 line to bus
+
+ 62:PIN 21 = AO14;  // A14 line to bus
+
+ 63:PIN 17 = AO13;  // A13 line to bus
+
+ 64:PIN 18 = AO12;  // A12 line to bus
+
+ 65:PIN 61 = IOW;           // IO write to bus      /* IOW, IOR, MEMR, and MEMW don't get tristated if they're set to invert here (why?) */
+
+ 66:PIN 60 = IOR;           // IO read to bus
+
+ 67:PIN 15 = MEMW;  // Memory write to bus
+
+ 68:PIN 41 = MEMR;  // Memory read to bus
+
+ 69:PIN 76 = !RD;           // RD signal from CPU
+
+ 70:PIN 55 = !WR;           // WR signal from CPU
+
+ 71:PIN 54 = IOM;           // IO/M from CPU
+
+ 72:PIN 68 = S0;            // S0 from CPU
+
+ 73:PIN 69 = S1;            // S1 from CPU
+
+ 74:PIN 83 = ALE;           // ALE from CPU
+
+ 75:PIN  1 = RESET; // Reset from CPU
+
+ 76:PIN 30 = M1;            // M1 to bus
+
+ 77:PIN 84 = HLDA;  // HLDA from CPU
+
+ 78:PIN 37 = !RFSH; // Refresh signal to bus (CPU halted)
+
+ 79:PIN 40 = READY; // Ready signal to CPU
+
+ 80:PIN 80 = !IOWT; // IO wait signal from bus
+
+ 81:PIN 81 = !MWT;  // Memory wait from bus
+
+ 82:PIN  2 = !INTA; // INTA from CPU
+
+ 83:
+ 84:PINNODE  0  = MM;       /* MMU enabled */
+ 85:PINNODE [0..0] = [LA7..0];      /* Latched address from AD bus */
+ 86:PINNODE [0..0] = [LMA3..0];     /* Latched page address */
+ 87:PINNODE  0  = MMUWR;    /* Write cycle to page register */
+ 88:PINNODE  0  = DLTCHWR;  /* Write to high data bits latch */
+ 89:PINNODE  0  = ALTCHWR;  /* Write to page address latch */
+ 90:PINNODE  0  = CFGWR;    /* Write to config port */
+ 91:
+ 92:/* Latch low address from AD lines */
+ 93:[LA7..0].d = [AD7..0];
+ 94:[LA7..0].ck = !ALE;
+ 95:
+ 96:/* Bus control signals */
+ 97:IOW = !(IOM & WR);      /* IO write signal to the bus */
+ 98:IOW.oe = !HLDA; /* Tristate during HLDA */
+ 99:IOR = !(IOM & RD);      /* IO read signal to the bus */
+100:IOR.oe = !HLDA;
+101:MEMW = !(!IOM & WR & !(MM & MD12));     /* Memory write, MD12 = write protect */
+102:MEMW.oe = !HLDA;
+103:MEMR = !(!IOM & RD);    /* Memory read */
+104:MEMR.oe = !HLDA;
+105:M1 = !IOM & S1 & S0;    /* Opcode fetch status */
+106:M1.oe = !HLDA;
+107:READY = !IOWT & !MWT;   /* Lump IO and memory into one wait request */
+
+LISTING FOR LOGIC DESCRIPTION FILE: 8085-BUSCTRL.pld                 Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Apr 30 19:06:41 2019
+
+108:RFSH.d = !S0 & !S1;     /* HALT status */
+109:RFSH.ck = !ALE;
+110:
+111:/* MMU equations */
+112:MMUWR.d = IOM & !S1 & S0 & !AD7 & AD6 & !AD5 & !AD4 & !AD3 & !AD2 & AD1 & AD0;  /* IO write status, port 43h */
+113:MMUWR.ck = !ALE;        /* Latch status on ALE falling edge */
+114:CFGWR = IOM & WR & !LA7 & LA6 & !LA5 & !LA4 & !LA3 & !LA2 & !LA1 & !LA0;        /* IO write to 40h (control port) */
+115:MM.d = AD7;             /* Data bit 7 = MMU enable */
+116:MM.ck = !CFGWR;
+117:MM.ar = RESET;  /* Disable MMU on reset */
+118:[MA6..4].d = [AD2..0];  /* Latch MA5 and MA4 (config select) from control port */
+119:[MA6..4].ck = !CFGWR;
+120:DLTCHWR = IOM & WR & !LA7 & LA6 & !LA5 & !LA4 & !LA3 & !LA2 & LA1 & !LA0;       /* IO write to 42h (high data bits) */
+121:[MD12..8].d = [AD4..0];
+122:[MD12..8].ck = !DLTCHWR;
+123:ALTCHWR = IOM & WR & !LA7 & LA6 & !LA5 & !LA4 & !LA3 & !LA2 & !LA1 & LA0;       /* IO write to 41h (page address) */
+124:[LMA3..0].d = [AD3..0];
+125:[LMA3..0].ck = !ALTCHWR;
+126:[MD7..0] = [AD7..0];            /* Low SRAM bits come directly from data bus */
+127:[MD12..0].oe = MMUWR;   /* IO cycle to 43h (low data bits) */
+128:MWE = MMUWR & WR;               /* IO write to 43h (writes data to SRAM) */
+129:MOE = !MMUWR;                   /* Output when not inputting */
+130:[MA3..0] = ([AI15..12] & !MMUWR) # ([LMA3..0] & MMUWR); /* SRAM address from CPU address lines unless we're writing to it */
+131:[AO23..16] = ([MD11..4] & MM & !IOM);   /* A23-16 zero when MMU not enabled or during IO cycle */
+132:[AO15..12] = (([MD3..0] & MM) # ([AI15..12] & !MM)) & !IOM;     /* A15-12 from CPU if MMU disabled, or zero during IO cycle */
+133:[AO23..12].oe = !HLDA;  /* Don't drive address bus during HLDA */
+134:
+
+
+

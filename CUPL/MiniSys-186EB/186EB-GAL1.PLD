@@ -1,0 +1,46 @@
+Name     186EB-GAL1 ;
+PartNo   186-01 ;
+Date     9/27/2019 ;
+Revision 01 ;
+Designer Alex ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g16v8 ;
+
+/* *************** INPUT PINS *********************/
+PIN 1   =  !WP                    ; /* Write Protect                   */ 
+PIN 2   =  !BKPRT                 ; /* Bank I/O Port                   */ 
+PIN 3   =  !RD                    ; /* CPU Read                        */ 
+PIN 4   =  !WR                    ; /* CPU Write                       */ 
+PIN 5   =  S0                     ; /* Bus Status 0                    */ 
+PIN 6   =  S1                     ; /* Bus Status 1                    */ 
+PIN 7   =  S2                     ; /* Bus Status 2                    */
+PIN 8   =  !DEN                   ; /* DEN from CPU                    */
+PIN 9   =  DTR                    ; /* DTR from CPU                    */ 
+PIN 11  =  HLDA                   ; /* Hold Acknowledge                */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN 19  =  !IOR                   ; /* IO Read                         */ 
+PIN 18  =  !IOW                   ; /* IO Write                        */ 
+PIN 17  =  !MEMR                  ; /* Memory Read                     */ 
+PIN 16  =  !MEMW                  ; /* Memory Write                    */ 
+PIN 15  =  !BKWR                  ; /* Bank Write                      */ 
+PIN 14  =  !M1                    ; /* M1 Cycle                        */
+PIN 13  =  !oHLDA                 ; /* Inverted HLDA to bus            */
+PIN 12  =  IO                     ; /* Bus cycle is IO                 */
+
+/* ************** EQUATIONS ***********************/
+IOR = !S2 & !S1 & S0 & RD;
+IOR.OE = !HLDA;
+IOW = !WP & !S2 & S1 & !S0 & WR;
+IOW.OE = !HLDA;
+MEMR = S2 & !S1 & S0 & RD;
+MEMR.OE = !HLDA;
+MEMW = !WP & S2 & S1 & !S0 & WR;
+MEMW.OE = !HLDA;
+BKWR = BKPRT & WR;
+M1 = S2 & !S1 & !S0;
+M1.OE = !HLDA;
+oHLDA = HLDA;
+IO = !S2 & (S1 $ S0);

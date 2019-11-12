@@ -1,0 +1,48 @@
+%SIGNAL
+PIN   4 =  A0 
+PIN   5 = !BHE 
+PIN   6 = !DEN 
+PIN  18 = !HCE 
+PIN   9 = !HOLD 
+PIN   7 = !INT 
+PIN  11 =  IO 
+PIN   3 = !IO16 
+PIN   1 = !IOWT 
+PIN  19 = !LCE 
+PIN   2 = !MWT 
+PIN   8 = !NMI 
+PIN  13 =  READY 
+PIN  17 = !XCE 
+PIN  14 =  oHOLD 
+PIN  16 =  oINT 
+PIN  15 =  oNMI 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+HCE =>
+    !DEN & !IO
+  # !A0 & !DEN
+
+LCE =>
+    !DEN & !IO
+  # !A0 & !DEN
+
+READY =>
+    IOWT & MWT
+
+XCE =>
+    A0 & !DEN & IO
+
+oHOLD =>
+    !HOLD
+
+oINT =>
+    !INT
+
+oNMI =>
+    !NMI
+
+%END

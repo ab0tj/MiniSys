@@ -1,0 +1,43 @@
+Name     MiniSys-PPR ;
+PartNo   05 ;
+Date     2/23/2019 ;
+Revision 01 ;
+Designer Engineer ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   p22v10lcc ;
+
+PIN 2  = !HI;
+PIN 3  = LO;
+PIN 4  = A3;
+PIN 5  = A2;
+PIN 6  = A1;
+PIN 7  = A0;
+PIN 9  = AEN;
+PIN 10 = !IOR;
+PIN 11 = !IOW;
+PIN 12 = INT;
+PIN 13 = !INTA;
+
+PIN 17 = !PIT_CS;
+PIN 18 = RTC_AS;
+PIN 19 = !RTC_CS;
+PIN 20 = !PIC_CS;
+PIN 21 = !STS;
+PIN 23 = !WR;
+PIN 24 = !RD;
+PIN 25 = DIR;
+PIN 26 = !bINT;
+
+
+PIT_CS	= AEN & HI & LO & A3 & !A2;				/* BASE + 8 THRU 11 */
+RTC_AS	= AEN & HI & LO & A3 & A2 & !A1 & A0 & IOW;	/* BASE + 13 WRITE */
+RTC_CS	= AEN & HI & LO & A3 & A2 & !A1 & !A0;		/* BASE + 12 */
+PIC_CS	= AEN & HI & LO & A3 & A2 & A1;			/* BASE + 14 AND 15 */
+STS	= AEN & HI & LO & !A3 & A2 & A1 & A0 & IOR;	/* BASE + 7 READ */
+WR	= IOW & !(A3 & A2 & !A1 & A0);			/* DON'T STROBE WR DURING RTC_AS */
+RD	= IOR;
+DIR	= (AEN & HI & LO & A3 & IOR) # INTA;
+bINT	= INT;
+bINT.OE = INT;
