@@ -97,7 +97,7 @@ namespace Interface
     uint8_t SystemBus::GetDataVal()
     {
         uint8_t val = AD0->Read();
-        //val = AD0->Read();
+        val = AD0->Read();
         val |= AD1->Read() << 1;
         val |= AD2->Read() << 2;
         val |= AD3->Read() << 3;
