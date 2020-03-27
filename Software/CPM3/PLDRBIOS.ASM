@@ -12,14 +12,14 @@ NBYTES  EQU	128			;(128 byte sectors)
 	; MiniSys Equates
 	shm$base equ 0fff0h
 	shm$cmd equ shm$base
-	shm$data equ shm$base + 1
-	shm$track equ shm$base + 3
-	shm$sect equ shm$base + 5
-	shm$dma equ shm$base + 7
-	shm$drive equ shm$base + 9
+	shm$param equ shm$base + 1
+	shm$data equ shm$base + 2
+	shm$track equ shm$base + 2
+	shm$sect equ shm$base + 4
+	shm$dma equ shm$base + 6
 	cmd$readsec equ 0
 	cmd$writesec equ 1
-	cmd$chkdisk equ 2
+	cmd$seldisk equ 2
 
 
 	; INCLUDE CP/M 3.0 DISK DEFINITION MACROS:
@@ -125,26 +125,25 @@ HOME:	LXI	B,0			; HOME SELECTED DRIVE -- TREAT AS SETTRK(0):
 SETTRK:					; ROUTINE SETS TRACK TO ACCESS ON NEXT READ
 	mov l,c
 	mov h,b
-	shld shm$track		; save in memory for later
+	shld track			; save in memory for later
 	RET
 	
 SETSEC:					; ROUTINE SETS SECTOR TO ACCESS ON NEXT READ
 	mov l,c
 	mvi h,0				; Minisys is capable of 16 bit sector- but is cp/m?
-	shld shm$sect		; save in memory to be used later
+	shld sector			; save in memory to be used later
 	ret
 
-SETDMA:					; ROUTINE SETS DISK MEMORY ADDRESS FOR READ
+SETDMA:					; ROUTINE SETS DISK MEMORY ADDRESS FOR NEXT READ
 	mov	l,c	;low order address
 	mov	h,b	;high order address
-	shld	shm$dma	;save the address
+	shld dma ;save the address
 	ret
 
 					;Arrive here with [BC] = Sec #,  [DE] Translation table address.
 SECTRN:
 	mov h,b
 	mov l,c				; don't translate as it doesn't help us here
-	inx h				; just offset by one
 	ret					;with value in HL
 
 GETDRV:	LXI	H,@DTBL			; RETURN ADDRESS OF DISK DRIVE TABLE:
@@ -164,22 +163,36 @@ WBOOT:	RET				; WARM BOOT IS NOT USED IN LOADER BIOS
 					; ROUTINE DOES COLD BOOT INITIALIZATION 
 
 BOOT:
-	xra a
-	sta shm$drive	; select A: drive
+	; don't need to do anything here
 	RET
 
 read:	;perform read operation
+	xra a
+	sta shm$param
+	lhld track
+	shld shm$track
+	lhld sector
+	shld shm$sect
+	lhld dma
+	shld shm$dma
+	lxi h,0
+	shld shm$dma + 2
 	mvi a,cmd$readsec
+	; (fall through to dopistuff)
+
+dopistuff:
 	sta shm$cmd
-	out 0		; by this point we should have already set params, so do the i/o
-waitio$w:
+	out 0
+waitforpi:
 	in 0
 	ani 4
-	jnz waitio$w
-	lda shm$data
+	jnz waitforpi
+	lda shm$cmd
 	ret
 
-
+track: ds 2
+sector: ds 2
+dma: ds 2
 
                	; DISK DRIVE TABLE:
 @DTBL:	DW	DPH0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: MS-PIBRD.pld                     Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Feb 22 22:29:21 2019
+Created Fri Dec 13 10:53:33 2019
 
   1:Name     MS-PiBrd ;
   2:PartNo   3.14 ;
@@ -62,4 +62,4 @@ Created Fri Feb 22 22:29:21 2019
 
 
 Jedec Fuse Checksum       (88fa)
-Jedec Transmit Checksum   (c569)
+Jedec Transmit Checksum   (c565)

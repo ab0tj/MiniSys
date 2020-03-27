@@ -2,6 +2,7 @@
 #define INC_BUS_H
 
 #include <cstdint>
+#include "pins.h"
 
 #define MEM     0
 #define IO      1
@@ -9,63 +10,24 @@
 #define HIGH    1
 #define INPUT   0
 #define OUTPUT  1
+#define FALLING 1
+#define RISING  2
 
-namespace Interface
+namespace Bus
 {
-    class Pin
-    {
-        private:
-            int pinNum;
-            bool activeLow;
-
-        public:
-            Pin(int pin, int pinMode, int pullUpDn, bool isActiveLow);
-            bool Read();
-            void Write(bool val);
-            void Pulse();
-            void SetMode(int mode);
-    };
-
-    class SystemBus
-    {
-        private:
-            Pin* AD0;
-            Pin* AD1;
-            Pin* AD2;
-            Pin* AD3;
-            Pin* AD4;
-            Pin* AD5;
-            Pin* AD6;
-            Pin* AD7;
-            Pin* ALE_X;
-            Pin* ALE_H;
-            Pin* ALE_L;
-            Pin* PI_REQ;
-            Pin* SV;
-            Pin* WR;
-            Pin* RD;
-            Pin* IOM;
-            Pin* HRQ;
-            Pin* HAK;
-            Pin* INT;
-            Pin* RFSH;
-            Pin* CON_R;
-            Pin* CON_W;
-            Pin* CON_SO;
-            void SetAddr(uint32_t addr);
-            void SetDataDir(int dir);
-            void SetDataVal(uint8_t val);
-            uint8_t GetDataVal();
-
-        public:
-            void Init();
-            uint8_t Read(int iom, uint32_t addr);
-            void Write(int iom, uint32_t addr, uint8_t val);
-            void Take();
-            void Give();
-            char ConsoleRead();
-            void ConsoleWrite(char c);
-    };
+    void Init();
+    uint8_t Read(int iom, uint32_t addr);
+    inline uint16_t Read16(int iom, uint32_t addr) { return Read(iom, addr) + (Read(iom, addr + 1) << 8); }
+    inline uint32_t Read32(int iom, uint32_t addr) { return Read(iom, addr) + (Read(iom, addr + 1) << 8) + (Read(iom, addr + 2) << 16) + (Read(iom, addr + 3) << 24); }
+    void Write(int iom, uint32_t addr, uint8_t val);
+    void Take();
+    void Give();
+    void Activate();
+    void Deactivate();
+    char ConsoleRead();
+    void ConsoleWrite(char c);
+    bool IsRunning();
+    void SetupInt(int pin, int edgeType, void (*function)(void));
 }
 
 #endif

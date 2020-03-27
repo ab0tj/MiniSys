@@ -5,7 +5,6 @@
 #include "bus.h"
 
 void INTHandler(int);
-Interface::SystemBus* Bus;
 
 #define MEMSIZE	2048
 
@@ -16,15 +15,15 @@ int main(void)
 	uint8_t testVal[65536];
 	uint8_t testRes;
 	uint32_t memBytes = MEMSIZE * 1024;
-	Bus = new Interface::SystemBus();
 
 	srand(time(NULL));
 
 	signal(SIGINT, INTHandler);
-	Bus->Init();
+	Bus::Init();
 	/* initI2C();
 	setPowerState(1); */
-	Bus->Take();
+	Bus::Activate();
+	Bus::Take();
 
 	printf("MiniSys Memtest: Testing 0-%XH (%dKB)\n\n", memBytes, MEMSIZE);
 
@@ -39,12 +38,12 @@ int main(void)
 
 		for (addr = 0; addr < 65536; addr++)
 		{
-			Bus->Write(MEM, seg + addr, testVal[addr]);
+			Bus::Write(MEM, seg + addr, testVal[addr]);
 		}
 
 		for (addr = 0; addr < 65536; addr++)
 		{
-			testRes = Bus->Read(MEM, seg + addr);
+			testRes = Bus::Read(MEM, seg + addr);
 			if (testRes != testVal[addr])
 			{
 				printf("Error at %06X: Expected %02X, got %02X\n", seg + addr, testVal[addr], testRes);
@@ -64,6 +63,6 @@ int main(void)
 
 void INTHandler(int sig)
 {
-    Bus->Init();
+    Bus::Init();
     exit(0);
 }

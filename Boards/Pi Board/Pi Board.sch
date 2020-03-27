@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Pi-Board-rescue:CheapBusTX24-RA-SamacSys_Parts J1
+L SamacSys_Parts:CheapBusTX24-RA J1
 U 1 1 5C010E5B
 P 1050 1050
 F 0 "J1" H 1550 1315 50  0000 C CNN
@@ -950,33 +950,19 @@ Wire Wire Line
 Text Label 1000 1050 2    50   ~ 0
 GND
 Wire Wire Line
-	1050 1250 1050 1150
-Wire Wire Line
-	1050 1150 1050 1050
-Connection ~ 1050 1150
-Connection ~ 1050 1050
-Wire Wire Line
 	2050 1050 2100 1050
 Text Label 2100 1050 0    50   ~ 0
 GND
 Wire Wire Line
 	2050 1150 2050 1050
-Connection ~ 2050 1050
 Wire Wire Line
 	1050 6950 1000 6950
 Text Label 1000 6950 2    50   ~ 0
 GND
 Wire Wire Line
 	1050 6850 1050 6950
-Connection ~ 1050 6950
-Wire Wire Line
-	2050 6750 2050 6850
-Wire Wire Line
-	2050 6850 2050 6950
-Connection ~ 2050 6850
 Wire Wire Line
 	2050 6950 2100 6950
-Connection ~ 2050 6950
 Text Label 2100 6950 0    50   ~ 0
 GND
 Wire Wire Line
@@ -1098,7 +1084,6 @@ Text Label 1000 3950 2    50   ~ 0
 +5V
 Wire Wire Line
 	1050 4050 1050 3950
-Connection ~ 1050 3950
 Wire Wire Line
 	1050 4150 1000 4150
 Text Label 1000 4150 2    50   ~ 0
@@ -1221,13 +1206,7 @@ Wire Wire Line
 Text Label 2100 2550 0    50   ~ 0
 ~MEMR
 Wire Wire Line
-	2050 4050 2050 3950
-Wire Wire Line
-	2050 3950 2050 3850
-Connection ~ 2050 3950
-Wire Wire Line
 	2050 3850 2100 3850
-Connection ~ 2050 3850
 Text Label 2100 3850 0    50   ~ 0
 +5V
 Wire Wire Line
@@ -1643,11 +1622,11 @@ Text Label 10800 2950 0    50   ~ 0
 Text Label 9100 2950 2    50   ~ 0
 pPI_REQ
 $Comp
-L Pi-Board-rescue:22V10-PLCC-22v10 U14
+L 22v10:22V10-PLCC U14
 U 1 1 5F18948D
 P 11100 5300
-F 0 "U14" H 11100 6198 60  0000 C CNN
-F 1 "22V10-PLCC" H 11100 6092 60  0000 C CNN
+F 0 "U14" H 11100 5350 60  0000 C CNN
+F 1 "22V10-PLCC" H 11100 5250 60  0000 C CNN
 F 2 "Sockets:PLCC28" H 11100 5300 60  0001 C CNN
 F 3 "" H 11100 5300 60  0000 C CNN
 	1    11100 5300
@@ -2883,7 +2862,7 @@ L Connector_Generic:Conn_01x01 J8
 U 1 1 5C042748
 P 13700 950
 F 0 "J8" H 13780 992 50  0000 L CNN
-F 1 "Conn_01x01" H 13780 901 50  0000 L CNN
+F 1 "Conn_01x01" H 13780 901 50  0001 L CNN
 F 2 "Mounting_Holes:MountingHole_2.7mm_Pad_Via" H 13700 950 50  0001 C CNN
 F 3 "~" H 13700 950 50  0001 C CNN
 	1    13700 950 
@@ -2894,7 +2873,7 @@ L Connector_Generic:Conn_01x01 J9
 U 1 1 5C0427D2
 P 13700 1100
 F 0 "J9" H 13780 1142 50  0000 L CNN
-F 1 "Conn_01x01" H 13780 1051 50  0000 L CNN
+F 1 "Conn_01x01" H 13780 1051 50  0001 L CNN
 F 2 "Mounting_Holes:MountingHole_2.7mm_Pad_Via" H 13700 1100 50  0001 C CNN
 F 3 "~" H 13700 1100 50  0001 C CNN
 	1    13700 1100
@@ -3016,7 +2995,6 @@ F 3 "" H 1650 7300 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	1650 7250 1650 7300
-NoConn ~ 1450 7250
 Wire Wire Line
 	11050 8350 11050 8400
 Text Notes 8300 4100 0    50   ~ 0
@@ -3029,4 +3007,63 @@ Wire Wire Line
 	10750 1350 10850 1350
 Text Label 10850 1350 0    50   ~ 0
 SV
+Wire Wire Line
+	1050 1050 1050 1250
+Wire Wire Line
+	2050 6750 2050 6950
+Wire Wire Line
+	2050 3850 2050 4050
+Wire Wire Line
+	1450 7250 1650 7250
+Connection ~ 1650 7250
+$Comp
+L power:GND #PWR?
+U 1 1 5E01D6C6
+P 11100 6150
+F 0 "#PWR?" H 11100 5900 50  0001 C CNN
+F 1 "GND" H 11105 5977 50  0000 C CNN
+F 2 "" H 11100 6150 50  0001 C CNN
+F 3 "" H 11100 6150 50  0001 C CNN
+	1    11100 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5E01D821
+P 11100 4450
+F 0 "#PWR?" H 11100 4300 50  0001 C CNN
+F 1 "+5V" H 11115 4623 50  0000 C CNN
+F 2 "" H 11100 4450 50  0001 C CNN
+F 3 "" H 11100 4450 50  0001 C CNN
+	1    11100 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11050 4500 11050 4450
+Wire Wire Line
+	11050 4450 11100 4450
+Wire Wire Line
+	11100 4450 11150 4450
+Wire Wire Line
+	11150 4450 11150 4500
+Connection ~ 11100 4450
+Wire Wire Line
+	10950 6100 10950 6150
+Wire Wire Line
+	10950 6150 11050 6150
+Wire Wire Line
+	11100 6150 11150 6150
+Wire Wire Line
+	11250 6150 11250 6100
+Connection ~ 11100 6150
+Wire Wire Line
+	11150 6100 11150 6150
+Connection ~ 11150 6150
+Wire Wire Line
+	11150 6150 11250 6150
+Wire Wire Line
+	11050 6100 11050 6150
+Connection ~ 11050 6150
+Wire Wire Line
+	11050 6150 11100 6150
 $EndSCHEMATC

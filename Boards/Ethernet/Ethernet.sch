@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:Ethernet-cache
-EELAYER 26 0
+EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
@@ -1228,7 +1228,7 @@ Wire Wire Line
 Text Label 7450 3950 0    50   ~ 0
 ~RD
 $Comp
-L 74xx:74HCT244 U5
+L Ethernet-rescue:74HCT244-74xx U5
 U 1 1 5D9BA9AF
 P 9100 5250
 F 0 "U5" H 9100 5050 50  0000 C CNN
@@ -1265,7 +1265,7 @@ Wire Wire Line
 Wire Wire Line
 	9100 6050 9100 6100
 $Comp
-L 74xx:74HCT244 U6
+L Ethernet-rescue:74HCT244-74xx U6
 U 1 1 5D9F525A
 P 10750 5250
 F 0 "U6" H 10750 5050 50  0000 C CNN

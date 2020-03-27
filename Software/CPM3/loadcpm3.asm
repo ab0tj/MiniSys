@@ -1,75 +1,86 @@
-; ***************************************
-; quick and dirty routine that
+; **********************************************
+; quick and dirty routine for minisys that
 ; loads numsects sectors from disk 0
-; starting at t0s2, into memory at 100H
+; starting at t0s1, into memory at 100H
 ; and then jumps there
-; ***************************************
+;
+; assumes 128 byte sectors, 32 spt,
+; drive 0 already selected (minisys boot state)
+; **********************************************
 
 .download bin
 .binfile bootsect.bin
 
+; SHM stuff
 shm_base equ 0fff0h
 shm_cmd equ shm_base
-shm_data equ shm_base + 1
-shm_track equ shm_base + 3
-shm_sect equ shm_base + 5
-shm_dma equ shm_base + 7
+shm_param equ shm_base + 1
+shm_data equ shm_base + 2
+shm_track equ shm_base + 2
+shm_sect equ shm_base + 4
+shm_dma equ shm_base + 6
 cmd_readsec equ 0
 cmd_writesec equ 1
 cmd_seldisk equ 2
 
+; load this many sectors from disk
 numsects equ 27
 
 .org 0h
 
+; set the stack pointer to just below our dma location
 lxi sp, 0ffh
 
+; set up the read
+mvi d, numsects
 xra a
-sta shm_data
-mvi a, cmd_seldisk
-call docmd
+sta shm_param
 
-mvi d, numsects+1
-
-lxi h, 0
-shld shm_track
-inx h
-inx h
-shld shm_sect
-
-lxi h, 0100h
-shld shm_dma
-
+; read the sectors
 readlp:
-dcr d
-jz 0100h
-mvi a, cmd_readsec
-call docmd
-lhld shm_sect
-inx h
-shld shm_sect
-mov a,l
-cpi 33
-jnz next
-mvi l,1
-shld shm_sect
-lhld shm_track
-inx h
-shld shm_track
-next:
-lhld shm_dma
+; set DMA location
+lhld dma
+shld shm_dma
 lxi b, 128
 dad b
-shld shm_dma
-jmp readlp
+shld dma
+lxi h, 0
+shld shm_dma + 2
 
-docmd:
+; read a sector
+lhld track
+shld shm_track
+lhld sector
+shld shm_sect
+inx h
+shld sector
+mov a,l
+cpi 33
+jnz do_read
+; change tracks if we hit the last sector
+lhld track
+inx h
+shld track
+lxi h, 0
+shld sector
+do_read:
+mvi a, cmd_readsec
 sta shm_cmd
 out 0
+; wait for the pi to service the request
 docmd_w:
 in 0
-ani 1
+ani 4
 jnz docmd_w
-ret
+; jump to start if we're done
+dcr d
+jz 0100h
+jmp readlp
 
-ds 128-.    ; fill the rest of the sector with zero's`
+
+; variables
+dma: dw 0100h	; start dma address
+track: dw 0	; start track
+sector: dw 1	; start sector
+
+ds 128-.    ; fill the rest of the sector with zeros

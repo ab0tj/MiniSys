@@ -1,5 +1,5 @@
 
-TITLE	'CPM3 MODULE FOR PI85 DISK CONTROLLER.'
+TITLE	'CPM3 MODULE FOR MINISYS DISK CONTROLLER.'
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;   >>>>>>>>>>>>>>>>>>>>>>> THIS IS FOR A NON BANKED CPM3 SYSTEM <<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -16,11 +16,11 @@ EOL	EQU	1CH			;SD Systems Video Board Clear to end of line
 ; MiniSys Equates
 shm$base equ 0fff0h
 shm$cmd equ shm$base
-shm$data equ shm$base + 1
-shm$track equ shm$base + 3
-shm$sect equ shm$base + 5
-shm$dma equ shm$base + 7
-shm$drive equ shm$base + 9
+shm$param equ shm$base + 1
+shm$data equ shm$base + 2
+shm$track equ shm$base + 2
+shm$sect equ shm$base + 4
+shm$dma equ shm$base + 6
 cmd$readsec equ 0
 cmd$writesec equ 1
 cmd$chkdisk equ 2
@@ -113,7 +113,7 @@ DRIVE$SELECT	equ	27		;Drive Hardware Select (Relative Drive Offset does not work
 hd8mb$dpb:	dpb	128,32,2048,4096,1024,6	;"8mb-hd" cpmtools format
 
 
-hd8mb$trans:	skew	32,0,1		;null sector skew (Note first sector is 1)
+hd8mb$trans:	skew	32,0,0		;null sector skew (Note first sector is 0)
 
 
 
@@ -141,7 +141,7 @@ FLOPPY$LOGIN$3:
 	lxi d,DRIVE$SELECT
 	dad d
 	mov a,m		; get drive number
-	sta shm$data
+	sta shm$param
 
 	mvi a,cmd$chkdisk
 	sta shm$cmd
@@ -151,7 +151,7 @@ login$waitlp:
 	ani 4
 	jnz login$waitlp	; wait until command is processed
 
-	lda shm$data
+	lda shm$cmd
 	ana a		; 0 = no error
 	rz
 
@@ -184,13 +184,15 @@ login$waitlp:
 
 WRITE$SECTOR:
 	lda @RDRV		; relative drive number
-	sta shm$drive
+	sta shm$param
 	lhld @TRK		; track number
 	shld shm$track
 	lhld @SECT		; sector number
 	shld shm$sect
 	lhld @DMA		; DMA address
 	shld shm$dma
+	lxi h, 0
+	shld shm$dma + 2 ; DMA high bits
 
 	mvi a, cmd$writesec
 	sta shm$cmd
@@ -200,7 +202,7 @@ WRITE$SECTOR$LOOP:
 	ani 4
 	jnz WRITE$SECTOR$LOOP
 
-	lda shm$data	; get result
+	lda shm$cmd	; get result
 	RET
 
 
@@ -223,13 +225,15 @@ WRITE$SECTOR$LOOP:
 
 READ$SECTOR:
 	lda @RDRV		; relative drive number
-	sta shm$drive
+	sta shm$param
 	lhld @TRK		; track number
 	shld shm$track
 	lhld @SECT		; sector number
 	shld shm$sect
 	lhld @DMA		; DMA address
 	shld shm$dma
+	lxi h,0
+	shld shm$dma + 2 ; DMA high bits
 
 	mvi a, cmd$readsec
 	sta shm$cmd
@@ -239,7 +243,7 @@ READ$SECTOR$LOOP:
 	ani 4
 	jnz READ$SECTOR$LOOP
 
-	lda shm$data	; get result
+	lda shm$cmd	; get result
 	RET
 
 ;END

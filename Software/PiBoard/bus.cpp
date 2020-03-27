@@ -1,16 +1,151 @@
 #include <wiringPi.h>
 #include "bus.h"
-#include "pins.h"
 
-namespace Interface
+namespace Bus
 {
+    namespace
+    {
+        class Pin
+        {
+            private:
+                int pinNum;
+                bool activeLow;
+                int defaultMode;
+                int defaultPullUpDn;
+
+            public:
+                Pin(int pin, int pinMode, int pullUpDn, bool isActiveLow);
+                bool Read();
+                void Write(bool val);
+                void Pulse();
+                void SetMode(int mode);
+                void Activate();
+                void Deactivate();
+        };
+
+        enum BusPin
+        {
+            AD0,
+            AD1,
+            AD2,
+            AD3,
+            AD4,
+            AD5,
+            AD6,
+            AD7,
+            ALE_X,
+            ALE_H,
+            ALE_L,
+            PI_REQ,
+            SV,
+            WR,
+            RD,
+            IOM,
+            HRQ,
+            HAK,
+            INT,
+            RFSH,
+            CON_R,
+            CON_W,
+            CON_SO,
+            CON_SI
+        };
+
+        Pin* Pins[24];
+
+        void SetDataDir(int dir)
+        {
+            static int lastDir = -1;
+            if (dir == lastDir) return;
+            lastDir = dir;
+
+            Pins[AD0]->SetMode(dir);
+            Pins[AD1]->SetMode(dir);
+            Pins[AD2]->SetMode(dir);
+            Pins[AD3]->SetMode(dir);
+            Pins[AD4]->SetMode(dir);
+            Pins[AD5]->SetMode(dir);
+            Pins[AD6]->SetMode(dir);
+            Pins[AD7]->SetMode(dir);
+        }
+
+        void SetDataVal(uint8_t val)
+        {
+            Pins[AD0]->Write(val & 0x01);
+            Pins[AD1]->Write(val & 0x02);
+            Pins[AD2]->Write(val & 0x04);
+            Pins[AD3]->Write(val & 0x08);
+            Pins[AD4]->Write(val & 0x10);
+            Pins[AD5]->Write(val & 0x20);
+            Pins[AD6]->Write(val & 0x40);
+            Pins[AD7]->Write(val & 0x80);
+        }
+
+        uint8_t GetDataVal()
+        {
+            uint8_t val = Pins[AD0]->Read();
+            val = Pins[AD0]->Read();
+            val |= Pins[AD1]->Read() << 1;
+            val |= Pins[AD2]->Read() << 2;
+            val |= Pins[AD3]->Read() << 3;
+            val |= Pins[AD4]->Read() << 4;
+            val |= Pins[AD5]->Read() << 5;
+            val |= Pins[AD6]->Read() << 6;
+            val |= Pins[AD7]->Read() << 7;
+
+            return val;
+        }
+        
+        void SetAddr(uint32_t addr)
+        {
+            static uint32_t lastAddr;
+
+            SetDataDir(OUTPUT);
+
+            if ((addr & 0xFF) != (lastAddr & 0xFF))
+            {
+                SetDataVal(addr);
+                Pins[ALE_L]->Pulse();
+            }
+
+            if ((addr & 0xFF00) != (lastAddr & 0xFF00))
+            {
+                SetDataVal(addr >> 8);
+                Pins[ALE_H]->Pulse();
+            }
+
+            if ((addr & 0xFF0000) != (lastAddr & 0xFF0000))
+            {
+                SetDataVal(addr >> 16);
+                Pins[ALE_X]->Pulse();
+            }
+
+            SetDataDir(INPUT);
+
+            lastAddr = addr;
+        }
+    }
+
     Pin::Pin(int pin, int mode, int pullUpDn, bool isActiveLow)
     {
         pinNum = pin;
         activeLow = isActiveLow;
-        pinMode(pinNum, mode);
-        pullUpDnControl(pinNum, pullUpDn);
+        defaultMode = mode;
+        defaultPullUpDn = pullUpDn;
+        this->Deactivate();
+    }
+
+    void Pin::Activate()
+    {
+        pinMode(pinNum, defaultMode);
+        pullUpDnControl(pinNum, defaultPullUpDn);
 	    digitalWrite(pinNum, activeLow);
+    }
+
+    void Pin::Deactivate()
+    {
+        pinMode(pinNum, INPUT);
+        pullUpDnControl(pinNum, PUD_OFF);
     }
 
     bool Pin::Read()
@@ -34,166 +169,120 @@ namespace Interface
         digitalWrite(pinNum, activeLow);
     }
 
-    void SystemBus::Init()
+    void Init()
     {
         wiringPiSetupGpio();
 
-        AD0 = new Pin(PIN_AD0, INPUT, PUD_DOWN, false);
-        AD1 = new Pin(PIN_AD1, INPUT, PUD_DOWN, false);
-        AD2 = new Pin(PIN_AD2, INPUT, PUD_DOWN, false);
-        AD3 = new Pin(PIN_AD3, INPUT, PUD_DOWN, false);
-        AD4 = new Pin(PIN_AD4, INPUT, PUD_DOWN, false);
-        AD5 = new Pin(PIN_AD5, INPUT, PUD_DOWN, false);
-        AD6 = new Pin(PIN_AD6, INPUT, PUD_DOWN, false);
-        AD7 = new Pin(PIN_AD7, INPUT, PUD_DOWN, false);
-        ALE_X = new Pin(PIN_ALE_X, OUTPUT, PUD_OFF, false);
-        ALE_H = new Pin(PIN_ALE_H, OUTPUT, PUD_OFF, false);
-        ALE_L = new Pin(PIN_ALE_L, OUTPUT, PUD_OFF, false);
-        PI_REQ = new Pin(PIN_PI_REQ, INPUT, PUD_DOWN, false);
-        SV = new Pin(PIN_SV, OUTPUT, PUD_OFF, false);
-        WR = new Pin(PIN_WR, OUTPUT, PUD_OFF, true);
-        RD = new Pin(PIN_RD, OUTPUT, PUD_OFF, true);
-        IOM = new Pin(PIN_IOM, OUTPUT, PUD_OFF, false);
-        HRQ = new Pin(PIN_HRQ, OUTPUT, PUD_OFF, true);
-        HAK = new Pin(PIN_HAK, INPUT, PUD_OFF, true);
-        CON_SO = new Pin(PIN_CON_SO, INPUT, PUD_DOWN, true);
-        CON_W = new Pin(PIN_CON_W, OUTPUT, PUD_OFF, false);
-        CON_R = new Pin(PIN_CON_R, OUTPUT, PUD_OFF, true);
-        INT = new Pin(PIN_INT, OUTPUT, PUD_OFF, true);
-        RFSH = new Pin(PIN_RFSH, OUTPUT, PUD_OFF, true);
+        Pins[AD0] = new Pin(PIN_AD0, INPUT, PUD_DOWN, false);
+        Pins[AD1] = new Pin(PIN_AD1, INPUT, PUD_DOWN, false);
+        Pins[AD2] = new Pin(PIN_AD2, INPUT, PUD_DOWN, false);
+        Pins[AD3] = new Pin(PIN_AD3, INPUT, PUD_DOWN, false);
+        Pins[AD4] = new Pin(PIN_AD4, INPUT, PUD_DOWN, false);
+        Pins[AD5] = new Pin(PIN_AD5, INPUT, PUD_DOWN, false);
+        Pins[AD6] = new Pin(PIN_AD6, INPUT, PUD_DOWN, false);
+        Pins[AD7] = new Pin(PIN_AD7, INPUT, PUD_DOWN, false);
+        Pins[ALE_X] = new Pin(PIN_ALE_X, OUTPUT, PUD_OFF, false);
+        Pins[ALE_H] = new Pin(PIN_ALE_H, OUTPUT, PUD_OFF, false);
+        Pins[ALE_L] = new Pin(PIN_ALE_L, OUTPUT, PUD_OFF, false);
+        Pins[PI_REQ] = new Pin(PIN_PI_REQ, INPUT, PUD_DOWN, false);
+        Pins[SV] = new Pin(PIN_SV, OUTPUT, PUD_OFF, false);
+        Pins[WR] = new Pin(PIN_WR, OUTPUT, PUD_OFF, true);
+        Pins[RD] = new Pin(PIN_RD, OUTPUT, PUD_OFF, true);
+        Pins[IOM] = new Pin(PIN_IOM, OUTPUT, PUD_OFF, false);
+        Pins[HRQ] = new Pin(PIN_HRQ, OUTPUT, PUD_OFF, true);
+        Pins[HAK] = new Pin(PIN_HAK, INPUT, PUD_OFF, true);
+        Pins[CON_SO] = new Pin(PIN_CON_SO, INPUT, PUD_DOWN, true);
+        Pins[CON_W] = new Pin(PIN_CON_W, OUTPUT, PUD_OFF, false);
+        Pins[CON_R] = new Pin(PIN_CON_R, OUTPUT, PUD_OFF, true);
+        Pins[INT] = new Pin(PIN_INT, OUTPUT, PUD_OFF, true);
+        Pins[RFSH] = new Pin(PIN_RFSH, OUTPUT, PUD_OFF, true);
+    }
+
+    uint8_t Read(int iom, uint32_t addr)
+    {
+        uint8_t val;
+
+        Pins[IOM]->Write(iom);
+        SetAddr(addr);
+        Pins[RD]->Write(true);
+        val = GetDataVal();
+        Pins[RD]->Write(false);
+
+        return val;
+    }
+
+    void Write(int iom, uint32_t addr, uint8_t val)
+    {
+        Pins[IOM]->Write(iom);
+        SetAddr(addr);
+        SetDataDir(OUTPUT);
+        SetDataVal(val);
+        Pins[WR]->Write(true);
+        Pins[SV]->Write(true);
+        Pins[SV]->Write(true);    /* Waste some time... */
+        Pins[SV]->Write(true);
+        Pins[SV]->Write(false);
+        Pins[WR]->Write(false);
+        SetDataDir(INPUT);
+    }
+
+    void Give()
+    {
+        Pins[HRQ]->Write(false);
+    }
+
+    void Take()
+    {
+        Pins[HRQ]->Write(true);	            // Ask for control
+	    while (Pins[HAK]->Read() != true);	// Wait for control
+    }
+
+    void Activate()
+    {
+        for (int i = 0; i < 24; i++)
+        {
+            if (Pins[i]) Pins[i]->Activate();
+        }
 
         SetAddr(0xFFFFFF);  /* Ensure address latches start with a known value */
         SetAddr(0);
     }
 
-    void SystemBus::SetDataDir(int dir)
+    void Deactivate()
     {
-        static int lastDir = -1;
-        if (dir == lastDir) return;
-        lastDir = dir;
-
-        AD0->SetMode(dir);
-        AD1->SetMode(dir);
-        AD2->SetMode(dir);
-        AD3->SetMode(dir);
-        AD4->SetMode(dir);
-        AD5->SetMode(dir);
-        AD6->SetMode(dir);
-        AD7->SetMode(dir);
-    }
-
-    void SystemBus::SetDataVal(uint8_t val)
-    {
-        AD0->Write(val & 0x01);
-        AD1->Write(val & 0x02);
-        AD2->Write(val & 0x04);
-        AD3->Write(val & 0x08);
-        AD4->Write(val & 0x10);
-        AD5->Write(val & 0x20);
-        AD6->Write(val & 0x40);
-        AD7->Write(val & 0x80);
-    }
-
-    uint8_t SystemBus::GetDataVal()
-    {
-        uint8_t val = AD0->Read();
-        val = AD0->Read();
-        val |= AD1->Read() << 1;
-        val |= AD2->Read() << 2;
-        val |= AD3->Read() << 3;
-        val |= AD4->Read() << 4;
-        val |= AD5->Read() << 5;
-        val |= AD6->Read() << 6;
-        val |= AD7->Read() << 7;
-
-	    return val;
-    }
-
-    void SystemBus::SetAddr(uint32_t addr)
-    {
-        static uint32_t lastAddr;
-
-        SetDataDir(OUTPUT);
-
-        if ((addr & 0xFF) != (lastAddr & 0xFF))
+        for (int i = 0; i < 24; i++)
         {
-            SetDataVal(addr);
-            ALE_L->Pulse();
+            if (Pins[i]) Pins[i]->Deactivate();
         }
-
-        if ((addr & 0xFF00) != (lastAddr & 0xFF00))
-        {
-            SetDataVal(addr >> 8);
-            ALE_H->Pulse();
-        }
-
-        if ((addr & 0xFF0000) != (lastAddr & 0xFF0000))
-        {
-            SetDataVal(addr >> 16);
-            ALE_X->Pulse();
-        }
-
-        SetDataDir(INPUT);
-
-        lastAddr = addr;
     }
 
-    uint8_t SystemBus::Read(int iom, uint32_t addr)
+    bool IsRunning()
     {
-        uint8_t val;
-
-        IOM->Write(iom);
-        SetAddr(addr);
-        RD->Write(true);
-        val = GetDataVal();
-        RD->Write(false);
-
-        return val;
+        return !(Pins[HAK]->Read());
     }
 
-    void SystemBus::Write(int iom, uint32_t addr, uint8_t val)
-    {
-        IOM->Write(iom);
-        SetAddr(addr);
-        SetDataDir(OUTPUT);
-        SetDataVal(val);
-        WR->Write(true);
-        SV->Write(true);
-        SV->Write(true);    /* Waste some time... */
-        SV->Write(true);
-        SV->Write(false);
-        WR->Write(false);
-        SetDataDir(INPUT);
-    }
-
-    void SystemBus::Give()
-    {
-        HRQ->Write(false);
-    }
-
-    void SystemBus::Take()
-    {
-        HRQ->Write(true);	            // Ask for control
-	    while (HAK->Read() != true);	// Wait for control
-    }
-
-    char SystemBus::ConsoleRead()
+    char ConsoleRead()
     {
         char c;
 
-        CON_R->Write(true);
+        Pins[CON_R]->Write(true);
         c = GetDataVal();
-        SV->Pulse();
-        CON_R->Write(false);
+        Pins[SV]->Pulse();
+        Pins[CON_R]->Write(false);
 
         return c;
     }
 
-    void SystemBus::ConsoleWrite(char c)
+    void ConsoleWrite(char c)
     {
         SetDataDir(OUTPUT);
         SetDataVal(c);
-        CON_W->Pulse();
+        Pins[CON_W]->Pulse();
         SetDataDir(INPUT);
+    }
+
+    void SetupInt(int pin, int edgeType, void (*function)(void))
+    {
+        wiringPiISR(pin, edgeType, function);
     }
 }

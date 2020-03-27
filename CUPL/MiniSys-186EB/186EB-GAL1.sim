@@ -49,7 +49,7 @@ M1.oe  =>
     !HLDA
 
 MEMR =>
-    !RD & S0 & !S1 & S2
+    !RD & !S1 & S2
 
 MEMR.oe  =>
     !HLDA

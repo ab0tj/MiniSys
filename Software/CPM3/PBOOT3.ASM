@@ -27,7 +27,9 @@ BANKED		EQU	FALSE	;<--------------- NON BANKED VERSION
 ; MiniSys Equates
 shm$base equ 0fff0h
 shm$cmd equ shm$base
-shm$data equ shm$base + 1
+shm$param equ shm$base + 1
+shm$data equ shm$base + 2
+cmd$timw equ 012h
 
 	; SOME MISCELLANEOUS EQUATES:
 BDOS		EQU	5
@@ -175,13 +177,13 @@ RL$1:
 	; ROUTINE GETS TIME FROM PI BOARD
 ?TIME:
 	INR C	; SET TIME IF C=FFh
-	RZ		; Don't bother
+	RZ		; Let's not try to set the Pi's time.
 
 	PUSH H
 	LXI H,@DATE
 	SHLD shm$data
 	POP H
-	MVI A,012H
+	MVI A,cmd$time
 	STA shm$cmd
 	OUT 0
 TIME$WAIT: 
@@ -190,7 +192,7 @@ TIME$WAIT:
     JNZ TIME$WAIT
 	RET
 
-TSET:	; SET TIME FROM SCB
+TSET: RET	; SET TIME FROM SCB
 ;
 ;
 ;
@@ -234,6 +236,6 @@ FCB$NR:	DB	0,0,0
 	; SYSTEM SIGN-ON MESSAGE:
 SIGNON$MSG:
 	DB	CR,LF,LF,'CP/M VERSION 3.0 (NON-BANKED)'
-	DB	CR,LF,'MiniSys BIOS v1.0',CR,LF
+	DB	CR,LF,'MiniSys BIOS v1.1',CR,LF
 	DB	CR,LF,0
 	END

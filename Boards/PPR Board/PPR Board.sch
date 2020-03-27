@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:PPR Board-cache
-EELAYER 26 0
+EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L PPR-Board-rescue:CheapBusTX24-RA-SamacSys_Parts-PPR-Board-rescue J1
+L PPR-Board-rescue:CheapBusTX24-RA-SamacSys_Parts-PPR-Board-rescue-PPR-Board-rescue J1
 U 1 1 5E043769
 P 900 1000
 F 0 "J1" H 1400 1265 50  0000 C CNN
@@ -30,7 +30,7 @@ F 7 "TX24-120R-LT-H1E" H 1750 500 50  0001 L CNN "Manufacturer_Part_Number"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Interface:8259A U6
+L PPR-Board-rescue:8259A-Interface U6
 U 1 1 5E043842
 P 8600 2350
 F 0 "U6" H 8600 2400 50  0000 C CNN
@@ -41,7 +41,7 @@ F 3 "http://pdos.csail.mit.edu/6.828/2005/readings/hardware/8259A.pdf" H 8600 23
 	1    0    0    -1  
 $EndComp
 $Comp
-L dallas-rtc:DS12885Q U10
+L PPR-Board-rescue:DS12885Q-dallas-rtc U10
 U 1 1 5E04395F
 P 13200 2300
 F 0 "U10" H 13200 2350 60  0000 C CNN
@@ -1157,7 +1157,7 @@ Wire Wire Line
 Wire Wire Line
 	6450 4250 6450 4300
 $Comp
-L 74xx:74HCT244 U5
+L PPR-Board-rescue:74HCT244-74xx U5
 U 1 1 5C70E57B
 P 6450 6050
 F 0 "U5" H 6450 5850 50  0000 C CNN
@@ -1381,7 +1381,7 @@ Wire Wire Line
 	8000 8000 8000 8050
 NoConn ~ 8450 8000
 $Comp
-L 22v10:22V10-PLCC U3
+L PPR-Board-rescue:22V10-PLCC-22v10 U3
 U 1 1 5CB0A19B
 P 5300 8600
 F 0 "U3" H 5300 9498 60  0000 C CNN

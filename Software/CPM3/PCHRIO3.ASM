@@ -50,14 +50,12 @@ BAUD$19200	EQU 15		; 19.2K BAUD
 ; MiniSys Equates
 shm$base equ 0fff0h
 shm$cmd equ shm$base
-shm$data equ shm$base + 1
-shm$track equ shm$base + 3
-shm$sect equ shm$base + 5
-shm$dma equ shm$base + 7
-shm$drive equ shm$base + 9
+shm$data equ shm$base + 2
+shm$track equ shm$base + 2
+shm$sect equ shm$base + 4
 cmd$readsec equ 0
 cmd$writesec equ 1
-cmd$chkdisk equ 2
+cmd$seldisk equ 2
 
 	; WILL START OFF IN COMMON MEMORY FOR BANKED OR NON-BANKED SYSTEMS:
 	CSEG
