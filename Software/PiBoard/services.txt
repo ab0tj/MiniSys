@@ -1,0 +1,93 @@
+This document describes the SHM format for each service request.
+The first byte in the SHM block should contain the code for the service you
+want to call, and it will contain the return value (if any) when control is
+passed back to the CPU.
+16 and 32 bit values are stored little-endian order.
+
+0x00 - Read disk sector
+Read a sector from the disk image into system memory.
+Byte 1: Drive number (zero-based)
+Bytes 2-3: Track number (zero-based)
+Bytes 4-5: Sector number (zero-based)
+Bytes 6-9: Memory address
+Return value: 0 for success, 1 for failure
+
+0x01 - Write disk sector
+Write a sector from system memory to the disk image file.
+Byte 1: Drive number (zero-based)
+Bytes 2-3: Track number (zero-based)
+Bytes 4-5: Sector number (zero-based)
+Bytes 6-9: Memory address
+Return value: 0 for success, 1 for failure
+
+0x02 - Check disk
+Check that the specified drive is ready
+Byte 1: Drive number (zero based)
+Return value: 0 for success, 1 for failure
+
+0x03 - Open file
+Open a file from the Pi's filesystem for future read/write operations.
+Byte 1: File number (multiple files can be opened at the same time)
+Bytes 2-5: Memory address where the null-terminated filename is located
+Byte 6: File mode flags
+    bit 0: in (Open for input)
+    bit 1: out (Open for output - can be combined with input)
+    bit 2: binary (Binary mode)
+    bit 3: ate (Set inital position at the end of the file)
+    bit 4: app (Append to the end of an existing file)
+    bit 5: trunc (Replace the file if it already exists)
+Return value: 0 for success, 1 for failure
+
+0x04 - Close file
+Close a file that was opened with the call above.
+Byte 1: File number to close
+Return value: none
+
+0x05 - Read from file
+Read from an open file into memory.
+Byte 1: File number to read from
+Bytes 2-3: Number of bytes to read
+Bytes 4-7: Memory address
+Return value (2 bytes): Number of bytes that were successfully read
+
+0x06 - Write to file
+Write from system memory to an open file.
+Byte 1: File number to write to
+Bytes 2-3: Number of bytes to write
+Bytes 4-7: Memory address
+Return value (2 bytes): Number of bytes that were successfully written
+
+0x07 - Seek file pointer
+Seek to the specified position in an open file.
+Byte 1: File number to seek
+Bytes 2-5: File position (4GB max).
+Return value: 0 for success, 1 for failure
+
+0x10 - Get time (binary)
+0x11 - Get time (BCD)
+0x12 - Get time (CP/M format)
+
+0x20 - Set SHM address
+Set the SHM base address to be used for future service calls
+Bytes 2-5: SHM base address
+Return value: none
+
+0x21 - Set drive parameters
+Set the disk parameters for the specified drive.
+Byte 1: Drive number
+Bytes 2-3: Sector size (bytes)
+Bytes 4-5: Sectors per track
+Return value: 0 for success, 1 for failure
+
+0xFE - Debug print
+Print a value to the monitor window.
+Byte 1: Mode
+    0: Null terminated string at the address in bytes 2-5
+    1: Hex value of bytes 2-5
+    2: Decimal value of bytes 2-5
+    3: ASCII char at byte 2
+Return value: none
+
+0xFF - Break
+Stop execution and return to the monitor
+Return value: none

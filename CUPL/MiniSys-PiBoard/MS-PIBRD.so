@@ -1,0 +1,50 @@
+CSIM(WM): CUPL Simulation Program
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+CREATED Fri Dec 13 10:53:34 2019
+
+LISTING FOR SIMULATION FILE: MS-PIBRD.si
+
+   1: Name     MS-PiBrd;
+   2: PartNo   3.14;
+   3: Date     2/5/2019;
+   4: Revision 01;
+   5: Designer Engineer;
+   6: Company  AB0TJ;
+   7: Assembly None;
+   8: Location ;
+   9: Device   g22v10lcc;
+  10: 
+  11: 
+  12: ORDER: A0, A1, ADDR_MATCH, IOM, !RD, !WR, !CON_R, CON_W, !HAK, !HRQ, !RESET, !CON_IOR, CON_IOW, !IOR, !IOW, !MEMR, !MEMW, PI_REQ, !STS_IOR, !CON_SI, !CON_SO, SV; 
+  13: 
+  14: 
+
+===============================
+        A                      
+        D                      
+        D        !      !      
+        R        CC     S!!    
+        _   !   !OO    PTCC    
+        M   CC  RNN  !!ISOO    
+        A   OO!!E__!!MM__NN    
+        TI!!NNHHSIIIIEERI__    
+      AACORW__AREOOOOMMEOSSS   
+      01HMDRRWKQTRWRWRWQRIOV   
+===============================
+0001: 10111110110HL1111LHHH0
+0002: 10111110111HH1011LHHL0
+0003: 00111110111HL1111LHHL0
+0004: 00111110111HL1111LHHL0
+0005: 00111100111HL1111LHHL0
+0006: 00111100111HL0111LLHL0
+0007: 00111100111HL0111LLHL0
+0008: 00111100111HL0111LLHH1
+0009: 00111110111HL1111LHHH0
+0010: 00111110111HL1111LHHH0
+0011: 00111110111HL1111LHHH0
+0012: 00111110111HL1111LHHH0
+0013: 00111110111HL1111LHHH0
+0014: 00111110111HL1111LHHH0
+0015: 00111110111HL1111LHHH0
+0016: 00111110111HL1111LHHH0

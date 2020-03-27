@@ -1,0 +1,17 @@
+#define SIG_SDA		PA0
+#define SIG_PSON	PA1
+#define SIG_SCL		PA2
+#define SIG_PWROK	PA3
+#define MON_3V3		PA4
+#define MON_5V		PA5
+#define MON_12V		PA6
+#define MON_BAT		PA7
+#define BTN_DEBUG	PB0
+#define BTN_RESET	PB1
+#define SIG_TEMP	PB3
+#define SIG_NMI		PB4
+#define SIG_RESET	PB5
+#define BTN_POWER	PB6
+#define PIN_USI		PINA
+#define DDR_USI		DDRA
+#define PORT_USI	PORTA

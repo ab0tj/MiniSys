@@ -1,0 +1,59 @@
+LISTING FOR LOGIC DESCRIPTION FILE: 186EB-GAL1.pld                   Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Mar 27 09:41:43 2020
+
+  1:Name     186EB-GAL1 ;
+  2:PartNo   186-01 ;
+  3:Date     9/27/2019 ;
+  4:Revision 01 ;
+  5:Designer Alex ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   g16v8 ;
+ 10:
+ 11:/* *************** INPUT PINS *********************/
+ 12:PIN 1   =  !WP                    ; /* Write Protect                   */ 
+ 13:PIN 2   =  !BKPRT                 ; /* Bank I/O Port                   */ 
+ 14:PIN 3   =  !RD                    ; /* CPU Read                        */ 
+ 15:PIN 4   =  !WR                    ; /* CPU Write                       */ 
+ 16:PIN 5   =  S0                     ; /* Bus Status 0                    */ 
+ 17:PIN 6   =  S1                     ; /* Bus Status 1                    */ 
+ 18:PIN 7   =  S2                     ; /* Bus Status 2                    */
+ 19:PIN 8   =  !DEN                   ; /* DEN from CPU                    */
+ 20:PIN 9   =  DTR                    ; /* DTR from CPU                    */ 
+ 21:PIN 11  =  HLDA                   ; /* Hold Acknowledge                */ 
+ 22:
+ 23:/* *************** OUTPUT PINS *********************/
+ 24:PIN 19  =  !IOR                   ; /* IO Read                         */ 
+ 25:PIN 18  =  !IOW                   ; /* IO Write                        */ 
+ 26:PIN 17  =  !MEMR                  ; /* Memory Read                     */ 
+ 27:PIN 16  =  !MEMW                  ; /* Memory Write                    */ 
+ 28:PIN 15  =  !BKWR                  ; /* Bank Write                      */ 
+ 29:PIN 14  =  !M1                    ; /* M1 Cycle                        */
+ 30:PIN 13  =  !oHLDA                 ; /* Inverted HLDA to bus            */
+ 31:PIN 12  =  IO                     ; /* Bus cycle is IO                 */
+ 32:
+ 33:/* ************** EQUATIONS ***********************/
+ 34:IOR = !S2 & !S1 & S0 & RD;
+ 35:IOR.OE = !HLDA;
+ 36:IOW = !WP & !S2 & S1 & !S0 & WR;
+ 37:IOW.OE = !HLDA;
+ 38:MEMR = S2 & !S1 & RD;
+ 39:MEMR.OE = !HLDA;
+ 40:MEMW = !WP & S2 & S1 & !S0 & WR;
+ 41:MEMW.OE = !HLDA;
+ 42:BKWR = BKPRT & WR;
+ 43:M1 = S2 & !S1 & !S0;
+ 44:M1.OE = !HLDA;
+ 45:oHLDA = HLDA;
+ 46:IO = !S2 & (S1 $ S0);
+ 47:
+
+
+
+Jedec Fuse Checksum       (4b2f)
+Jedec Transmit Checksum   (f733)
