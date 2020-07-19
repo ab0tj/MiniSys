@@ -1,0 +1,68 @@
+%SIGNAL
+PIN   5 = !CD0 
+PIN   6 = !CD1 
+PIN  17 =  CKDIV 
+PIN  19 =  CLK 
+PIN   2 =  CRD 
+PIN  15 =  CS0 
+PIN  16 =  CS1 
+PIN   1 =  CWR 
+PIN  12 =  D0 
+PIN  13 =  D1 
+PIN  14 =  D2 
+PIN   9 = !DWR 
+PIN   8 =  FCLK 
+PIN  18 =  ICLK 
+PIN   4 =  RDY 
+PIN   3 = !RST 
+PIN   7 =  SCLK 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CKDIV.d  =>
+    D0
+  # !RST
+
+CLK =>
+    !CKDIV & DWR & FCLK & !RDY
+  # CKDIV & DWR & !RDY & SCLK
+
+CS0.d  =>
+    D1
+  # !RST
+
+CS1.d  =>
+    D2
+  # !RST
+
+D0 =>
+    RDY
+
+D0.oe  =>
+    CRD
+
+D1 =>
+    !CD0
+
+D1.oe  =>
+    CRD
+
+D2 =>
+    !CD1
+
+D2.oe  =>
+    CRD
+
+ICLK =>
+    !CLK
+
+CLK.oe  =>
+    1 
+
+ICLK.oe  =>
+    1 
+
+%END

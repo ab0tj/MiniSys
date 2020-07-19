@@ -1,0 +1,38 @@
+Name     MINISYS-SD-GAL1 ;
+PartNo   SD-01 ;
+Date     7/8/2020 ;
+Revision 01 ;
+Designer Alex ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g16v8 ;
+
+/* *************** INPUT PINS *********************/
+PIN 1   = A0                      ; /*                                 */ 
+PIN 2   = A1                      ; /*                                 */ 
+PIN 3   = A2                      ; /*                                 */ 
+PIN 4   = A3                      ; /*                                 */ 
+PIN 5   = A4                      ; /*                                 */ 
+PIN 6   = !SEL                    ; /*                                 */ 
+PIN 7   = !IOR                    ; /*                                 */ 
+PIN 8   = !IOW                    ; /*                                 */ 
+PIN 9   = AEN                     ; /*                                 */ 
+PIN 11  = AHI                     ; /*                                 */
+PIN 13  = !RST                    ; /*                                 */
+PIN 14  = !ADD10                  ; /*                                 */
+
+/* *************** OUTPUT PINS *********************/
+/* PIN 12  =                      ; /*                                 */
+/*PIN 15  = !CDSEL                ; /*                                 */ 
+PIN 16  = CRD                     ; /*                                 */ 
+PIN 17  = CWR                     ; /*                                 */ 
+PIN 18  = !DRD                    ; /*                                 */ 
+PIN 19  = !DWR                    ; /*                                 */ 
+
+ADSEL = SEL & !A1 & !A2 & !A3 & !A4 & !AHI;
+
+CRD = ADSEL & A0 & IOR;
+CWR = (ADSEL & A0 & IOW) # RST;
+DRD = ADSEL & !A0 & IOR;
+DWR = ADSEL & !A0 & IOW;

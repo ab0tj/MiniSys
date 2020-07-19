@@ -1,0 +1,41 @@
+Name     MINISYS-SD-GAL2 ;
+PartNo   SD-02 ;
+Date     7/8/2020 ;
+Revision 01 ;
+Designer Alex ;
+Company  AB0TJ ;
+Assembly None ;
+Location  ;
+Device   g16v8 ;
+
+/* *************** INPUT PINS *********************/
+PIN 1   = CWR                     ; /*                                 */ 
+PIN 2   = CRD                     ; /*                                 */ 
+PIN 3   = !RST                    ; /*                                 */ 
+PIN 4   = RDY                     ; /*                                 */ 
+PIN 5   = !CD0                    ; /*                                 */ 
+PIN 6   = !CD1                    ; /*                                 */ 
+PIN 7   = SCLK                    ; /*                                 */ 
+PIN 8   = FCLK                    ; /*                                 */ 
+PIN 9   = !DWR                    ; /*                                 */ 
+/* PIN 11  =                         ; /*                                 */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN 12  = D0                      ; /*                                 */ 
+PIN 13  = D1                      ; /*                                 */ 
+PIN 14  = D2                      ; /*                                 */ 
+PIN 15  = CS0                     ; /*                                 */ 
+PIN 16  = CS1                     ; /*                                 */ 
+PIN 17  = CKDIV                   ; /*                                 */ 
+PIN 18  = ICLK                    ; /*                                 */ 
+PIN 19  = CLK                     ; /*                                 */ 
+
+[D0..2].oe = CRD;
+D0 = RDY;
+D1 = CD0;
+D2 = CD1;
+CKDIV.d = D0 # RST;
+CS0.d = D1 # RST;
+CS1.d = D2 # RST;
+ICLK = !CLK;
+CLK = !DWR & ((!RDY & CKDIV & SCLK) # (!RDY & !CKDIV & FCLK));

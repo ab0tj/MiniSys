@@ -1,0 +1,188 @@
+{COMPONENT \\ARMIN\ALEX\PROJECTS\MINISYS\CUPL\MINISYS-SD\MINISYS-SD-GAL1 .SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Fri Jul 10 13:48:04 2020 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P A0 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P A1 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P A2 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P A3 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P A4 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P SEL' {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P IOR' {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P IOW' {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P AEN {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P AHI {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P RST' {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P ADD10' {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P CWR {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P DRD' {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P DWR' {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P CRD {Pt "I/O"}{Lq 0}{Ploc 280 20}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 190 330}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 310}
+   {Pnl 120 290}
+   {Pnl 120 270}
+   {Pnl 120 250}
+   {Pnl 120 230}
+   {Pnl 120 210}
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 260 30}
+
+   {Sd A 1 2 3 4 5 6 7 8 9 11 13 14 17 18 19 16}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 320 250 0}
+   {L 130 300 100 300}
+   {L 130 280 100 280}
+   {L 130 260 100 260}
+   {L 130 240 100 240}
+   {L 130 220 100 220}
+   {L 120 200 100 200}
+   {C 125 200 5}
+   {L 120 180 100 180}
+   {C 125 180 5}
+   {L 120 160 100 160}
+   {C 125 160 5}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 120 100 100 100}
+   {C 125 100 5}
+   {L 120 80 100 80}
+   {C 125 80 5}
+   {L 130 60 100 60}
+   {L 120 40 100 40}
+   {C 125 40 5}
+   {L 120 20 100 20}
+   {C 125 20 5}
+   {L 250 20 280 20}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "A0" 140 300}
+   {T "A1" 140 280}
+   {T "A2" 140 260}
+   {T "A3" 140 240}
+   {T "A4" 140 220}
+   {T "SEL'" 140 200}
+   {T "IOR'" 140 180}
+   {T "IOW'" 140 160}
+   {T "AEN" 140 140}
+   {T "AHI" 140 120}
+   {T "RST'" 140 100}
+   {T "ADD10'" 140 80}
+   {T "CWR" 140 60}
+   {T "DRD'" 140 40}
+   {T "DWR'" 140 20}
+   [Tj "RC"]
+   {T "CRD" 240 20}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "G16V8S" 190 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD \\ARMIN\ALEX\PROJECTS\MINISYS\CUPL\MINISYS-SD\MINISYS-SD-GAL1  190 320}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N A0
+   }
+   {N A1
+   }
+   {N A2
+   }
+   {N A3
+   }
+   {N A4
+   }
+   {N SEL'
+   }
+   {N IOR'
+   }
+   {N IOW'
+   }
+   {N AEN
+   }
+   {N AHI
+   }
+   {N RST'
+   }
+   {N ADD10'
+   }
+   {N CWR
+   }
+   {N DRD'
+   }
+   {N DWR'
+   }
+   {N CRD
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

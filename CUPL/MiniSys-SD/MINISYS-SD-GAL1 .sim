@@ -1,0 +1,40 @@
+%SIGNAL
+PIN   1 =  A0 
+PIN   2 =  A1 
+PIN   3 =  A2 
+PIN   4 =  A3 
+PIN   5 =  A4 
+PIN  14 = !ADD10 
+PIN   9 =  AEN 
+PIN  11 =  AHI 
+PIN  16 =  CRD 
+PIN  17 =  CWR 
+PIN  18 = !DRD 
+PIN  19 = !DWR 
+PIN   7 = !IOR 
+PIN   8 = !IOW 
+PIN  13 = !RST 
+PIN   6 = !SEL 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+ADSEL =>
+    !A1 & !A2 & !A3 & !A4 & !AHI & SEL
+
+CRD =>
+    A0 & !A1 & !A2 & !A3 & !A4 & !AHI & !IOR & !SEL
+
+CWR =>
+    A0 & !A1 & !A2 & !A3 & !A4 & !AHI & !IOW & !SEL
+  # !RST
+
+DRD =>
+    !A0 & !A1 & !A2 & !A3 & !A4 & !AHI & !IOR & !SEL
+
+DWR =>
+    !A0 & !A1 & !A2 & !A3 & !A4 & !AHI & !IOW & !SEL
+
+%END

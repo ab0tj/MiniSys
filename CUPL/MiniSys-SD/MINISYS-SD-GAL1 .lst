@@ -1,0 +1,51 @@
+LISTING FOR LOGIC DESCRIPTION FILE: MINISYS-SD-GAL1 .pld             Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Jul 10 13:48:04 2020
+
+  1:Name     MINISYS-SD-GAL1 ;
+  2:PartNo   SD-01 ;
+  3:Date     7/8/2020 ;
+  4:Revision 01 ;
+  5:Designer Alex ;
+  6:Company  AB0TJ ;
+  7:Assembly None ;
+  8:Location  ;
+  9:Device   g16v8 ;
+ 10:
+ 11:/* *************** INPUT PINS *********************/
+ 12:PIN 1   = A0                      ; /*                                 */ 
+ 13:PIN 2   = A1                      ; /*                                 */ 
+ 14:PIN 3   = A2                      ; /*                                 */ 
+ 15:PIN 4   = A3                      ; /*                                 */ 
+ 16:PIN 5   = A4                      ; /*                                 */ 
+ 17:PIN 6   = !SEL                    ; /*                                 */ 
+ 18:PIN 7   = !IOR                    ; /*                                 */ 
+ 19:PIN 8   = !IOW                    ; /*                                 */ 
+ 20:PIN 9   = AEN                     ; /*                                 */ 
+ 21:PIN 11  = AHI                     ; /*                                 */
+ 22:PIN 13  = !RST                    ; /*                                 */
+ 23:PIN 14  = !ADD10                  ; /*                                 */
+ 24:
+ 25:/* *************** OUTPUT PINS *********************/
+ 26:/* PIN 12  =                      ; /*                                 */
+ 27:/*PIN 15  = !CDSEL                ; /*                                 */ 
+ 28:PIN 16  = CRD                     ; /*                                 */ 
+ 29:PIN 17  = CWR                     ; /*                                 */ 
+ 30:PIN 18  = !DRD                    ; /*                                 */ 
+ 31:PIN 19  = !DWR                    ; /*                                 */ 
+ 32:
+ 33:ADSEL = SEL & !A1 & !A2 & !A3 & !A4 & !AHI;
+ 34:
+ 35:CRD = ADSEL & A0 & IOR;
+ 36:CWR = (ADSEL & A0 & IOW) # RST;
+ 37:DRD = ADSEL & !A0 & IOR;
+ 38:DWR = ADSEL & !A0 & IOW;
+ 39:
+
+
+
+Jedec Fuse Checksum       (1b29)
+Jedec Transmit Checksum   (9ad2)

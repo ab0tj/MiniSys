@@ -1,0 +1,207 @@
+
+*******************************************************************************
+                                MINISYS-SD-GAL2
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          g16v8ms  Library DLIB-h-40-11
+Created         Fri Jul 10 13:51:55 2020
+Name            MINISYS-SD-GAL2 
+Partno          SD-02 
+Revision        01 
+Date            7/8/2020 
+Designer        Alex 
+Company         AB0TJ 
+Assembly        None 
+Location        
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+CKDIV.d  =>
+    D0
+  # RST
+
+CLK =>
+    !CKDIV & !DWR & FCLK & !RDY
+  # CKDIV & !DWR & !RDY & SCLK
+
+CS0.d  =>
+    D1
+  # RST
+
+CS1.d  =>
+    D2
+  # RST
+
+D0 =>
+    RDY
+
+D0.oe  =>
+    CRD
+
+D1 =>
+    CD0
+
+D1.oe  =>
+    CRD
+
+D2 =>
+    CD1
+
+D2.oe  =>
+    CRD
+
+ICLK =>
+    !CLK
+
+CLK.oe  =>
+    1 
+
+ICLK.oe  =>
+    1 
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+ !  CD0                         5        V        -       -       -     
+ !  CD1                         6        V        -       -       -     
+    CKDIV                       17       V        -       -       -     
+    CKDIV               d       17       X        2       8       1     
+    CLK                         19       V        2       7       1     
+    CRD                         2        V        -       -       -     
+    CS0                         15       V        -       -       -     
+    CS0                 d       15       X        2       8       1     
+    CS1                         16       V        -       -       -     
+    CS1                 d       16       X        2       8       1     
+    CWR                         1        V        -       -       -     
+    D0                          12       V        1       7       1     
+    D0                  oe      12       X        1       1       1     
+    D1                          13       V        1       7       1     
+    D1                  oe      13       X        1       1       1     
+    D2                          14       V        1       7       1     
+    D2                  oe      14       X        1       1       1     
+ !  DWR                         9        V        -       -       -     
+    FCLK                        8        V        -       -       -     
+    ICLK                        18       V        1       7       1     
+    RDY                         4        V        -       -       -     
+ !  RST                         3        V        -       -       -     
+    SCLK                        7        V        -       -       -     
+    CLK                 oe      19       D        1       1       0     
+    ICLK                oe      18       D        1       1       0     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+
+
+===============================================================================
+                                   Fuse Plot
+===============================================================================
+
+Syn   02192 x Ac0   02193 - 
+
+Pin #19  02048  Pol -  02120  Ac1 - 
+ 00000 -------------------------------- 
+ 00032 ---------x-x------------x---x--- 
+ 00064 ---------xx---------x-------x--- 
+ 00096 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00128 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00160 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00192 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00224 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #18  02049  Pol -  02121  Ac1 - 
+ 00256 -------------------------------- 
+ 00288 ---x---------------------------- 
+ 00320 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00352 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00384 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00416 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00448 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00480 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #17  02050  Pol -  02122  Ac1 x 
+ 00512 ------------------------------x- 
+ 00544 -----x-------------------------- 
+ 00576 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00608 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00640 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00704 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #16  02051  Pol -  02123  Ac1 x 
+ 00768 ----------------------x--------- 
+ 00800 -----x-------------------------- 
+ 00832 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00896 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00928 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00960 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00992 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #15  02052  Pol -  02124  Ac1 x 
+ 01024 --------------------------x----- 
+ 01056 -----x-------------------------- 
+ 01088 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01120 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01152 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01184 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01216 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01248 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #14  02053  Pol -  02125  Ac1 - 
+ 01280 x------------------------------- 
+ 01312 -----------------x-------------- 
+ 01344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01376 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01440 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01472 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01504 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #13  02054  Pol -  02126  Ac1 - 
+ 01536 x------------------------------- 
+ 01568 -------------x------------------ 
+ 01600 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01632 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01664 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01696 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01728 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01760 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #12  02055  Pol -  02127  Ac1 - 
+ 01792 x------------------------------- 
+ 01824 --------x----------------------- 
+ 01856 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01888 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01920 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01952 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01984 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+
+
+LEGEND    X : fuse not blown 
+          - : fuse blown 
+
+===============================================================================
+                                 Chip Diagram
+===============================================================================
+
+                               ______________
+                              |MINISYS-SD-GAL|
+                      CWR x---|1           20|---x Vcc                      
+                      CRD x---|2           19|---x CLK                      
+                     !RST x---|3           18|---x ICLK                     
+                      RDY x---|4           17|---x CKDIV                    
+                     !CD0 x---|5           16|---x CS1                      
+                     !CD1 x---|6           15|---x CS0                      
+                     SCLK x---|7           14|---x D2                       
+                     FCLK x---|8           13|---x D1                       
+                     !DWR x---|9           12|---x D0                       
+                      GND x---|10          11|---x                          
+                              |______________|
+
