@@ -29,6 +29,7 @@
 #define PIN_HAK	    8
 
 #define PIN_CON_SO	9
+#define PIN_CON_SI  1
 #define PIN_CON_W	10
 #define PIN_CON_R	11
 

@@ -26,6 +26,7 @@ namespace Bus
     void Deactivate();
     char ConsoleRead();
     void ConsoleWrite(char c);
+    bool ConsoleReady();
     bool IsRunning();
     void SetupInt(int pin, int edgeType, void (*function)(void));
 }

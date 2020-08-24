@@ -14,13 +14,28 @@ std::atomic<bool> Global::timeToExit(false), Global::ctrlC(false);
 void INTHandler(int signal);
 void DoCleanup();
 void StatusThread();
-void ConsoleISR();
+void ConsoleInISR();
+void ConsoleOutISR();
 
 const char* version = "2.0";
+
+class ConsoleBuffer
+{
+    private:
+        uint head, tail, size;
+        char* buffer;
+    public:
+        ConsoleBuffer(uint sz);
+        bool isEmpty();
+        char get();
+        void add(char c);
+};
+ConsoleBuffer* conBuf;
 
 int main()
 {
     char c, cmd[128];
+    conBuf = new ConsoleBuffer(32);
 
     signal(SIGINT, INTHandler);
     UI::Init();
@@ -29,7 +44,8 @@ int main()
     Service::Init();
 
     std::thread statusUpdater(StatusThread);
-    Bus::SetupInt(PIN_CON_SO, RISING, &ConsoleISR);
+    Bus::SetupInt(PIN_CON_SO, RISING, &ConsoleInISR);
+    Bus::SetupInt(PIN_CON_SI, FALLING, &ConsoleOutISR);
 
     UI::active_window = UI::Monitor;
     UI::Print(UI::Monitor, "MiniSys v%s by AB0TJ\n\n", version);
@@ -49,7 +65,16 @@ int main()
 
 			if (c == 0x7f) c = 8;		// Translate backspace
 			if (c == '\n') c = '\r';	// Vintage stuff seems to expect CR instead of LF
-			Bus::ConsoleWrite(c);
+
+            if (Bus::ConsoleReady())
+            {
+			    Bus::ConsoleWrite(c);
+            }
+            else
+            {
+                conBuf->add(c);
+            }
+            
 		}
 		else
 		{
@@ -109,8 +134,45 @@ void StatusThread()
     }
 }
 
-void ConsoleISR()
+void ConsoleInISR()
 {
     char c = Bus::ConsoleRead();
     UI::Print(UI::Console, c);
+}
+
+void ConsoleOutISR()
+{
+    if (!conBuf->isEmpty())
+    {
+        Bus::ConsoleWrite(conBuf->get());
+    }
+}
+
+ConsoleBuffer::ConsoleBuffer(uint sz)
+{
+    size = sz;
+    buffer = new char[size];
+    head = tail = 0;
+}
+
+bool ConsoleBuffer::isEmpty()
+{
+    return head == tail;
+}
+
+void ConsoleBuffer::add(char c)
+{
+    uint next = (head + 1) % size;
+    if (next != tail)
+    {
+        buffer[head] = c;
+        head = next;
+    }
+}
+
+char ConsoleBuffer::get()
+{
+    char c = buffer[tail];
+    tail = (tail + 1) % size;
+    return c;
 }

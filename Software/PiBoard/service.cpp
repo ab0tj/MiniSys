@@ -1,3 +1,4 @@
+#include <time.h>
 #include "service.h"
 #include "bus.h"
 #include "disk.h"
@@ -32,11 +33,12 @@ namespace Service
         volatile uint32_t shm_base;
     }
 
-    void ReadSector();
+    void RWSector(uint8_t svc);
     void WriteSector();
     void CheckDisk();
     void SetDriveParams();
     void DebugPrint();
+    void GetTime(uint8_t svc);
     
     void ISR()
     {   /* Service a PI_REQ interrupt */
@@ -46,11 +48,8 @@ namespace Service
         switch(svc)
         {
             case Svc_Read_Sector:
-                ReadSector();
-                break;
-
             case Svc_Write_Sector:
-                WriteSector();
+                RWSector(svc);
                 break;
 
             case Svc_Check_Disk:
@@ -74,6 +73,12 @@ namespace Service
                 UI::Print(UI::Monitor, "*BREAK* Press any key to return to monitor.\n");
                 return;
 
+            case Svc_Get_Time_Bin:
+            case Svc_Get_Time_BCD:
+            case Svc_Get_Time_CPM:
+                GetTime(svc);
+                break;
+
             default:
                 UI::Print(UI::Monitor, "Service request with unknown code 0x%02X\n", svc);
                 break;
@@ -93,7 +98,7 @@ namespace Service
         shm_base = 0xFFF0;
     }
 
-    void ReadSector()
+    void RWSector(uint8_t svc)
     {   /* Get sector read params and do the read */
         uint8_t drive = Bus::Read(MEM, shm_base + 1);
         uint16_t track = Bus::Read16(MEM, shm_base + 2);
@@ -102,24 +107,14 @@ namespace Service
 
         if (Disk::Drives[drive] != NULL)
         {
-            Bus::Write(MEM, shm_base, !(Disk::Drives[drive]->Read(track, sector, address)));
-        }
-        else
-        {
-            Bus::Write(MEM, shm_base, 1);
-        }
-    }
-
-    void WriteSector()
-    {   /* Get sector write params and do the write */
-        uint8_t drive = Bus::Read(MEM, shm_base + 1);
-        uint16_t track = Bus::Read16(MEM, shm_base + 2);
-        uint16_t sector = Bus::Read16(MEM, shm_base + 4);
-        uint32_t address = Bus::Read32(MEM, shm_base + 6);
-
-        if (Disk::Drives[drive] != NULL)
-        {
-            Bus::Write(MEM, shm_base, !(Disk::Drives[drive]->Write(track, sector, address)));
+            if (svc == Svc_Write_Sector)
+            {
+                Bus::Write(MEM, shm_base, !(Disk::Drives[drive]->Write(track, sector, address)));
+            }
+            else
+            {
+                Bus::Write(MEM, shm_base, !(Disk::Drives[drive]->Read(track, sector, address)));
+            }
         }
         else
         {
@@ -193,5 +188,51 @@ namespace Service
                     break;
             }
         }
+    }   /* End of DebugPrint */
+
+    uint8_t byteToBCD(uint8_t val)
+    {
+        uint8_t x = (val / 10) << 4;
+        x |= val % 10;
+        return x;
     }
+
+    void GetTime(uint8_t svc)
+    {
+        uint32_t addr = Bus::Read32(MEM, shm_base + 2);
+        time_t rawtime = time(NULL);
+        struct tm *now = localtime(&rawtime);
+
+        switch (svc)
+        {
+            case Svc_Get_Time_Bin:
+                Bus::Write(MEM, addr, (now->tm_year / 100) + 19);  // Century
+                Bus::Write(MEM, addr + 1, now->tm_year % 100);     // Year
+                Bus::Write(MEM, addr + 2, now->tm_mon + 1);        // Month
+                Bus::Write(MEM, addr + 3, now->tm_mday);           // Day
+                Bus::Write(MEM, addr + 4, now->tm_hour);           // Hour
+                Bus::Write(MEM, addr + 5, now->tm_min);            // Minute
+                Bus::Write(MEM, addr + 6, now->tm_sec);            // Second
+                break;
+
+            case Svc_Get_Time_BCD:
+                Bus::Write(MEM, addr, byteToBCD((now->tm_year / 100) + 19));  // Century
+                Bus::Write(MEM, addr + 1, byteToBCD(now->tm_year % 100));     // Year
+                Bus::Write(MEM, addr + 2, byteToBCD(now->tm_mon + 1));        // Month
+                Bus::Write(MEM, addr + 3, byteToBCD(now->tm_mday));           // Day
+                Bus::Write(MEM, addr + 4, byteToBCD(now->tm_hour));           // Hour
+                Bus::Write(MEM, addr + 5, byteToBCD(now->tm_min));            // Minute
+                Bus::Write(MEM, addr + 6, byteToBCD(now->tm_sec));            // Second
+                break;
+
+            case Svc_Get_Time_CPM:
+                uint16_t cpmDay = (rawtime - 252460800) / 86400;      // Days since Jan 1, 1978
+                Bus::Write(MEM, addr, cpmDay);                        // Low byte
+                Bus::Write(MEM, addr + 1, cpmDay >> 8);               // High byte
+                Bus::Write(MEM, addr + 2, byteToBCD(now->tm_hour));   // Hour
+                Bus::Write(MEM, addr + 3, byteToBCD(now->tm_min));    // Minute
+                Bus::Write(MEM, addr + 4, byteToBCD(now->tm_sec));    // Second
+                break;
+        }
+    }   /* End of GetTime */
 }

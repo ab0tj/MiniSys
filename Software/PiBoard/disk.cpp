@@ -8,7 +8,7 @@ namespace Disk
 {
     Drive* Drives[16];
 
-    Drive::Drive(int num, const char* file, uint sectorSz, uint secPerTrk)
+    Drive::Drive(int num, const char* file, uint sectorSz, uint secPerTrk, bool wp)
     {
         imageFile.open(file, std::ios::in | std::ios::out | std::ios::binary);
         if (imageFile.is_open())
@@ -16,6 +16,7 @@ namespace Disk
             buffer = NULL;
             SetDiskParams(sectorSz, secPerTrk);
             driveNumber = num;
+            writeProtect = wp;
         }
         else throw std::invalid_argument("Failed to open image file");
     }
@@ -52,7 +53,7 @@ namespace Disk
     {
         UI::Print(UI::Status, 0, 31, "W%d D%02d T%05d S%05d A%08X", sectorSize, driveNumber, track, sector, addr);
 
-        if (!imageFile.is_open()) return false;
+        if (!imageFile.is_open() || writeProtect) return false;
         
         imageFile.seekp(((track * sectorsPerTrack) + sector) * sectorSize);
         if (imageFile.fail()) return false; // couldn't seek

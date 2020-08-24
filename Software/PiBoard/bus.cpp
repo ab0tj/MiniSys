@@ -191,6 +191,7 @@ namespace Bus
         Pins[IOM] = new Pin(PIN_IOM, OUTPUT, PUD_OFF, false);
         Pins[HRQ] = new Pin(PIN_HRQ, OUTPUT, PUD_OFF, true);
         Pins[HAK] = new Pin(PIN_HAK, INPUT, PUD_OFF, true);
+        Pins[CON_SI] = new Pin(PIN_CON_SI, INPUT, PUD_UP, true);
         Pins[CON_SO] = new Pin(PIN_CON_SO, INPUT, PUD_DOWN, true);
         Pins[CON_W] = new Pin(PIN_CON_W, OUTPUT, PUD_OFF, false);
         Pins[CON_R] = new Pin(PIN_CON_R, OUTPUT, PUD_OFF, true);
@@ -279,6 +280,11 @@ namespace Bus
         SetDataVal(c);
         Pins[CON_W]->Pulse();
         SetDataDir(INPUT);
+    }
+
+    bool ConsoleReady()
+    {
+        return Pins[CON_SI]->Read();
     }
 
     void SetupInt(int pin, int edgeType, void (*function)(void))

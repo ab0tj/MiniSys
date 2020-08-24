@@ -73,12 +73,16 @@ namespace Monitor
 
         else if (op.compare("do") == 0) RunScript(args);
 
+        else if (op.compare("in") == 0) UI::Print(UI::Monitor, "%02X\n", Bus::Read(IO, stoi(args[0], NULL, 16)));
+
+        else if (op.compare("out") == 0) Bus::Write(IO, stoi(args[0], NULL, 16), stoi(args[1], NULL, 16));
+
         else UI::Print(UI::Monitor, "Invalid command. Type help for a list of valid commands.\n");
     } /* End of ProcessCommand() */
 
     void PrintHelp()
     {
-        UI::Print(UI::Monitor, "MiniSys Commands: boot, con, disk, do, dump, exit, go, help, load, pwr, quit, reset, run, save, stop\n");
+        UI::Print(UI::Monitor, "MiniSys Commands: boot, con, disk, do, dump, exit, go, help, in, load, out, pwr, quit, reset, run, save, stop\n");
     }
 
     void Dump(const std::string (&args)[3])
@@ -245,6 +249,9 @@ namespace Monitor
     void LoadDisk(const std::string (&args)[3])
     {
         int drive;
+
+        bool wp = (args[2].compare("wp") == 0);
+
         if (args[0].length() > 0) drive = atoi(args[0].c_str());
 
         if (args[1].length() > 0 && drive < 16 && !(drive < 0))
@@ -252,7 +259,7 @@ namespace Monitor
             try
             {
                 delete Disk::Drives[drive];
-                Disk::Drives[drive] = new Disk::Drive(drive, args[1].c_str(), 128, 32);
+                Disk::Drives[drive] = new Disk::Drive(drive, args[1].c_str(), 128, 32, wp);
                 UI::Print(UI::Monitor, "Loaded %s in drive %d\n", args[1].c_str(), drive);
             }
             catch (std::exception& e)
